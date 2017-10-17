@@ -9,6 +9,7 @@ import game.map.tile.Montagne;
 import game.map.tile.Plaine;
 import game.map.tile.decorator.CaseAttaque;
 import game.map.tile.decorator.CaseSante;
+import game.utils.Coordonnees;
 
 public class TestCase {
 	
@@ -16,9 +17,9 @@ public class TestCase {
 		BarbaresFactory bf = new BarbaresFactory();
 		Joueur j = bf.creerJoueur("Jean", JoueurType.JOUEURHUMAIN);
 		Territoire t1 = new Territoire(j);
-		Case c1 = new Plaine(0.5, 0.4);
-		Case c2 = new Montagne(0.7, 1.5);
-		Case c3 = new Montagne(1, 5);
+		Case c1 = new Plaine(new Coordonnees(0, 1));
+		Case c2 = new Montagne(new Coordonnees(0, 1));
+		Case c3 = new Montagne(new Coordonnees(0, 1));
 		c1 = new CaseAttaque(c1);
 		c2 = new CaseSante(c2);
 		t1.ajouterCase(c1);

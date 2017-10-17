@@ -21,7 +21,7 @@ public abstract class Joueur {
 	
 	public String toString() {
 		String str = "Nom du joueur : " + this.getNom_joueur() 
-						+ ", Type : " + this.getClass() 
+						+ ", Type : " + this.joueur_type
 							+ ", Tribu : " + this.getJoueur_tribu();
 		return str;
 	}   
