@@ -45,8 +45,8 @@ public class CarteFactory {
 	
 	public List<Coordonnees> genererCoordonnees(int dimension) {
 		List<Coordonnees> listCoordonnees = new ArrayList<Coordonnees>();
-		for (int i = 0; i < dimension; i++) {
-			for (int j = 0; j < dimension; j++) {
+		for (int i = 1; i <= dimension; i++) {
+			for (int j = 1; j <= dimension; j++) {
 				listCoordonnees.add(new Coordonnees(i, j));
 			}
 		}

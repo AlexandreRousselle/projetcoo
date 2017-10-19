@@ -2,6 +2,7 @@ package game.map;
 
 import game.map.factory.CarteType;
 import game.map.tile.Case;
+import game.map.tile.decorator.EffetType;
 import game.partie.Partie;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,22 @@ public class Carte {
 		String res = "Carte " + this.carte_type.toString() + " de dimension : " + this.dimension + "\n";
 		for (int i = 0; i < listeCases.size(); i++) {
 			res += listeCases.get(i).getLibelle() + "\n";
+		}
+		return res;
+	}
+	
+	public String toStringModelise() {
+		String res = "Carte " + this.carte_type.toString() + " de dimension : " + this.dimension + "\n";
+		for (int i = 1; i <= listeCases.size(); i++) {
+			res += "[";
+			if (listeCases.get(i-1).getEffet_type() != EffetType.DEFAULT){
+				res += listeCases.get(i-1).getEffet_type().toString() + "]";
+			} else {
+				res += "         ]";
+			}
+		 	if (i%10 == 0) {
+				res += "\n";
+			}
 		}
 		return res;
 	}

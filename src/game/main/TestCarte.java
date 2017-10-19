@@ -16,6 +16,7 @@ public class TestCarte {
 		p.ajouterJoueur(new BarbaresFactory().creerJoueur("Jean", JoueurType.JOUEURHUMAIN));
 		p.ajouterJoueur(new GauloisFactory().creerJoueur("Paul", JoueurType.JOUEURIA));
 		System.out.println(p.toString());
+		System.out.println(p.getCarte().toStringModelise());
 		System.out.println(p.getCarte().toString());
 	}
 

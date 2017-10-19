@@ -9,6 +9,10 @@ public class Coordonnees {
 		this.b = b;
 	}
 
+	public String toString() {
+		return this.a + "," + this.b;
+	}
+	
 	public double getA() {
 		return a;
 	}
