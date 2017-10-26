@@ -1,4 +1,4 @@
-package game.vue;
+package game.view;
 
 public class TestPrincipale {
 

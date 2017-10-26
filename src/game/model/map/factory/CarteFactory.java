@@ -16,14 +16,15 @@ import game.model.utils.Coordonnees;
 
 public class CarteFactory {
 	
+	protected Carte carte = null;
+	
 	public Carte creerCarte(CarteType carte_type, int dimension) {
-		Carte carte = null;
 		switch(carte_type)
         {
-            case FORESTIERE:carte = new Carte(carte_type, dimension);
+            case FERMIERE:carte = new Carte(carte_type, dimension);
         		carte.setListeCases(creerCases(genererCoordonnees(dimension)));
             break;
-            case OCEANIQUE:carte = new Carte(carte_type, dimension);
+            case FORESTIERE:carte = new Carte(carte_type, dimension);
         		carte.setListeCases(creerCases(genererCoordonnees(dimension)));
             break;
             case MONTAGNEUSE:carte = new Carte(carte_type, dimension);
@@ -54,7 +55,6 @@ public class CarteFactory {
 				case FORET:c = new Case(listCoordonnees.get(i), CaseAccessibilite.ACCESSIBLE, CaseType.FORET);break;
 				case CHAMP:c = new Case(listCoordonnees.get(i), CaseAccessibilite.ACCESSIBLE, CaseType.CHAMP);break;
 				case MONTAGNE:c = new Case(listCoordonnees.get(i), CaseAccessibilite.NONACCESSIBLE, CaseType.MONTAGNE);break;
-				case MER:c = new Case(listCoordonnees.get(i), CaseAccessibilite.NONACCESSIBLE, CaseType.MER);break;
 			}
 			EffetType et = randomEffetType();
 			switch(et)
@@ -69,15 +69,30 @@ public class CarteFactory {
 		return listCases;
 	}
 	
-	public EffetType randomEffetType() {
-		int valeur = new Random().nextInt(EffetType.values().length);
-	    return EffetType.values()[valeur];
-	}
-	
 	//à restructurer intelligemment
 	public CaseType randomCaseType() {
-		int valeur = new Random().nextInt(CaseType.values().length);
-	    return CaseType.values()[valeur];
+		int valeur = (int) (Math.random()*100);
+		int nbChamps = this.carte.getCarte_type().getNbChamps();
+		int nbForets = this.carte.getCarte_type().getNbForets();
+		int nbMontagnes = this.carte.getCarte_type().getNbMontagnes();
+		if (valeur < nbChamps) {
+			return CaseType.values()[1];
+		} else if (valeur < nbChamps + nbForets) {
+			return CaseType.values()[2];
+		} else if (valeur < nbChamps + nbForets + nbMontagnes) {
+			return CaseType.values()[3];
+		} else {
+			return CaseType.values()[0];
+		}
+	}
+	
+	public EffetType randomEffetType() {
+		int valeur = (int) (Math.random()*100);
+	    if(valeur > 80) {
+	    	return EffetType.values()[new Random().nextInt(4)];
+	    } else {
+	    	return EffetType.values()[0];
+	    }
 	}
 	
 }

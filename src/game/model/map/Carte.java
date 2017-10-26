@@ -20,7 +20,6 @@ public class Carte {
 	public Carte(CarteType carte_type, int dimension) {
 		this.id_carte = 0;
 		this.carte_type = carte_type;
-		this.partie = new Partie();
 		this.dimension = dimension;
 		this.listeCases = new ArrayList<Case>();
 	}
@@ -37,11 +36,7 @@ public class Carte {
 		String res = "Carte " + this.carte_type.toString() + " de dimension : " + this.dimension + "\n";
 		for (int i = 1; i <= listeCases.size(); i++) {
 			res += "[";
-			if (listeCases.get(i-1).getEffet_type() != EffetType.DEFAULT){
-				res += listeCases.get(i-1).getEffet_type().toString() + "]";
-			} else {
-				res += "         ]";
-			}
+			res += listeCases.get(i-1).getCase_type().toString() + "]";
 		 	if (i%10 == 0) {
 				res += "\n";
 			}

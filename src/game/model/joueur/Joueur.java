@@ -7,39 +7,27 @@ import game.model.partie.Partie;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Joueur {
+public class Joueur {
 
 	protected int id_joueur;
 	protected String nom_joueur;
 	protected List<Partie> listeParties;
 	protected Territoire territoireConquis;
-	protected JoueurType joueur_type;
 	protected JoueurTribu joueur_tribu;
 	protected int ressources;
 	protected List<Construction> constructions;
 	
-	public Joueur(String nom_joueur, JoueurType joueur_type, JoueurTribu joueur_tribu) {
+	public Joueur(String nom_joueur, JoueurTribu joueur_tribu) {
 		this.nom_joueur = nom_joueur;
-		this.joueur_type = joueur_type;
 		this.joueur_tribu = joueur_tribu;
-		this.ressources = 1000;
 		this.constructions = new ArrayList<Construction>();
 	}
 
 	public String toString() {
 		String str = "Nom du joueur : " + this.getNom_joueur() 
-						+ ", Type : " + this.joueur_type
 							+ ", Tribu : " + this.getJoueur_tribu();
 		return str;
 	}   
-	
-	public JoueurType getJoueur_type() {
-		return joueur_type;
-	}
-
-	public void setJoueur_type(JoueurType joueur_type) {
-		this.joueur_type = joueur_type;
-	}
 
 	public List<Construction> getConstructions() {
 		return constructions;

@@ -15,6 +15,7 @@ public class Partie {
 	private Carte carte; 
 	private Date date;
 	private List<Joueur> listeJoueurs;
+	private EtatPartie etat_partie;
 	
 	public Partie() {
 	}
@@ -78,6 +79,14 @@ public class Partie {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+	public EtatPartie getEtat_partie() {
+		return etat_partie;
+	}
+
+	public void setEtat_partie(EtatPartie etat_partie) {
+		this.etat_partie = etat_partie;
 	}
 	
 }

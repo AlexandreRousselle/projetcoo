@@ -2,8 +2,7 @@ package game.model.map.tile;
 
 public enum CaseType {
 	PLAINE,
-	FORET,
 	CHAMP,
+	FORET,
 	MONTAGNE,
-	MER;
 }

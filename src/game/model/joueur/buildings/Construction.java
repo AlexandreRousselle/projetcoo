@@ -9,9 +9,16 @@ public class Construction {
 	protected int pv;
 	protected Coordonnees coordonnees;
 	
+	public Construction(ConstructionType construction_type, int pv) {
+		this.construction_type = construction_type;
+		this.pv = pv;
+	}
+	
 	public Construction(ConstructionType construction_type, int pv, int posX, int posY) {
 		this.construction_type = construction_type;
 		this.pv = pv;
+		this.coordonnees.setA(posX);
+		this.coordonnees.setB(posY);
 	}
 	
 	public int getId_construction() {
