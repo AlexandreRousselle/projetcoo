@@ -1,8 +1,8 @@
 package game.model.joueur;
 
 public enum JoueurTribu {
-	EGYPTIENS,
-	BARBARES,
-	ROMAINS,
-	GAULOIS;
+	EASTCREW,
+	WESTCREW,
+	NORTHCREW,
+	SOUTHCREW;
 }

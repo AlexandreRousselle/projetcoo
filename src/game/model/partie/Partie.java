@@ -2,11 +2,13 @@ package game.model.partie;
 
 import java.util.Date;
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.List;
 
 import game.model.joueur.Joueur;
+import game.model.joueur.buildings.Construction;
+import game.model.joueur.buildings.ConstructionType;
 import game.model.map.Carte;
+import game.model.utils.Coordonnees;
 
 public class Partie {
 	
@@ -17,16 +19,31 @@ public class Partie {
 	private List<Joueur> listeJoueurs;
 	private EtatPartie etat_partie;
 	
-	public Partie() {
-	}
-	
-	public Partie(String nom_partie, Carte carte) {
-		this.id_partie = 1;
+	public Partie(int id_partie, String nom_partie, Carte carte, List<Joueur> listeJoueurs) {
+		this.id_partie = id_partie;
 		this.nom_partie = nom_partie;
 		this.carte = carte;
 		this.carte.setPartie(this);
 		this.date = Date.from(Instant.now());
-		this.listeJoueurs = new ArrayList<Joueur>();
+		this.listeJoueurs = this.genererVilleJoueur(listeJoueurs);
+	}
+	
+	public List<Joueur> genererVilleJoueur(List<Joueur> listeJoueurs) {
+		for (int i = 0; i < listeJoueurs.size(); i++) {
+			int posX = (int) (Math.floor(Math.random() * 10) + 1 );
+			int posY = (int) (Math.floor(Math.random() * 10) + 1 );
+			Coordonnees c = new Coordonnees(posX, posY);
+			for (int j = 0; j < this.carte.getListeCases().size(); j++) {
+				if(this.carte.getListeCases().get(j).getCoordonnees().getA() == c.getA()
+						&& this.carte.getListeCases().get(j).getCoordonnees().getB() == c.getB()){
+					listeJoueurs.get(i).getConstructions().add(
+							new Construction(ConstructionType.VILLE, listeJoueurs.get(i), c));
+					this.carte.getListeCases().get(j).setConstruction(
+							listeJoueurs.get(i).getConstructions().get(0));
+				}
+			}
+		}
+		return listeJoueurs;
 	}
 
 	public void ajouterJoueur(Joueur joueur) {
@@ -34,7 +51,7 @@ public class Partie {
 	}
 	
 	public String toString() {
-		String res = "Partie nÂ°" + this.id_partie + " -> Nom de partie : " + this.nom_partie + " -> CrÃ©Ã©e le : " + this.date.toString() + "\n";
+		String res = "Partie n°" + this.id_partie + " -> Nom de partie : " + this.nom_partie + " -> Créée le : " + this.date.toString() + "\n";
 		for (int i = 0; i < this.listeJoueurs.size(); i++) {
 			res += listeJoueurs.get(i).toString() + "\n";
 		}

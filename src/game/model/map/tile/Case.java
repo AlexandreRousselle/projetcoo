@@ -1,5 +1,6 @@
 package game.model.map.tile;
 
+import game.model.joueur.buildings.Construction;
 import game.model.map.tile.decorator.EffetType;
 import game.model.utils.Coordonnees;
 
@@ -8,6 +9,7 @@ public class Case {
 	private Coordonnees coordonnees;
 	private CaseAccessibilite case_access;
 	private CaseType case_type;
+	private Construction construction;
 	private EffetType effet_type;
 	
 	public Case(Coordonnees coordonnees, CaseAccessibilite case_access, CaseType case_type) {
@@ -56,6 +58,14 @@ public class Case {
 
 	public void setCoordonnees(Coordonnees coordonnees) {
 		this.coordonnees = coordonnees;
+	}
+
+	public Construction getConstruction() {
+		return construction;
+	}
+
+	public void setConstruction(Construction construction) {
+		this.construction = construction;
 	}
 
 }

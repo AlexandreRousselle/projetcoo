@@ -6,10 +6,11 @@ import game.model.partie.Partie;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Joueur {
 
-	protected int id_joueur;
+	protected UUID id_joueur;
 	protected String nom_joueur;
 	protected List<Partie> listeParties;
 	protected Territoire territoireConquis;
@@ -18,13 +19,15 @@ public class Joueur {
 	protected List<Construction> constructions;
 	
 	public Joueur(String nom_joueur, JoueurTribu joueur_tribu) {
+		this.id_joueur = UUID.randomUUID();
 		this.nom_joueur = nom_joueur;
 		this.joueur_tribu = joueur_tribu;
 		this.constructions = new ArrayList<Construction>();
 	}
 
 	public String toString() {
-		String str = "Nom du joueur : " + this.getNom_joueur() 
+		String str = "ID du joueur : " + this.id_joueur
+						 + ", Nom du joueur : " + this.getNom_joueur() 
 							+ ", Tribu : " + this.getJoueur_tribu();
 		return str;
 	}   
@@ -37,12 +40,20 @@ public class Joueur {
 		this.constructions = constructions;
 	}
 
-	public int getId_joueur() {
+	public UUID getId_joueur() {
 		return id_joueur;
 	}
 
-	public void setId_joueur(int id_joueur) {
+	public void setId_joueur(UUID id_joueur) {
 		this.id_joueur = id_joueur;
+	}
+
+	public int getRessources() {
+		return ressources;
+	}
+
+	public void setRessources(int ressources) {
+		this.ressources = ressources;
 	}
 
 	public String getNom_joueur() {

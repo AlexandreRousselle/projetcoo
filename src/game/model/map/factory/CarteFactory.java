@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import game.model.joueur.Joueur;
+import game.model.joueur.buildings.Construction;
+import game.model.joueur.buildings.ConstructionType;
 import game.model.map.Carte;
 import game.model.map.tile.Case;
 import game.model.map.tile.CaseAccessibilite;
@@ -88,7 +91,7 @@ public class CarteFactory {
 	
 	public EffetType randomEffetType() {
 		int valeur = (int) (Math.random()*100);
-	    if(valeur > 80) {
+	    if(valeur > 70) {
 	    	return EffetType.values()[new Random().nextInt(4)];
 	    } else {
 	    	return EffetType.values()[0];
