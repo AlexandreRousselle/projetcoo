@@ -1,18 +1,25 @@
 package game.model.map.tile;
 
-import game.model.joueur.buildings.Construction;
+import java.util.UUID;
+
+import game.model.map.Carte;
+import game.model.map.Coordonnees;
 import game.model.map.tile.decorator.EffetType;
-import game.model.utils.Coordonnees;
+import game.model.unite.Unite;
 
 public class Case {
 
+	private UUID id_case;
+	private Carte carte;
 	private Coordonnees coordonnees;
 	private CaseAccessibilite case_access;
 	private CaseType case_type;
-	private Construction construction;
+	private Unite unite;
 	private EffetType effet_type;
 	
-	public Case(Coordonnees coordonnees, CaseAccessibilite case_access, CaseType case_type) {
+	public Case(Carte carte, Coordonnees coordonnees, CaseAccessibilite case_access, CaseType case_type) {
+		this.id_case = UUID.randomUUID();
+		this.carte = carte;
 		this.coordonnees = coordonnees;
 		this.case_access = case_access;
 		this.case_type = case_type;
@@ -60,12 +67,28 @@ public class Case {
 		this.coordonnees = coordonnees;
 	}
 
-	public Construction getConstruction() {
-		return construction;
+	public Unite getUnite() {
+		return unite;
 	}
 
-	public void setConstruction(Construction construction) {
-		this.construction = construction;
+	public void setUnite(Unite unite) {
+		this.unite = unite;
+	}
+
+	public Carte getCarte() {
+		return carte;
+	}
+
+	public void setCarte(Carte carte) {
+		this.carte = carte;
+	}
+
+	public UUID getId_case() {
+		return id_case;
+	}
+
+	public void setId_case(UUID id_case) {
+		this.id_case = id_case;
 	}
 
 }

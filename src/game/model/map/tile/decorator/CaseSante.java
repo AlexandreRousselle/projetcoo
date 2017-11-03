@@ -1,11 +1,12 @@
 package game.model.map.tile.decorator;
 
+import game.model.map.Carte;
 import game.model.map.tile.Case;
 
 public class CaseSante extends DecorateurCase {
 
-	public CaseSante(Case caseDecoree) {
-		super(caseDecoree, EffetType.SANTEPLUS);
+	public CaseSante(Carte carte, Case caseDecoree) {
+		super(carte, caseDecoree, EffetType.SANTEPLUS);
 	}
 
 	@Override
