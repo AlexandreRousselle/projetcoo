@@ -3,33 +3,29 @@ package game.model.partie;
 import java.util.Date;
 import java.time.Instant;
 import java.util.List;
-import java.util.UUID;
 
 import game.model.joueur.Joueur;
+import game.model.joueur.buildings.Construction;
+import game.model.joueur.buildings.ConstructionType;
 import game.model.map.Carte;
-import game.model.map.Coordonnees;
-import game.model.unite.Unite;
-import game.model.unite.UniteType;
+import game.model.utils.Coordonnees;
 
 public class Partie {
 	
-	private UUID id_partie;
+	private int id_partie;
 	private String nom_partie;
 	private Carte carte; 
 	private Date date;
 	private List<Joueur> listeJoueurs;
 	private EtatPartie etat_partie;
 	
-	public Partie(String nom_partie, Carte carte, List<Joueur> listeJoueurs) {
-		this.id_partie = UUID.randomUUID();
+	public Partie(int id_partie, String nom_partie, Carte carte, List<Joueur> listeJoueurs) {
+		this.id_partie = id_partie;
 		this.nom_partie = nom_partie;
 		this.carte = carte;
 		this.carte.setPartie(this);
 		this.date = Date.from(Instant.now());
 		this.listeJoueurs = this.genererVilleJoueur(listeJoueurs);
-		for (int i = 0; i < this.listeJoueurs.size(); i++) {
-			this.listeJoueurs.get(i).getUtilisateur().getListeParties().add(this);
-		}
 	}
 	
 	public List<Joueur> genererVilleJoueur(List<Joueur> listeJoueurs) {
@@ -40,10 +36,10 @@ public class Partie {
 			for (int j = 0; j < this.carte.getListeCases().size(); j++) {
 				if(this.carte.getListeCases().get(j).getCoordonnees().getA() == c.getA()
 						&& this.carte.getListeCases().get(j).getCoordonnees().getB() == c.getB()){
-					listeJoueurs.get(i).getListUnites().add(
-							new Unite(UniteType.VILLE, listeJoueurs.get(i), c));
-					this.carte.getListeCases().get(j).setUnite(
-							listeJoueurs.get(i).getListUnites().get(0));
+					listeJoueurs.get(i).getConstructions().add(
+							new Construction(ConstructionType.VILLE, listeJoueurs.get(i), c));
+					this.carte.getListeCases().get(j).setConstruction(
+							listeJoueurs.get(i).getConstructions().get(0));
 				}
 			}
 		}
@@ -76,6 +72,14 @@ public class Partie {
 
 	public void setCarte(Carte carte) {
 		this.carte = carte;
+	}
+
+	public int getId_partie() {
+		return id_partie;
+	}
+
+	public void setId_partie(int id_partie) {
+		this.id_partie = id_partie;
 	}
 
 	public String getNom_partie() {

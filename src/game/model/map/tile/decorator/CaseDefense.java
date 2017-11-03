@@ -1,12 +1,11 @@
 package game.model.map.tile.decorator;
 
-import game.model.map.Carte;
 import game.model.map.tile.Case;
 
 public class CaseDefense extends DecorateurCase {
 	
-	public CaseDefense(Carte carte, Case caseDecoree) {
-		super(carte, caseDecoree, EffetType.DEFENSEPLUS);
+	public CaseDefense(Case caseDecoree) {
+		super(caseDecoree, EffetType.DEFENSEPLUS);
 	}
 
 	@Override

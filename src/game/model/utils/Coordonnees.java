@@ -1,4 +1,4 @@
-package game.model.map;
+package game.model.utils;
 
 public class Coordonnees {
 

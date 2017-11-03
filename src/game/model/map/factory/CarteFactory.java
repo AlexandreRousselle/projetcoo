@@ -5,8 +5,9 @@ import java.util.List;
 import java.util.Random;
 
 import game.model.joueur.Joueur;
+import game.model.joueur.buildings.Construction;
+import game.model.joueur.buildings.ConstructionType;
 import game.model.map.Carte;
-import game.model.map.Coordonnees;
 import game.model.map.tile.Case;
 import game.model.map.tile.CaseAccessibilite;
 import game.model.map.tile.CaseType;
@@ -14,6 +15,7 @@ import game.model.map.tile.decorator.CaseAttaque;
 import game.model.map.tile.decorator.CaseDefense;
 import game.model.map.tile.decorator.CaseSante;
 import game.model.map.tile.decorator.EffetType;
+import game.model.utils.Coordonnees;
 
 public class CarteFactory {
 	
@@ -52,17 +54,17 @@ public class CarteFactory {
 			CaseType ct = randomCaseType();
 			switch(ct)
 			{
-				case PLAINE:c = new Case(carte, listCoordonnees.get(i), CaseAccessibilite.ACCESSIBLE, CaseType.PLAINE);break;
-				case FORET:c = new Case(carte, listCoordonnees.get(i), CaseAccessibilite.ACCESSIBLE, CaseType.FORET);break;
-				case CHAMP:c = new Case(carte, listCoordonnees.get(i), CaseAccessibilite.ACCESSIBLE, CaseType.CHAMP);break;
-				case MONTAGNE:c = new Case(carte, listCoordonnees.get(i), CaseAccessibilite.NONACCESSIBLE, CaseType.MONTAGNE);break;
+				case PLAINE:c = new Case(listCoordonnees.get(i), CaseAccessibilite.ACCESSIBLE, CaseType.PLAINE);break;
+				case FORET:c = new Case(listCoordonnees.get(i), CaseAccessibilite.ACCESSIBLE, CaseType.FORET);break;
+				case CHAMP:c = new Case(listCoordonnees.get(i), CaseAccessibilite.ACCESSIBLE, CaseType.CHAMP);break;
+				case MONTAGNE:c = new Case(listCoordonnees.get(i), CaseAccessibilite.NONACCESSIBLE, CaseType.MONTAGNE);break;
 			}
 			EffetType et = randomEffetType();
 			switch(et)
 			{
-				case ATTAQUEPLUS:c = new CaseAttaque(carte, c);break;
-				case DEFENSEPLUS:c = new CaseDefense(carte, c);break;
-				case SANTEPLUS:c = new CaseSante(carte, c);;break;
+				case ATTAQUEPLUS:c = new CaseAttaque(c);break;
+				case DEFENSEPLUS:c = new CaseDefense(c);break;
+				case SANTEPLUS:c = new CaseSante(c);;break;
 				default:break;
 			}
 			listCases.add(c);

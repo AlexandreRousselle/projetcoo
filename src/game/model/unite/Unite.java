@@ -1,38 +1,24 @@
 package game.model.unite;
 
-import java.util.UUID;
+public abstract class Unite {
 
-import game.model.joueur.Joueur;
-import game.model.map.Coordonnees;
+	private int id_unite;
+	private UniteType unite_type;
+	int pv;
+	int degats;
 
-public class Unite {
-
-	protected UUID id_unite;
-	protected Joueur proprietaire;
-	protected UniteType unite_type;
-	protected Coordonnees coordonnees;
-
-	public Unite(UniteType unite_type, Joueur proprietaire, Coordonnees coordonnees) {
-		this.id_unite = UUID.randomUUID();
+	public Unite(UniteType unite_type, int pv, int degats) {
 		this.unite_type = unite_type;
-		this.proprietaire = proprietaire;
-		this.coordonnees = coordonnees;
+		this.pv = pv;
+		this.degats = degats;
 	}
-
-	public UUID getId_unite() {
+	
+	public int getId_unite() {
 		return id_unite;
 	}
-
-	public void setId_unite(UUID id_unite) {
+	
+	public void setId_unite(int id_unite) {
 		this.id_unite = id_unite;
-	}
-
-	public Joueur getProprietaire() {
-		return proprietaire;
-	}
-
-	public void setProprietaire(Joueur proprietaire) {
-		this.proprietaire = proprietaire;
 	}
 
 	public UniteType getUnite_type() {
@@ -42,13 +28,13 @@ public class Unite {
 	public void setUnite_type(UniteType unite_type) {
 		this.unite_type = unite_type;
 	}
-
-	public Coordonnees getCoordonnees() {
-		return coordonnees;
+	
+	public int getPv() {
+		return pv;
 	}
 
-	public void setCoordonnees(Coordonnees coordonnees) {
-		this.coordonnees = coordonnees;
+	public void setPv(int pv) {
+		this.pv = pv;
 	}
 	
 }
