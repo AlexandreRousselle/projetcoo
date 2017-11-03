@@ -1,8 +1,9 @@
 package game.model.joueur;
 
-import game.model.joueur.buildings.Construction;
 import game.model.map.territoire.Territoire;
 import game.model.partie.Partie;
+import game.model.unite.Unite;
+import game.user.Utilisateur;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,33 +12,41 @@ import java.util.UUID;
 public class Joueur {
 
 	protected UUID id_joueur;
-	protected String nom_joueur;
-	protected List<Partie> listeParties;
+	protected Utilisateur utilisateur;
 	protected Territoire territoireConquis;
 	protected JoueurTribu joueur_tribu;
 	protected int ressources;
-	protected List<Construction> constructions;
+	protected List<Unite> listUnites;
 	
-	public Joueur(String nom_joueur, JoueurTribu joueur_tribu) {
+	public Joueur(Utilisateur utilisateur, JoueurTribu joueur_tribu) {
 		this.id_joueur = UUID.randomUUID();
-		this.nom_joueur = nom_joueur;
+		this.utilisateur = utilisateur;
 		this.joueur_tribu = joueur_tribu;
-		this.constructions = new ArrayList<Construction>();
+		this.ressources = 1000;
+		this.listUnites = new ArrayList<Unite>();
 	}
 
 	public String toString() {
 		String str = "ID du joueur : " + this.id_joueur
-						 + ", Nom du joueur : " + this.getNom_joueur() 
+						 + ", Nom du joueur : " + this.utilisateur.getPseudo() 
 							+ ", Tribu : " + this.getJoueur_tribu();
 		return str;
 	}   
-
-	public List<Construction> getConstructions() {
-		return constructions;
+	
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
 	}
 
-	public void setConstructions(List<Construction> constructions) {
-		this.constructions = constructions;
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
+	}
+
+	public List<Unite> getListUnites() {
+		return listUnites;
+	}
+
+	public void setListUnites(List<Unite> listUnites) {
+		this.listUnites = listUnites;
 	}
 
 	public UUID getId_joueur() {
@@ -54,22 +63,6 @@ public class Joueur {
 
 	public void setRessources(int ressources) {
 		this.ressources = ressources;
-	}
-
-	public String getNom_joueur() {
-		return nom_joueur;
-	}
-
-	public void setNom_joueur(String nom_joueur) {
-		this.nom_joueur = nom_joueur;
-	}
-
-	public List<Partie> getListeParties() {
-		return listeParties;
-	}
-
-	public void setListeParties(List<Partie> listeParties) {
-		this.listeParties = listeParties;
 	}
 
 	public Territoire getTerritoireConquis() {

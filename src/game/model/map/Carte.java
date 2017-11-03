@@ -26,7 +26,7 @@ public class Carte {
 	public String toString() {
 		String res = "Carte " + this.carte_type.toString() + " de dimension : " + this.dimension + "\n";
 		for (int i = 0; i < listeCases.size(); i++) {
-			res += listeCases.get(i).getLibelle() + "\n";
+			res += listeCases.get(i).getId_case() + ", " + listeCases.get(i).getLibelle() + "\n";
 		}
 		return res;
 	}
@@ -34,11 +34,12 @@ public class Carte {
 	public String toStringModelise() {
 		String res = "Carte n°" + this.id_carte + ", " + this.carte_type.toString() + " de dimension : " + this.dimension + "\n";
 		for (int i = 1; i <= listeCases.size(); i++) {
-			if(listeCases.get(i-1).getConstruction() == null){
+			/*if(listeCases.get(i-1).getUnite() == null){
 				res += "  |";
 			} else {
-				res += "V" + listeCases.get(i-1).getConstruction().getProprietaire() + "|";
-			}
+				res += "V" + listeCases.get(i-1).getUnite().getProprietaire() + "|";
+			}*/
+			res += listeCases.get(i-1).getCase_type();
 		 	if (i%this.dimension == 0) {
 				res += "\n";
 			}
