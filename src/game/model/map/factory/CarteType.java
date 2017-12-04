@@ -1,9 +1,9 @@
 package game.model.map.factory;
 
 public enum CarteType {
-	FERMIERE (20,5,5),
-	FORESTIERE (5,20,5),
-	MONTAGNEUSE (5,5,20);
+	FERMIERE (70,15,15),
+	FORESTIERE (15,70,15),
+	MONTAGNEUSE (15,15,70);
 	
 	private int nbChamps;
 	private int nbForets;

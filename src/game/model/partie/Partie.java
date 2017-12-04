@@ -1,53 +1,41 @@
 package game.model.partie;
 
-import java.util.Date;
-import java.time.Instant;
-import java.util.List;
-import java.util.UUID;
-
+import game.model.Observable;
+import game.model.Visiteur;
 import game.model.joueur.Joueur;
 import game.model.map.Carte;
-import game.model.map.Coordonnees;
-import game.model.unite.Unite;
-import game.model.unite.UniteType;
 
-public class Partie {
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+public class Partie extends Observable {
 	
-	private UUID id_partie;
+	protected int id_partie;
 	private String nom_partie;
 	private Carte carte; 
 	private Date date;
-	private List<Joueur> listeJoueurs;
+	protected List<Joueur> listeJoueurs;
 	private EtatPartie etat_partie;
 	
-	public Partie(String nom_partie, Carte carte, List<Joueur> listeJoueurs) {
-		this.id_partie = UUID.randomUUID();
+	public Partie() {
+	}
+	
+	public Partie(String nom_partie, Carte carte) {
 		this.nom_partie = nom_partie;
 		this.carte = carte;
 		this.carte.setPartie(this);
 		this.date = Date.from(Instant.now());
-		this.listeJoueurs = this.genererVilleJoueur(listeJoueurs);
-		for (int i = 0; i < this.listeJoueurs.size(); i++) {
-			this.listeJoueurs.get(i).getUtilisateur().getListeParties().add(this);
-		}
+		this.listeJoueurs = new ArrayList<Joueur>();
 	}
 	
-	public List<Joueur> genererVilleJoueur(List<Joueur> listeJoueurs) {
-		for (int i = 0; i < listeJoueurs.size(); i++) {
-			int posX = (int) (Math.floor(Math.random() * 10) + 1 );
-			int posY = (int) (Math.floor(Math.random() * 10) + 1 );
-			Coordonnees c = new Coordonnees(posX, posY);
-			for (int j = 0; j < this.carte.getListeCases().size(); j++) {
-				if(this.carte.getListeCases().get(j).getCoordonnees().getA() == c.getA()
-						&& this.carte.getListeCases().get(j).getCoordonnees().getB() == c.getB()){
-					listeJoueurs.get(i).getListUnites().add(
-							new Unite(UniteType.VILLE, listeJoueurs.get(i), c));
-					this.carte.getListeCases().get(j).setUnite(
-							listeJoueurs.get(i).getListUnites().get(0));
-				}
-			}
-		}
-		return listeJoueurs;
+	public Partie(String nom_partie, Carte carte, List<Joueur> listeJoueurs) {
+		this.nom_partie = nom_partie;
+		this.carte = carte;
+		this.carte.setPartie(this);
+		this.date = Date.from(Instant.now());
+		this.listeJoueurs = listeJoueurs;
 	}
 
 	public void ajouterJoueur(Joueur joueur) {
@@ -55,7 +43,7 @@ public class Partie {
 	}
 	
 	public String toString() {
-		String res = "Partie n∞" + this.id_partie + " -> Nom de partie : " + this.nom_partie + " -> CrÈÈe le : " + this.date.toString() + "\n";
+		String res = "Partie n¬∞" + this.id_partie + " -> Nom de partie : " + this.nom_partie + " -> Cr√©√©e le : " + this.date.toString() + "\n";
 		for (int i = 0; i < this.listeJoueurs.size(); i++) {
 			res += listeJoueurs.get(i).toString() + "\n";
 		}
@@ -76,6 +64,14 @@ public class Partie {
 
 	public void setCarte(Carte carte) {
 		this.carte = carte;
+	}
+
+	public int getId_partie() {
+		return id_partie;
+	}
+
+	public void setId_partie(int id_partie) {
+		this.id_partie = id_partie;
 	}
 
 	public String getNom_partie() {
@@ -100,6 +96,11 @@ public class Partie {
 
 	public void setEtat_partie(EtatPartie etat_partie) {
 		this.etat_partie = etat_partie;
+	}
+
+	@Override
+	public void accept(Visiteur v) {
+		v.visit(this);
 	}
 	
 }

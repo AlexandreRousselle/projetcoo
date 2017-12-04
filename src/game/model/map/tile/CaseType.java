@@ -4,5 +4,5 @@ public enum CaseType {
 	PLAINE,
 	CHAMP,
 	FORET,
-	MONTAGNE,
+	MONTAGNE;
 }
