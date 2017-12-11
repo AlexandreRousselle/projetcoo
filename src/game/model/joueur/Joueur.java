@@ -13,7 +13,6 @@ public class Joueur extends Observable {
 
 	protected int id_joueur;
 	protected String nom_joueur;
-	protected List<Partie> listeParties;
 	protected Territoire territoireConquis;
 	protected JoueurTribu joueur_tribu;
 	protected int ressources;
@@ -50,15 +49,7 @@ public class Joueur extends Observable {
 	public void setNom_joueur(String nom_joueur) {
 		this.nom_joueur = nom_joueur;
 	}
-
-	public List<Partie> getListeParties() {
-		return listeParties;
-	}
-
-	public void setListeParties(List<Partie> listeParties) {
-		this.listeParties = listeParties;
-	}
-
+	
 	public Territoire getTerritoireConquis() {
 		return territoireConquis;
 	}

@@ -9,6 +9,7 @@ public abstract class Visiteur {
 		v.accept(this);
 	}
 	
+	public abstract void visit(User u);
 	public abstract void visit(Joueur j);
 	public abstract void visit(Partie p);
 }

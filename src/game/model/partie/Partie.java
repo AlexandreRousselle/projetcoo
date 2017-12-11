@@ -1,6 +1,7 @@
 package game.model.partie;
 
 import game.model.Observable;
+import game.model.User;
 import game.model.Visiteur;
 import game.model.joueur.Joueur;
 import game.model.map.Carte;
@@ -16,6 +17,7 @@ public class Partie extends Observable {
 	private String nom_partie;
 	private Carte carte; 
 	private Date date;
+	private User createur;
 	protected List<Joueur> listeJoueurs;
 	private EtatPartie etat_partie;
 	
@@ -48,6 +50,14 @@ public class Partie extends Observable {
 			res += listeJoueurs.get(i).toString() + "\n";
 		}
 		return res;
+	}
+	
+	public User getCreateur() {
+		return createur;
+	}
+
+	public void setCreateur(User createur) {
+		this.createur = createur;
 	}
 	
 	public List<Joueur> getListeJoueurs() {

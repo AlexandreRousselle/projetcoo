@@ -12,7 +12,7 @@ public class DBconfig {
 	private String psw;
 	private String driver;
 	
-	private static DBconfig instance ;
+	private static DBconfig instance;
 	private Connection connect;
 	
 	//Constructor

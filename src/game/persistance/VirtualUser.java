@@ -3,12 +3,13 @@ package game.persistance;
 import java.sql.SQLException;
 import java.util.List;
 
+import game.model.User;
 import game.model.joueur.Joueur;
 import game.model.partie.Partie;
 
-public class VirtualJoueur extends Joueur{
+public class VirtualUser extends User {
 	
-	public VirtualJoueur(){
+	public VirtualUser(){
 		super();
 		this.listeParties = null;
 	}
@@ -17,7 +18,7 @@ public class VirtualJoueur extends Joueur{
 	public List<Partie> getListeParties() {
 		if (this.listeParties == null){
 			try {
-				PartieMapper.getInstance().findByIdJoueur(this.id_joueur);
+				PartieMapper.getInstance().findByIdJoueur(this.id_user);
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			} catch (SQLException e) {
@@ -26,4 +27,5 @@ public class VirtualJoueur extends Joueur{
 		}
 		return this.listeParties;
 	}
+	
 }

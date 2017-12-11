@@ -59,7 +59,7 @@ public class JoueurMapper {
 		ResultSet rs = ps.executeQuery();
 		if (rs.next()){
 			String pseudo = rs.getString("pseudo");
-			Joueur j = new VirtualJoueur();
+			Joueur j = new Joueur();
 			j.setNom_joueur(pseudo);
 			j.setId_joueur(id);
 			map.put(id, j);
