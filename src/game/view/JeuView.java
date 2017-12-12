@@ -23,7 +23,8 @@ public class JeuView extends JFrame implements Observer {
 		Container c = new LoginView();
 		this.setContentPane(c);
 		this.setSize(c.getWidth(), c.getHeight());
-		this.setTitle(c.getName());
+		this.setTitle(jeu.getNom_jeu());
+		this.setLocationRelativeTo(null);
 		this.setResizable(false);	
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
