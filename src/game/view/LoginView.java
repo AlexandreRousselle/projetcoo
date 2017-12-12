@@ -8,23 +8,17 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
-import game.main.EtatJeu;
+import game.controller.AuthentificationController;
 import game.main.Jeu;
-import game.persistance.UserMapper;
 
 public class LoginView extends JPanel {
 
@@ -37,9 +31,7 @@ public class LoginView extends JPanel {
 	JButton valider = new JButton("Valider");
 	Font font = new Font("Arial",Font.BOLD,16);
 
-	public LoginView() {
-		
-		this.setName("Login");
+	public LoginView() {	
 		TitledBorder tb = new TitledBorder("Connexion");
 		tb.setTitleColor(Color.WHITE);
 		this.setBorder(tb);
@@ -76,8 +68,7 @@ public class LoginView extends JPanel {
 		c.gridwidth = 3;
 		c.fill = 0;
 		this.add(valider, c);
-		valider.addActionListener(new ValiderListener());
-
+		valider.addActionListener(new AuthentificationController(pseudojtf.getText(), mdpjtf.getText()));
 		this.setBounds(0, 0, 400, 300);
 	}
 	
@@ -90,26 +81,5 @@ public class LoginView extends JPanel {
 		}
         g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), null);
     }
-
-	class ValiderListener extends JFrame implements ActionListener {
-
-    	private static final long serialVersionUID = 1L;
-
-    	@Override
-    	public void actionPerformed(ActionEvent e) {
-    	// TODO Auto-generated method stub
-	    	try {
-		    	if(UserMapper.getInstance().findByPseudoPassword(pseudojtf.getText(), mdpjtf.getText()) != null) {
-			    	JOptionPane.showMessageDialog(null,"Connexion reussie ! ","Success", JOptionPane.PLAIN_MESSAGE);
-			    	Jeu.getInstance().setEtat_jeu(EtatJeu.MENU_PRINCIPAL);
-		    	} else {
-			    	JOptionPane.showMessageDialog(null,"Login ou mot de passe incorrect ! ", "Error", 1);
-		    	}
-	    	}
-	    	catch (Exception ex) {
-	    		ex.printStackTrace();
-	    	}
-    	}
-	}
 
 }

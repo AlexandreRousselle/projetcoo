@@ -1,15 +1,9 @@
 package game.view;
 
-import java.awt.Color;
 import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -59,10 +53,13 @@ public class JeuView extends JFrame implements Observer {
         	this.changePanel(new NouvellePartieView());
         	break;
         case MENU_REJOINDRE:
-        	this.changePanel(new LoginView());
+        	this.changePanel(new ChoixPartieView(1));
         	break;
         case MENU_VOIR:
-        	this.changePanel(new LoginView());
+        	this.changePanel(new ChoixPartieView(2));
+        	break;
+        case ATTENTE_PARTIE:
+        	this.changePanel(new AttentePartieView(null));
         	break;
 		}
 	}

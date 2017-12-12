@@ -1,7 +1,6 @@
 package game.view;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
@@ -20,7 +19,6 @@ import javax.swing.border.TitledBorder;
 
 import game.main.EtatJeu;
 import game.main.Jeu;
-import game.view.LoginView.ValiderListener;
 
 public class MenuPrincipalView extends JPanel {
 	
@@ -45,7 +43,7 @@ public class MenuPrincipalView extends JPanel {
 		c.weighty = 4;
 		c.gridwidth = 1;
 		c.fill = GridBagConstraints.BOTH;
-		c.insets = new Insets(50, 100, 50, 100);
+		c.insets = new Insets(25, 50, 25, 50);
 		c.gridx = 0;
 		c.gridy = 0;
 		this.add(nouvelle, c);
@@ -63,7 +61,7 @@ public class MenuPrincipalView extends JPanel {
 		this.add(deco, c);
 		deco.addActionListener(new DecoListener());
 		
-		this.setBounds(0, 0, 400, 600);
+		this.setBounds(0, 0, 300, 500);
 	}
 	
     public void paintComponent(Graphics g) {
