@@ -3,7 +3,7 @@ package game.main;
 public enum EtatJeu {
 	PAGE_LOGIN,
 	MENU_PRINCIPAL,
-	MENU_CREATION,
+	MENU_NOUVELLE,
 	MENU_REJOINDRE,
-	MENU_OPTIONS;
+	MENU_VOIR;
 }

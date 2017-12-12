@@ -22,6 +22,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
+import game.main.EtatJeu;
+import game.main.Jeu;
 import game.persistance.UserMapper;
 
 public class LoginView extends JPanel {
@@ -73,8 +75,8 @@ public class LoginView extends JPanel {
 		c.gridy = 2;
 		c.gridwidth = 3;
 		c.fill = 0;
-		valider.addActionListener(new ValiderListener());
 		this.add(valider, c);
+		valider.addActionListener(new ValiderListener());
 
 		this.setBounds(0, 0, 400, 300);
 	}
@@ -82,12 +84,11 @@ public class LoginView extends JPanel {
     public void paintComponent(Graphics g) {
     	Image img = null;
 		try {
-			img = ImageIO.read(new File("ressources/fonds/fondromain.jpg"));
+			img = ImageIO.read(Jeu.getInstance().getFileByKey("fond"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
         g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), null);
-        
     }
 
 	class ValiderListener extends JFrame implements ActionListener {
@@ -99,9 +100,9 @@ public class LoginView extends JPanel {
     	// TODO Auto-generated method stub
 	    	try {
 		    	if(UserMapper.getInstance().findByPseudoPassword(pseudojtf.getText(), mdpjtf.getText()) != null) {
-			    	JOptionPane.showMessageDialog(null,"Connexion réussie ! ","Success", JOptionPane.PLAIN_MESSAGE);
-			    	
-			    } else {
+			    	JOptionPane.showMessageDialog(null,"Connexion reussie ! ","Success", JOptionPane.PLAIN_MESSAGE);
+			    	Jeu.getInstance().setEtat_jeu(EtatJeu.MENU_PRINCIPAL);
+		    	} else {
 			    	JOptionPane.showMessageDialog(null,"Login ou mot de passe incorrect ! ", "Error", 1);
 		    	}
 	    	}
