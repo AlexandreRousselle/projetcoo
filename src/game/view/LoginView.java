@@ -8,6 +8,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -30,7 +32,7 @@ public class LoginView extends JPanel {
 	JTextField mdpjtf = new JTextField("rousselle");
 	JButton valider = new JButton("Valider");
 	Font font = new Font("Arial",Font.BOLD,16);
-
+	
 	public LoginView() {	
 		TitledBorder tb = new TitledBorder("Connexion");
 		tb.setTitleColor(Color.WHITE);
@@ -68,7 +70,13 @@ public class LoginView extends JPanel {
 		c.gridwidth = 3;
 		c.fill = 0;
 		this.add(valider, c);
-		valider.addActionListener(new AuthentificationController(pseudojtf.getText(), mdpjtf.getText()));
+		valider.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				AuthentificationController au = new AuthentificationController(pseudojtf.getText(), mdpjtf.getText());
+				au.actionPerformed(e);
+			}
+		});
 		this.setBounds(0, 0, 400, 300);
 	}
 	

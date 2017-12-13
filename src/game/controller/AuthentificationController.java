@@ -23,6 +23,8 @@ public class AuthentificationController implements ActionListener {
 		// TODO Auto-generated method stub
 		try {
 	    	if(UserMapper.getInstance().findByPseudoPassword(this.pseudo, this.mdp) != null) {
+	    		System.out.println(this.pseudo);
+	    		System.out.println(this.mdp);
 		    	JOptionPane.showMessageDialog(null,"Connexion reussie ! ","Success", JOptionPane.PLAIN_MESSAGE);
 		    	Jeu.getInstance().setEtat_jeu(EtatJeu.MENU_PRINCIPAL);
 	    	} else {

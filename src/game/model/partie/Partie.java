@@ -24,6 +24,12 @@ public class Partie extends Observable {
 	public Partie() {
 	}
 	
+	public Partie(String nom_partie) {
+		this.nom_partie = nom_partie;
+		this.date = Date.from(Instant.now());
+		this.listeJoueurs = new ArrayList<Joueur>();
+	}
+	
 	public Partie(String nom_partie, Carte carte) {
 		this.nom_partie = nom_partie;
 		this.carte = carte;

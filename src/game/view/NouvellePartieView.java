@@ -23,6 +23,7 @@ import javax.swing.SpinnerListModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.border.TitledBorder;
 
+import game.controller.CreationPartieController;
 import game.controller.RetourMenuListener;
 import game.main.EtatJeu;
 import game.main.Jeu;
@@ -40,7 +41,7 @@ public class NouvellePartieView extends JPanel {
 	JLabel nom_partie = new JLabel("Nom de la partie");
 	JLabel nb_joueurs = new JLabel("Nombre de joueurs");
 	JTextField nom_partiejtf = new JTextField();
-	JSpinner nb_joueurs_spin = new JSpinner(new SpinnerNumberModel(2, 0, 4, 1));
+	JSpinner nb_joueurs_spin = new JSpinner(new SpinnerNumberModel(2, 2, 4, 1));
 	//
 	JLabel type_carte = new JLabel("Type de carte");
 	JLabel dimension_carte = new JLabel("Dimension de la carte");
@@ -137,6 +138,18 @@ public class NouvellePartieView extends JPanel {
 		c.gridx = 1;
 		c.gridy = 0;
 		boutons.add(valider, c);
+		valider.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				CreationPartieController cpc = new CreationPartieController(nom_partiejtf.getText()
+						, (int) nb_joueurs_spin.getValue()
+						, (CarteType) type_carte_spin.getValue()
+						, (int) dimension_carte_spin.getValue());
+				cpc.actionPerformed(e);
+			}
+		});
 		
 		partie.setBackground(new Color(0, 0, 0, 0));
 		carte.setBackground(new Color(0, 0, 0, 0));

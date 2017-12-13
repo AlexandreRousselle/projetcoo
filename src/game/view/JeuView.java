@@ -59,7 +59,7 @@ public class JeuView extends JFrame implements Observer {
         	this.changePanel(new ChoixPartieView(2));
         	break;
         case ATTENTE_PARTIE:
-        	this.changePanel(new AttentePartieView(null));
+        	this.changePanel(new AttenteCreationPartieView());
         	break;
 		}
 	}

@@ -1,7 +1,9 @@
 package game.main;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 
@@ -9,13 +11,23 @@ public class Jeu extends Observable {
 
 	private String nom_jeu;
 	private EtatJeu etat_jeu;
+	private	List<String> infostmp;
 	private Map<String, File> files;
 	private static Jeu instance;
 	
 	public Jeu() {
 		this.nom_jeu = "ALEXNASS_GAME";
+		this.infostmp = new ArrayList<String>();
 		this.files = new HashMap<String, File>();
 		this.files.put("fond", new File("ressources/fonds/general.jpg"));
+	}
+	
+	public void ajouterInfos(String info){
+		this.infostmp.add(info);
+	}
+	
+	public void viderInfos(){
+		this.infostmp.clear();
 	}
 	
 	public EtatJeu getEtat_jeu() {
@@ -57,6 +69,14 @@ public class Jeu extends Observable {
 
 	public void setFiles(Map<String, File> files) {
 		this.files = files;
+	}
+
+	public List<String> getInfostmp() {
+		return infostmp;
+	}
+
+	public void setInfostmp(List<String> infostmp) {
+		this.infostmp = infostmp;
 	}
 
 }
