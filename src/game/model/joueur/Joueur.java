@@ -6,6 +6,7 @@ import game.model.map.territoire.Territoire;
 import game.model.partie.Partie;
 import game.model.unite.Unite;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,17 +16,27 @@ public class Joueur extends Observable {
 	protected String nom_joueur;
 	protected Territoire territoireConquis;
 	protected JoueurTribu joueur_tribu;
+	protected Color couleur;
 	protected int ressources;
 	protected List<Unite> listUnites;
 	
-	public Joueur(String nom_joueur, JoueurTribu joueur_tribu) {
+	public Joueur(String nom_joueur, JoueurTribu joueur_tribu, Color couleur) {
 		this.nom_joueur = nom_joueur;
 		this.joueur_tribu = joueur_tribu;
+		this.couleur = couleur;
 		this.listUnites = new ArrayList<Unite>();
 	}
 	
 	public Joueur(){
 		
+	}
+
+	public Color getCouleur() {
+		return couleur;
+	}
+
+	public void setCouleur(Color couleur) {
+		this.couleur = couleur;
 	}
 
 	public String toString() {

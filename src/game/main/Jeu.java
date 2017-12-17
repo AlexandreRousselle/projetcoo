@@ -7,27 +7,26 @@ import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 
+import game.model.User;
+import game.model.partie.Partie;
+
 public class Jeu extends Observable {
 
 	private String nom_jeu;
 	private EtatJeu etat_jeu;
-	private	List<String> infostmp;
+	private User current_user;
+	private Partie current_partie;
 	private Map<String, File> files;
 	private static Jeu instance;
 	
 	public Jeu() {
 		this.nom_jeu = "ALEXNASS_GAME";
-		this.infostmp = new ArrayList<String>();
 		this.files = new HashMap<String, File>();
 		this.files.put("fond", new File("ressources/fonds/general.jpg"));
 	}
 	
-	public void ajouterInfos(String info){
-		this.infostmp.add(info);
-	}
-	
-	public void viderInfos(){
-		this.infostmp.clear();
+	public void addPartieToUser(Partie p) {
+		this.current_user.addPartie(p);
 	}
 	
 	public EtatJeu getEtat_jeu() {
@@ -71,12 +70,20 @@ public class Jeu extends Observable {
 		this.files = files;
 	}
 
-	public List<String> getInfostmp() {
-		return infostmp;
+	public User getCurrent_user() {
+		return current_user;
 	}
 
-	public void setInfostmp(List<String> infostmp) {
-		this.infostmp = infostmp;
+	public void setCurrent_user(User current_user) {
+		this.current_user = current_user;
+	}
+
+	public Partie getCurrent_partie() {
+		return current_partie;
+	}
+
+	public void setCurrent_partie(Partie current_partie) {
+		this.current_partie = current_partie;
 	}
 
 }

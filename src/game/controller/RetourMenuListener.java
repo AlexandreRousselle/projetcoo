@@ -15,6 +15,7 @@ public class RetourMenuListener extends JFrame implements ActionListener {
 
    @Override
    public void actionPerformed(ActionEvent e) {
+	   Jeu.getInstance().setCurrent_partie(null);
 	   Jeu.getInstance().setEtat_jeu(EtatJeu.MENU_PRINCIPAL);
    }
    

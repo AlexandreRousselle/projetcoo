@@ -1,15 +1,18 @@
 package game.model.partie;
 
+import java.awt.Color;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import game.model.Observable;
 import game.model.User;
 import game.model.Visiteur;
 import game.model.joueur.Joueur;
 import game.model.map.Carte;
-
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 public class Partie extends Observable {
 	
@@ -18,32 +21,26 @@ public class Partie extends Observable {
 	private Carte carte; 
 	private Date date;
 	private User createur;
-	protected List<Joueur> listeJoueurs;
+	private int nb_tours;
+	private int nb_ressources_tour;
+	private int nb_joueurs;
+	private List<Joueur> listeJoueurs;
 	private EtatPartie etat_partie;
 	
 	public Partie() {
 	}
 	
-	public Partie(String nom_partie) {
+	public Partie(String nom_partie, User createur, int nb_joueurs, int nb_tours, int nb_ressources_tour, Carte carte) {
 		this.nom_partie = nom_partie;
-		this.date = Date.from(Instant.now());
-		this.listeJoueurs = new ArrayList<Joueur>();
-	}
-	
-	public Partie(String nom_partie, Carte carte) {
-		this.nom_partie = nom_partie;
+		this.createur = createur;
+		this.setNb_joueurs(nb_joueurs);
+		this.nb_tours = nb_tours;
+		this.nb_ressources_tour = nb_ressources_tour;
 		this.carte = carte;
 		this.carte.setPartie(this);
 		this.date = Date.from(Instant.now());
+		this.etat_partie = EtatPartie.ATTENTE;
 		this.listeJoueurs = new ArrayList<Joueur>();
-	}
-	
-	public Partie(String nom_partie, Carte carte, List<Joueur> listeJoueurs) {
-		this.nom_partie = nom_partie;
-		this.carte = carte;
-		this.carte.setPartie(this);
-		this.date = Date.from(Instant.now());
-		this.listeJoueurs = listeJoueurs;
 	}
 
 	public void ajouterJoueur(Joueur joueur) {
@@ -66,14 +63,6 @@ public class Partie extends Observable {
 		this.createur = createur;
 	}
 	
-	public List<Joueur> getListeJoueurs() {
-		return listeJoueurs;
-	}
-
-	public void setListeJoueurs(List<Joueur> listeJoueurs) {
-		this.listeJoueurs = listeJoueurs;
-	}
-
 	public Carte getCarte() {
 		return carte;
 	}
@@ -117,6 +106,38 @@ public class Partie extends Observable {
 	@Override
 	public void accept(Visiteur v) {
 		v.visit(this);
+	}
+
+	public int getNb_tours() {
+		return nb_tours;
+	}
+
+	public void setNb_tours(int nb_tours) {
+		this.nb_tours = nb_tours;
+	}
+
+	public int getNb_ressources_tour() {
+		return nb_ressources_tour;
+	}
+
+	public void setNb_ressources_tour(int nb_ressources_tour) {
+		this.nb_ressources_tour = nb_ressources_tour;
+	}
+
+	public int getNb_joueurs() {
+		return nb_joueurs;
+	}
+
+	public void setNb_joueurs(int nb_joueurs) {
+		this.nb_joueurs = nb_joueurs;
+	}
+
+	public List<Joueur> getListeJoueurs() {
+		return listeJoueurs;
+	}
+
+	public void setListeJoueurs(List<Joueur> listeJoueurs) {
+		this.listeJoueurs = listeJoueurs;
 	}
 	
 }

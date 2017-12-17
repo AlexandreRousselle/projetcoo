@@ -9,8 +9,8 @@ import game.model.partie.Partie;
 
 public class VirtualUser extends User {
 	
-	public VirtualUser(){
-		super();
+	public VirtualUser(String pseudo, String mdp){
+		super(pseudo, mdp);
 		this.listeParties = null;
 	}
 	

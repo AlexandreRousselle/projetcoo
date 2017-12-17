@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
 import java.io.IOException;
+import java.util.Vector;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
@@ -78,6 +79,12 @@ public class ChoixPartieView extends JPanel {
 			selection.setText("Rejoindre");
 		} else {
 			this.titledBorderName = "Voir mes parties";
+			Vector<String> parties = new Vector<String>();
+			for (int i = 0; i < Jeu.getInstance().getCurrent_user().getListeParties().size(); i++) {
+				parties.add(Jeu.getInstance().getCurrent_user().getListeParties().get(i).getNom_partie()
+						+ "(" + Jeu.getInstance().getCurrent_user().getListeParties().get(i).getId_partie() + ")");
+			}
+			this.listeParties.setListData(parties);
 			selection.setText("Configurer");
 		}
 	}

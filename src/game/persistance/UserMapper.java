@@ -60,7 +60,7 @@ public class UserMapper {
 			int id_user = rs.getInt(1);
 			if (map.containsKey(id_user))
 				return map.get(id_user);
-			User u = new VirtualUser();
+			User u = new VirtualUser(pseudo, mdp);
 			u.setPseudo(pseudo);
 			u.setMdp(mdp);
 			map.put(id_user, u);

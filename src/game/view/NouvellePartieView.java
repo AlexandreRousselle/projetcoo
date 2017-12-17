@@ -17,6 +17,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSlider;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerListModel;
@@ -40,8 +41,12 @@ public class NouvellePartieView extends JPanel {
 	//
 	JLabel nom_partie = new JLabel("Nom de la partie");
 	JLabel nb_joueurs = new JLabel("Nombre de joueurs");
+	JLabel nb_tours = new JLabel("Nombre de tours");
+	JLabel nb_ressources_tour = new JLabel("Nombre de ressources par tour");
 	JTextField nom_partiejtf = new JTextField();
 	JSpinner nb_joueurs_spin = new JSpinner(new SpinnerNumberModel(2, 2, 4, 1));
+	JSpinner nb_tours_slider = new JSpinner(new SpinnerNumberModel(10, 5, 50, 5));
+	JSpinner nb_ressources_tour_slider = new JSpinner(new SpinnerNumberModel(500, 100, 1000, 100));
 	//
 	JLabel type_carte = new JLabel("Type de carte");
 	JLabel dimension_carte = new JLabel("Dimension de la carte");
@@ -68,8 +73,12 @@ public class NouvellePartieView extends JPanel {
 		
 		nom_partie.setForeground(Color.WHITE);
 		nb_joueurs.setForeground(Color.WHITE);
+		nb_tours.setForeground(Color.WHITE);
+		nb_ressources_tour.setForeground(Color.WHITE);
 		nom_partie.setFont(font);
 		nb_joueurs.setFont(font);
+		nb_tours.setFont(font);
+		nb_ressources_tour.setFont(font);
 		type_carte.setForeground(Color.WHITE);
 		dimension_carte.setForeground(Color.WHITE);
 		type_carte.setFont(font);
@@ -86,7 +95,7 @@ public class NouvellePartieView extends JPanel {
 		
 		partie.setLayout(new GridBagLayout());
 		c.weightx = 2;
-		c.weighty = 2;
+		c.weighty = 4;
 		c.gridwidth = 1;
 		c.insets = new Insets(10, 20, 10, 20);
 		c.gridx = 0;
@@ -95,6 +104,12 @@ public class NouvellePartieView extends JPanel {
 		c.gridx = 0;
 		c.gridy = 1;
 		partie.add(nb_joueurs, c);
+		c.gridx = 0;
+		c.gridy = 2;
+		partie.add(nb_tours, c);
+		c.gridx = 0;
+		c.gridy = 3;
+		partie.add(nb_ressources_tour, c);
 		c.anchor = GridBagConstraints.CENTER;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 1;
@@ -103,6 +118,12 @@ public class NouvellePartieView extends JPanel {
 		c.gridx = 1;
 		c.gridy = 1;
 		partie.add(nb_joueurs_spin, c);
+		c.gridx = 1;
+		c.gridy = 2;
+		partie.add(nb_tours_slider, c);
+		c.gridx = 1;
+		c.gridy = 3;
+		partie.add(nb_ressources_tour_slider, c);
 		
 		c.fill = 0;
 		
@@ -145,6 +166,8 @@ public class NouvellePartieView extends JPanel {
 				// TODO Auto-generated method stub
 				CreationPartieController cpc = new CreationPartieController(nom_partiejtf.getText()
 						, (int) nb_joueurs_spin.getValue()
+						, (int) nb_tours_slider.getValue()
+						, (int) nb_ressources_tour_slider.getValue()
 						, (CarteType) type_carte_spin.getValue()
 						, (int) dimension_carte_spin.getValue());
 				cpc.actionPerformed(e);
