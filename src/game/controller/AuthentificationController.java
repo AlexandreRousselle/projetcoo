@@ -7,8 +7,8 @@ import javax.swing.JOptionPane;
 
 import game.main.EtatJeu;
 import game.main.Jeu;
-import game.model.User;
-import game.persistance.UserMapper;
+import game.model.joueur.Joueur;
+import game.persistance.JoueurMapper;
 
 public class AuthentificationController implements ActionListener {
 	
@@ -23,9 +23,10 @@ public class AuthentificationController implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		try {
-	    	if(UserMapper.getInstance().findByPseudoPassword(this.pseudo, this.mdp) != null) {
+	    	if(JoueurMapper.getInstance().findByPseudoPassword(this.pseudo, this.mdp) != null) {
 		    	JOptionPane.showMessageDialog(null,"Connexion reussie ! ","Success", JOptionPane.PLAIN_MESSAGE);
-		    	Jeu.getInstance().setCurrent_user(new User(UserMapper.getInstance().findByPseudoPassword(this.pseudo, this.mdp).getId_user(), this.pseudo, this.mdp));
+		    	Joueur j = new Joueur(JoueurMapper.getInstance().findByPseudoPassword(this.pseudo, this.mdp).getId_joueur(), this.pseudo, this.mdp);
+		    	Jeu.getInstance().setCurrent_joueur(j);
 		    	Jeu.getInstance().setEtat_jeu(EtatJeu.MENU_PRINCIPAL);
 	    	} else {
 		    	JOptionPane.showMessageDialog(null,"Login ou mot de passe incorrect ! ", "Error", 1);

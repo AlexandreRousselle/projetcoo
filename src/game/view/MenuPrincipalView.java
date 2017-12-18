@@ -111,7 +111,7 @@ public class MenuPrincipalView extends JPanel {
     	@Override
     	public void actionPerformed(ActionEvent e) {
     		Jeu.getInstance().setEtat_jeu(EtatJeu.PAGE_LOGIN);
-    		Jeu.getInstance().setCurrent_user(null );
+    		Jeu.getInstance().setCurrent_joueur(null);
     	}
 	}
     	

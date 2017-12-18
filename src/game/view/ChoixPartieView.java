@@ -88,7 +88,7 @@ public class ChoixPartieView extends JPanel {
 			this.titledBorderName = "Rejoindre une partie";
 			Vector<Partie> parties = new Vector<Partie>();
 			try {
-				p = PartieMapper.getInstance().findInWait(Jeu.getInstance().getCurrent_user());
+				p = PartieMapper.getInstance().findInWait(Jeu.getInstance().getCurrent_joueur());
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			} catch (SQLException e) {
@@ -105,7 +105,7 @@ public class ChoixPartieView extends JPanel {
 			this.titledBorderName = "Voir mes parties";
 			Vector<Partie> parties = new Vector<Partie>();
 			try {
-				p = PartieMapper.getInstance().findByIdUser(Jeu.getInstance().getCurrent_user().getId_user());
+				p = PartieMapper.getInstance().findByIdJoueur(Jeu.getInstance().getCurrent_joueur().getId_joueur());
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			} catch (SQLException e) {
@@ -123,8 +123,10 @@ public class ChoixPartieView extends JPanel {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					Jeu.getInstance().setCurrent_partie(listeParties.getSelectedValue());
-					Joueur j = new Joueur(Jeu.getInstance().getCurrent_user().getPseudo(),null,null);
-					j.setPartie(listeParties.getSelectedValue());
+					Joueur j = new Joueur(Jeu.getInstance().getCurrent_joueur().getId_joueur()
+							,Jeu.getInstance().getCurrent_joueur().getPseudo()
+							,Jeu.getInstance().getCurrent_joueur().getMdp());
+					j.addPartie(listeParties.getSelectedValue());
 					try {
 						JoueurMapper.getInstance().insert(j);
 					} catch (ClassNotFoundException | SQLException e1) {

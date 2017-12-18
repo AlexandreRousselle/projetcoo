@@ -61,7 +61,7 @@ public class AttenteCreationPartieView extends JPanel {
 			c.gridy = i+1;
 			JLabel jl = new JLabel("User " + (i+1) + " : ");
 			try {
-				JLabel jl2 = new JLabel(UserMapper.getInstance().findUserNamesByJoueurPartie(
+				JLabel jl2 = new JLabel(JoueurMapper.getInstance().findUserNamesByJoueurPartie(
 						Jeu.getInstance().getCurrent_partie().getId_partie()).get(i)
 						);
 			} catch (ClassNotFoundException | SQLException e) {

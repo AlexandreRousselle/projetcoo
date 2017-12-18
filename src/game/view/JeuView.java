@@ -61,9 +61,6 @@ public class JeuView extends JFrame implements Observer {
         case ATTENTE_PARTIE:
         	this.changePanel(new AttenteCreationPartieView());
         	break;
-        case CREATION_JOUEUR:
-        	this.changePanel(new CreationJoueurView());
-        	break;	
        /* case PARTIE_EN_COURS:
         	this.changePanel();
         	break;*/

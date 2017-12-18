@@ -47,7 +47,10 @@ public class CaseMapper {
 			ps.setInt(1, ca.getId_case());
 			ps.setInt(2, ca.getCoordonnees().getA());
 			ps.setInt(3, ca.getCoordonnees().getB());
-			ps.setBoolean(4, ca.getBuild_on());
+			if(ca.getBuild_on())
+				ps.setInt(4, 1);
+			else
+				ps.setInt(4, 0);
 			ps.setString(5, ca.getCase_type().toString());
 			ps.setString(6, ca.getEffet_type().toString());
 			ps.setInt(7, ca.getCarte().getId_carte());

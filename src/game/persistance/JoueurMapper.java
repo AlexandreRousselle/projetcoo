@@ -40,13 +40,13 @@ public class JoueurMapper {
 	}
 
 	public void insert(Joueur j) throws ClassNotFoundException, SQLException{
-		String query = "insert into coo_joueur(id_joueur, nom_joueur, id_partie) values (?,?,?)";
+		String query = "insert into coo_joueur values (?,?,?)";
 		PreparedStatement ps = DBconfig.getInstance().getConnection().prepareStatement(query);
 		j.setId_joueur(currentId);
 		currentId++;
 		ps.setInt(1, j.getId_joueur());
-		ps.setString(2, j.getNom_joueur());
-		ps.setInt(3, j.getPartie().getId_partie());
+		ps.setString(2, j.getPseudo());
+		ps.setString(3, j.getMdp());
 		ps.executeUpdate();
 		map.put(j.getId_joueur(), j);
 	}
@@ -54,16 +54,36 @@ public class JoueurMapper {
 	public Joueur findById(int id) throws SQLException, ClassNotFoundException{
 		if (map.containsKey(id))
 			return map.get(id);
-		String query = "select * from coo_joueur where id = ?";
+		String query = "select * from coo_joueur where id_joueur = ?";
 		PreparedStatement ps = DBconfig.getInstance().getConnection().prepareStatement(query);
 		ps.setInt(1, id);
 		ResultSet rs = ps.executeQuery();
 		if (rs.next()){
 			String pseudo = rs.getString("pseudo");
 			Joueur j = new Joueur();
-			j.setNom_joueur(pseudo);
+			j.setPseudo(pseudo);
 			j.setId_joueur(id);
 			map.put(id, j);
+			return j;
+		}
+		return null;
+	}
+	
+	public Joueur findByPseudoPassword(String pseudo, String mdp) throws SQLException, ClassNotFoundException{
+		String query = "select id_joueur from coo_joueur where pseudo = ? and mdp = ?";
+		PreparedStatement ps = DBconfig.getInstance().getConnection().prepareStatement(query);
+		ps.setString(1, pseudo);
+		ps.setString(2, mdp);
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()){
+			int id_joueur = rs.getInt(1);
+			if (map.containsKey(id_joueur))
+				return map.get(id_joueur);
+			Joueur j = new VirtualJoueur();
+			j.setId_joueur(id_joueur);
+			j.setPseudo(pseudo);
+			j.setMdp(mdp);
+			map.put(id_joueur, j);
 			return j;
 		}
 		return null;

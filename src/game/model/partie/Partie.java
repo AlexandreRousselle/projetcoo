@@ -1,15 +1,10 @@
 package game.model.partie;
 
-import java.awt.Color;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.sql.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import game.model.Observable;
-import game.model.User;
 import game.model.Visiteur;
 import game.model.joueur.Joueur;
 import game.model.map.Carte;
@@ -21,8 +16,9 @@ public class Partie extends Observable {
 	private String nom_partie;
 	private Carte carte; 
 	private Date date;
-	private User createur;
+	private Joueur createur;
 	private int nb_tours;
+	private int nb_ressources_initial;
 	private int nb_ressources_tour;
 	private int nb_joueurs;
 	protected List<Joueur> listeJoueurs;
@@ -32,11 +28,12 @@ public class Partie extends Observable {
 		this.listeJoueurs = new ArrayList<Joueur>();
 	}
 	
-	public Partie(String nom_partie, User createur, int nb_joueurs, int nb_tours, int nb_ressources_tour, Carte carte) {
+	public Partie(String nom_partie, Joueur createur, int nb_joueurs, int nb_tours, int nb_ressources_initial, int nb_ressources_tour, Carte carte) {
 		this.nom_partie = nom_partie;
 		this.createur = createur;
 		this.setNb_joueurs(nb_joueurs);
 		this.nb_tours = nb_tours;
+		this.nb_ressources_initial = nb_ressources_initial;
 		this.nb_ressources_tour = nb_ressources_tour;
 		this.carte = carte;
 		this.carte.setPartie(this);
@@ -55,11 +52,11 @@ public class Partie extends Observable {
 		return res;
 	}
 	
-	public User getCreateur() {
+	public Joueur getCreateur() {
 		return createur;
 	}
 
-	public void setCreateur(User createur) {
+	public void setCreateur(Joueur createur) {
 		this.createur = createur;
 		this.notifyUpdate();
 	}
@@ -147,6 +144,14 @@ public class Partie extends Observable {
 
 	public void setListeJoueurs(List<Joueur> listeJoueurs) {
 		this.listeJoueurs = listeJoueurs;
+	}
+
+	public int getNb_ressources_initial() {
+		return nb_ressources_initial;
+	}
+
+	public void setNb_ressources_initial(int nb_ressources_initial) {
+		this.nb_ressources_initial = nb_ressources_initial;
 	}
 	
 }

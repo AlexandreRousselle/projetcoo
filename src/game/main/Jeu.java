@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 
-import game.model.User;
 import game.model.joueur.Joueur;
 import game.model.partie.Partie;
 
@@ -15,7 +14,7 @@ public class Jeu extends Observable {
 
 	private String nom_jeu;
 	private EtatJeu etat_jeu;
-	private User current_user;
+	private Joueur current_joueur;
 	private Partie current_partie;
 	private Map<String, File> files;
 	private static Jeu instance;
@@ -30,8 +29,8 @@ public class Jeu extends Observable {
 		this.current_partie.setListeJoueurs(l);
 	}
 	
-	public void addPartieToUser(Partie p) {
-		this.current_user.addPartie(p);
+	public void addPartieToJoueur(Partie p) {
+		this.current_joueur.addPartie(p);
 	}
 	
 	public EtatJeu getEtat_jeu() {
@@ -75,12 +74,12 @@ public class Jeu extends Observable {
 		this.files = files;
 	}
 
-	public User getCurrent_user() {
-		return current_user;
+	public Joueur getCurrent_joueur() {
+		return current_joueur;
 	}
 
-	public void setCurrent_user(User current_user) {
-		this.current_user = current_user;
+	public void setCurrent_joueur(Joueur current_joueur) {
+		this.current_joueur = current_joueur;
 	}
 
 	public Partie getCurrent_partie() {
