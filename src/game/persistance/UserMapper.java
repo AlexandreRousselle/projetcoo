@@ -3,7 +3,9 @@ package game.persistance;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import game.model.User;
 import game.model.joueur.Joueur;
@@ -60,13 +62,34 @@ public class UserMapper {
 			int id_user = rs.getInt(1);
 			if (map.containsKey(id_user))
 				return map.get(id_user);
-			User u = new VirtualUser(pseudo, mdp);
+			User u = new VirtualUser(id_user, pseudo, mdp);
 			u.setPseudo(pseudo);
 			u.setMdp(mdp);
 			map.put(id_user, u);
 			return u;
 		}
 		return null;
+	}
+	
+	public List<String> findUserNamesByJoueurPartie(int id_partie) throws ClassNotFoundException, SQLException {
+		String query = "select cu.id_user, cu.pseudo, cu.mdp from coo_user cu "
+				+ "join coo_joueur cj "
+				+ "join coo_partie cp "
+				+ "where id_partie = ?";
+		PreparedStatement ps = DBconfig.getInstance().getConnection().prepareStatement(query);
+		ps.setInt(1, id_partie);
+		ResultSet rs = ps.executeQuery();
+		ArrayList<String> users = new ArrayList<String>(); 
+		while(rs.next()){
+			if (map.containsKey(rs.getInt(1))) {
+				users.add(map.get(rs.getInt(1)).getPseudo());
+			} else {
+				int id_user = rs.getInt(1);
+				String pseudo = rs.getString(2);
+				users.add(pseudo);	
+			}
+		}
+		return users;
 	}
 	
 }

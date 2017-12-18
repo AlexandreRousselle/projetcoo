@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
@@ -18,6 +19,9 @@ import javax.swing.border.TitledBorder;
 import game.controller.RetourMenuListener;
 import game.main.Jeu;
 import game.model.partie.Partie;
+import game.persistance.JoueurMapper;
+import game.persistance.PartieMapper;
+import game.persistance.UserMapper;
 
 public class AttenteCreationPartieView extends JPanel {
 
@@ -55,7 +59,15 @@ public class AttenteCreationPartieView extends JPanel {
 		
 		for (int i = 0; i < Jeu.getInstance().getCurrent_partie().getNb_joueurs(); i++) {
 			c.gridy = i+1;
-			JLabel jl = new JLabel("Joueur " + (i+1) + " : ");
+			JLabel jl = new JLabel("User " + (i+1) + " : ");
+			try {
+				JLabel jl2 = new JLabel(UserMapper.getInstance().findUserNamesByJoueurPartie(
+						Jeu.getInstance().getCurrent_partie().getId_partie()).get(i)
+						);
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				JLabel jl2 = new JLabel();
+			}
 			jl.setForeground(Color.WHITE);
 			jl.setFont(font);
 			this.add(jl, c);

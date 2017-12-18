@@ -25,7 +25,7 @@ public class AuthentificationController implements ActionListener {
 		try {
 	    	if(UserMapper.getInstance().findByPseudoPassword(this.pseudo, this.mdp) != null) {
 		    	JOptionPane.showMessageDialog(null,"Connexion reussie ! ","Success", JOptionPane.PLAIN_MESSAGE);
-		    	Jeu.getInstance().setCurrent_user(new User(this.pseudo, this.mdp));
+		    	Jeu.getInstance().setCurrent_user(new User(UserMapper.getInstance().findByPseudoPassword(this.pseudo, this.mdp).getId_user(), this.pseudo, this.mdp));
 		    	Jeu.getInstance().setEtat_jeu(EtatJeu.MENU_PRINCIPAL);
 	    	} else {
 		    	JOptionPane.showMessageDialog(null,"Login ou mot de passe incorrect ! ", "Error", 1);

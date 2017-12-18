@@ -17,7 +17,7 @@ public class DBconfig {
 	
 	//Constructor
 	public DBconfig(){
-		user ="CHERIFI";
+		user ="ROUSSELLE";
 		psw = "M1MIAGE";
 		url = "jdbc:oracle:thin:@oracle.fil.univ-lille1.fr:1521:filora";
 		driver = "oracle.jdbc.driver.OracleDriver";
@@ -33,6 +33,7 @@ public class DBconfig {
 		if (connect == null){
 			Class.forName(driver);
 			connect = DriverManager.getConnection(url, user, psw);
+			connect.setAutoCommit(false);
 		}
 		return connect;
 	}

@@ -13,7 +13,7 @@ public class Coordonnees {
 		return this.a + "," + this.b;
 	}
 	
-	public double getA() {
+	public int getA() {
 		return a;
 	}
 
@@ -21,7 +21,7 @@ public class Coordonnees {
 		this.a = a;
 	}
 	
-	public double getB() {
+	public int getB() {
 		return b;
 	}
 

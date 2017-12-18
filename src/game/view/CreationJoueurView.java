@@ -83,7 +83,6 @@ private static final long serialVersionUID = 1L;
 		c.gridx = 0;
 		this.add(demarrer, c);
 		demarrer.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
@@ -91,7 +90,6 @@ private static final long serialVersionUID = 1L;
 				Jeu.getInstance().setEtat_jeu(EtatJeu.PARTIE_EN_COURS);
 			}
 		});
-		
 		this.setBounds(0, 0, 500, 500);
 	}
 	

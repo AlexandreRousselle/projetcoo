@@ -4,6 +4,7 @@ import game.model.Observable;
 import game.model.Visiteur;
 import game.model.partie.Partie;
 import game.model.unite.Unite;
+import game.persistance.UnitOfWorks;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -24,6 +25,8 @@ public class Joueur extends Observable {
 		this.joueur_tribu = joueur_tribu;
 		this.couleur = couleur;
 		this.listUnites = new ArrayList<Unite>();
+		this.addObserver(UnitOfWorks.getInstance());
+		notifyUpdate();
 	}
 	
 	public Joueur(){
@@ -36,6 +39,7 @@ public class Joueur extends Observable {
 
 	public void setCouleur(Color couleur) {
 		this.couleur = couleur;
+		notifyUpdate();
 	}
 
 	public String toString() {
@@ -50,6 +54,7 @@ public class Joueur extends Observable {
 
 	public void setId_joueur(int id_joueur) {
 		this.id_joueur = id_joueur;
+		notifyUpdate();
 	}
 
 	public String getNom_joueur() {
@@ -58,6 +63,7 @@ public class Joueur extends Observable {
 
 	public void setNom_joueur(String nom_joueur) {
 		this.nom_joueur = nom_joueur;
+		notifyUpdate();
 	}
 	
 	public JoueurTribu getJoueur_tribu() {
@@ -66,6 +72,7 @@ public class Joueur extends Observable {
 
 	public void setJoueur_tribu(JoueurTribu joueur_tribu) {
 		this.joueur_tribu = joueur_tribu;
+		notifyUpdate();
 	}
 	
 	public int getRessources() {
@@ -74,6 +81,7 @@ public class Joueur extends Observable {
 
 	public void setRessources(int ressources) {
 		this.ressources = ressources;
+		notifyUpdate();
 	}
 
 	public Partie getPartie() {
@@ -82,6 +90,7 @@ public class Joueur extends Observable {
 
 	public void setPartie(Partie partie) {
 		this.partie = partie;
+		notifyUpdate();
 	}
 
 	public List<Unite> getListUnites() {

@@ -30,7 +30,7 @@ public class JoueurMapper {
 	}
 
 	public int getCurrentId() throws ClassNotFoundException, SQLException{
-		String query = "select max(id) from coo_joueur";
+		String query = "select max(id_joueur) from coo_joueur";
 		PreparedStatement ps = DBconfig.getInstance().getConnection().prepareStatement(query);
 		ResultSet rs = ps.executeQuery();
 		if(rs.next()){
@@ -40,16 +40,13 @@ public class JoueurMapper {
 	}
 
 	public void insert(Joueur j) throws ClassNotFoundException, SQLException{
-		String query = "insert into coo_joueur values (?,?,?,?,?,?)";
+		String query = "insert into coo_joueur(id_joueur, nom_joueur, id_partie) values (?,?,?)";
 		PreparedStatement ps = DBconfig.getInstance().getConnection().prepareStatement(query);
 		j.setId_joueur(currentId);
 		currentId++;
 		ps.setInt(1, j.getId_joueur());
 		ps.setString(2, j.getNom_joueur());
-		ps.setString(3, j.getJoueur_tribu().toString());
-		ps.setString(4, j.getCouleur().toString());
-		ps.setInt(5, j.getRessources());
-		ps.setInt(6, j.getPartie().getId_partie());
+		ps.setInt(3, j.getPartie().getId_partie());
 		ps.executeUpdate();
 		map.put(j.getId_joueur(), j);
 	}
@@ -73,7 +70,7 @@ public class JoueurMapper {
 	}
 
 	public List<Joueur> findByIdPartie(int id_partie) throws ClassNotFoundException, SQLException {
-		String query = "select id_joueur from coo_jeu_partie where id_partie = ?";
+		String query = "select * from coo_joueur where id_partie = ?";
 		PreparedStatement ps = DBconfig.getInstance().getConnection().prepareStatement(query);
 		ps.setInt(1, id_partie);
 		ResultSet rs = ps.executeQuery();

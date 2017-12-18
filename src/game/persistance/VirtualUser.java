@@ -9,8 +9,8 @@ import game.model.partie.Partie;
 
 public class VirtualUser extends User {
 	
-	public VirtualUser(String pseudo, String mdp){
-		super(pseudo, mdp);
+	public VirtualUser(int id_user, String pseudo, String mdp){
+		super(id_user, pseudo, mdp);
 		this.listeParties = null;
 	}
 	
@@ -18,7 +18,7 @@ public class VirtualUser extends User {
 	public List<Partie> getListeParties() {
 		if (this.listeParties == null){
 			try {
-				PartieMapper.getInstance().findByIdJoueur(this.id_user);
+				this.listeParties = PartieMapper.getInstance().findByIdUser(this.id_user);
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			} catch (SQLException e) {

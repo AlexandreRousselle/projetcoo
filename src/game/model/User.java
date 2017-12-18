@@ -13,7 +13,8 @@ public class User extends Observable {
 
 	protected List<Partie> listeParties;
 	
-	public User(String pseudo, String mdp) {
+	public User(int id_user, String pseudo, String mdp) {
+		this.id_user = id_user;
 		this.pseudo = pseudo;
 		this.mdp = mdp;
 		this.listeParties = new ArrayList<Partie>();

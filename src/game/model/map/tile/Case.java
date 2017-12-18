@@ -1,7 +1,5 @@
 package game.model.map.tile;
 
-import java.util.UUID;
-
 import game.model.map.Carte;
 import game.model.map.Coordonnees;
 import game.model.map.tile.decorator.EffetType;
@@ -9,7 +7,7 @@ import game.model.unite.Unite;
 
 public class Case {
 
-	private UUID id_case;
+	private int id_case;
 	private Carte carte;
 	private Coordonnees coordonnees;
 	private Boolean build_on;
@@ -18,7 +16,6 @@ public class Case {
 	private EffetType effet_type;
 	
 	public Case(Carte carte, Coordonnees coordonnees, Boolean build_on, CaseType case_type) {
-		this.id_case = UUID.randomUUID();
 		this.carte = carte;
 		this.setBuild_on(build_on);
 		this.coordonnees = coordonnees;
@@ -75,11 +72,11 @@ public class Case {
 		this.carte = carte;
 	}
 
-	public UUID getId_case() {
+	public int getId_case() {
 		return id_case;
 	}
 
-	public void setId_case(UUID id_case) {
+	public void setId_case(int id_case) {
 		this.id_case = id_case;
 	}
 

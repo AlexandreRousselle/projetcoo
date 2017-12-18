@@ -10,7 +10,9 @@ import game.model.joueur.Joueur;
 import game.model.map.factory.CarteFactory;
 import game.model.map.factory.CarteType;
 import game.model.partie.Partie;
+import game.persistance.JoueurMapper;
 import game.persistance.PartieMapper;
+import game.persistance.UnitOfWorks;
 
 public class CreationPartieController implements ActionListener {
 	
@@ -38,7 +40,10 @@ public class CreationPartieController implements ActionListener {
 		try {
 			Partie p = new Partie(this.nom_partie, Jeu.getInstance().getCurrent_user(), this.nb_joueurs, this.nb_tours,
 					this.nb_ressources_tour, new CarteFactory().creerCarte(this.type_carte, this.dimension_carte));
-			PartieMapper.getInstance().insert(p);
+			Joueur j = new Joueur(Jeu.getInstance().getCurrent_user().getPseudo(),null,null);
+			j.setPartie(p);
+			JoueurMapper.getInstance().insert(j);
+			UnitOfWorks.getInstance().commit();
 			Jeu.getInstance().addPartieToUser(p);
 			Jeu.getInstance().setCurrent_partie(p);
 	    	Jeu.getInstance().setEtat_jeu(EtatJeu.ATTENTE_PARTIE);

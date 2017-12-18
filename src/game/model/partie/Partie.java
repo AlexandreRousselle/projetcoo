@@ -29,6 +29,7 @@ public class Partie extends Observable {
 	private EtatPartie etat_partie;
 	
 	public Partie() {
+		this.listeJoueurs = new ArrayList<Joueur>();
 	}
 	
 	public Partie(String nom_partie, User createur, int nb_joueurs, int nb_tours, int nb_ressources_tour, Carte carte) {
@@ -39,9 +40,10 @@ public class Partie extends Observable {
 		this.nb_ressources_tour = nb_ressources_tour;
 		this.carte = carte;
 		this.carte.setPartie(this);
-		this.date.toInstant();
 		this.etat_partie = EtatPartie.ATTENTE;
 		this.listeJoueurs = new ArrayList<Joueur>();
+		this.addObserver(UnitOfWorks.getInstance());
+		this.notifyUpdate();
 	}
 
 	public void ajouterJoueur(Joueur joueur) {
@@ -49,10 +51,7 @@ public class Partie extends Observable {
 	}
 	
 	public String toString() {
-		String res = "Partie n°" + this.id_partie + " -> Nom de partie : " + this.nom_partie + " -> Créée le : " + this.date.toString() + "\n";
-		for (int i = 0; i < this.listeJoueurs.size(); i++) {
-			res += listeJoueurs.get(i).toString() + "\n";
-		}
+		String res = "Partie n°" + this.id_partie + ", Nom de partie : " + this.nom_partie;
 		return res;
 	}
 	
@@ -62,6 +61,7 @@ public class Partie extends Observable {
 
 	public void setCreateur(User createur) {
 		this.createur = createur;
+		this.notifyUpdate();
 	}
 	
 	public Carte getCarte() {
@@ -70,6 +70,7 @@ public class Partie extends Observable {
 
 	public void setCarte(Carte carte) {
 		this.carte = carte;
+		this.notifyUpdate();
 	}
 
 	public int getId_partie() {
@@ -78,6 +79,7 @@ public class Partie extends Observable {
 
 	public void setId_partie(int id_partie) {
 		this.id_partie = id_partie;
+		this.notifyUpdate();
 	}
 
 	public String getNom_partie() {
@@ -86,6 +88,7 @@ public class Partie extends Observable {
 
 	public void setNom_partie(String nom_partie) {
 		this.nom_partie = nom_partie;
+		this.notifyUpdate();
 	}
 
 	public Date getDate() {
@@ -94,6 +97,7 @@ public class Partie extends Observable {
 
 	public void setDate(Date date) {
 		this.date = date;
+		this.notifyUpdate();
 	}
 
 	public EtatPartie getEtat_partie() {
@@ -102,6 +106,7 @@ public class Partie extends Observable {
 
 	public void setEtat_partie(EtatPartie etat_partie) {
 		this.etat_partie = etat_partie;
+		this.notifyUpdate();
 	}
 
 	@Override
@@ -115,6 +120,7 @@ public class Partie extends Observable {
 
 	public void setNb_tours(int nb_tours) {
 		this.nb_tours = nb_tours;
+		this.notifyUpdate();
 	}
 
 	public int getNb_ressources_tour() {
@@ -123,6 +129,7 @@ public class Partie extends Observable {
 
 	public void setNb_ressources_tour(int nb_ressources_tour) {
 		this.nb_ressources_tour = nb_ressources_tour;
+		this.notifyUpdate();
 	}
 
 	public int getNb_joueurs() {
@@ -131,6 +138,7 @@ public class Partie extends Observable {
 
 	public void setNb_joueurs(int nb_joueurs) {
 		this.nb_joueurs = nb_joueurs;
+		this.notifyUpdate();
 	}
 
 	public List<Joueur> getListeJoueurs() {

@@ -1,14 +1,17 @@
 package game.model.map;
 
+import game.model.Observable;
+import game.model.Visiteur;
 import game.model.map.factory.CarteType;
 import game.model.map.tile.Case;
 import game.model.partie.Partie;
+import game.persistance.UnitOfWorks;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class Carte {
+public class Carte extends Observable {
 
 	private int id_carte;
 	private Partie partie;
@@ -31,7 +34,7 @@ public class Carte {
 	}
 	
 	public String toStringModelise() {
-		String res = "Carte n°" + this.id_carte + ", " + this.carte_type.toString() + " de dimension : " + this.dimension + "\n";
+		String res = "Carte nï¿½" + this.id_carte + ", " + this.carte_type.toString() + " de dimension : " + this.dimension + "\n";
 		for (int i = 1; i <= listeCases.size(); i++) {
 			/*if(listeCases.get(i-1).getUnite() == null){
 				res += "  |";
@@ -52,6 +55,7 @@ public class Carte {
 
 	public void setId_carte(int id_carte) {
 		this.id_carte = id_carte;
+		this.notifyUpdate();
 	}
 
 	public Partie getPartie() {
@@ -60,6 +64,7 @@ public class Carte {
 	
 	public void setPartie(Partie partie) {
 		this.partie = partie;
+		this.notifyUpdate();
 	}
 	
 	public List<Case> getListeCases() {
@@ -76,6 +81,7 @@ public class Carte {
 
 	public void setCarte_type(CarteType carte_type) {
 		this.carte_type = carte_type;
+		this.notifyUpdate();
 	}
 
 	public int getDimension() {
@@ -84,6 +90,13 @@ public class Carte {
 
 	public void setDimension(int dimension) {
 		this.dimension = dimension;
+		this.notifyUpdate();
+	}
+
+	@Override
+	public void accept(Visiteur v) {
+		// TODO Auto-generated method stub
+		v.visit(this);
 	}
 	
 }

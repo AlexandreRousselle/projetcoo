@@ -9,6 +9,7 @@ import java.util.List;
 
 import game.model.joueur.Joueur;
 import game.model.map.Carte;
+import game.model.map.tile.Case;
 
 public class CarteMapper {
 
@@ -31,7 +32,7 @@ public class CarteMapper {
 		}
 
 		public int getCurrentId() throws ClassNotFoundException, SQLException{
-			String query = "select max(id) from coo_carte";
+			String query = "select max(id_carte) from coo_carte";
 			PreparedStatement ps = DBconfig.getInstance().getConnection().prepareStatement(query);
 			ResultSet rs = ps.executeQuery();
 			if(rs.next()){
@@ -41,15 +42,15 @@ public class CarteMapper {
 		}
 
 		public void insert(Carte c) throws ClassNotFoundException, SQLException{
-			String query = "insert into coo_carte values (?,?,?,?)";
+			String query = "insert into coo_carte values (?,?,?)";
 			PreparedStatement ps = DBconfig.getInstance().getConnection().prepareStatement(query);
 			c.setId_carte(currentId);
 			currentId++;
 			ps.setInt(1, c.getId_carte());
 			ps.setString(2, c.getCarte_type().toString());
 			ps.setInt(3, c.getDimension());
-			ps.setInt(4, c.getPartie().getId_partie());
 			ps.executeUpdate();
+			CaseMapper.getInstance().insert(c.getListeCases());
 			map.put(c.getId_carte(), c);
 		}
 
