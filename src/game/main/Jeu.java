@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Observable;
 
 import game.model.User;
+import game.model.joueur.Joueur;
 import game.model.partie.Partie;
 
 public class Jeu extends Observable {
@@ -23,6 +24,10 @@ public class Jeu extends Observable {
 		this.nom_jeu = "ALEXNASS_GAME";
 		this.files = new HashMap<String, File>();
 		this.files.put("fond", new File("ressources/fonds/general.jpg"));
+	}
+	
+	public void addListeJoueursToPartie(List<Joueur> l) {
+		this.current_partie.setListeJoueurs(l);
 	}
 	
 	public void addPartieToUser(Partie p) {

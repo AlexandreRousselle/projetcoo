@@ -8,7 +8,7 @@ public abstract class DecorateurCase extends Case {
 	protected Case caseDecoree;
 
 	public DecorateurCase(Carte carte, Case caseDecoree, EffetType effet_type) {
-		super(carte, caseDecoree.getCoordonnees(), caseDecoree.getCase_access(), caseDecoree.getCase_type());
+		super(carte, caseDecoree.getCoordonnees(), caseDecoree.getBuild_on(), caseDecoree.getCase_type());
 		this.setEffet_type(effet_type);
 		this.caseDecoree = caseDecoree;
 	}

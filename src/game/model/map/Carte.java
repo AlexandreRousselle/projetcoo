@@ -10,14 +10,13 @@ import java.util.UUID;
 
 public class Carte {
 
-	private UUID id_carte;
+	private int id_carte;
 	private Partie partie;
 	private CarteType carte_type;
 	private int dimension;
 	private List<Case> listeCases;
 	
 	public Carte(CarteType carte_type, int dimension) {
-		this.id_carte = UUID.randomUUID();
 		this.carte_type = carte_type;
 		this.dimension = dimension;
 		this.listeCases = new ArrayList<Case>();
@@ -47,11 +46,11 @@ public class Carte {
 		return res;
 	}
 	
-	public UUID getId_carte() {
+	public int getId_carte() {
 		return id_carte;
 	}
 
-	public void setId_carte(UUID id_carte) {
+	public void setId_carte(int id_carte) {
 		this.id_carte = id_carte;
 	}
 

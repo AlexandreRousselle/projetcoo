@@ -74,7 +74,7 @@ public class ChoixPartieView extends JPanel {
 	}
 	
 	public void setAttributes(){
-		if(this.mode_choix == 1){
+		if(this.mode_choix == 1) {
 			this.titledBorderName = "Rejoindre une partie";
 			selection.setText("Rejoindre");
 		} else {
@@ -82,10 +82,10 @@ public class ChoixPartieView extends JPanel {
 			Vector<String> parties = new Vector<String>();
 			for (int i = 0; i < Jeu.getInstance().getCurrent_user().getListeParties().size(); i++) {
 				parties.add(Jeu.getInstance().getCurrent_user().getListeParties().get(i).getNom_partie()
-						+ "(" + Jeu.getInstance().getCurrent_user().getListeParties().get(i).getId_partie() + ")");
+						+ "(" + Jeu.getInstance().getCurrent_user().getListeParties().get(i).getNb_joueurs() + ")");
 			}
 			this.listeParties.setListData(parties);
-			selection.setText("Configurer");
+			selection.setText("Continuer");
 		}
 	}
 	

@@ -85,6 +85,8 @@ public class NouvellePartieView extends JPanel {
 		dimension_carte.setFont(font);
 		
 		((JSpinner.DefaultEditor) nb_joueurs_spin.getEditor()).getTextField().setEditable(false);
+		((JSpinner.DefaultEditor) nb_tours_slider.getEditor()).getTextField().setEditable(false);
+		((JSpinner.DefaultEditor) nb_ressources_tour_slider.getEditor()).getTextField().setEditable(false);
 		((JSpinner.DefaultEditor) type_carte_spin.getEditor()).getTextField().setEditable(false);
 		((JSpinner.DefaultEditor) dimension_carte_spin.getEditor()).getTextField().setEditable(false);
 		

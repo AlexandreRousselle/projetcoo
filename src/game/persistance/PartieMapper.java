@@ -38,13 +38,22 @@ public class PartieMapper {
 	}
 	
 	public void insert(Partie p) throws ClassNotFoundException, SQLException{
-		String query = "insert into coo_partie values (?)";
+		String query = "insert into coo_partie values (?,?,?,?,?,?,?,?,?)";
 		PreparedStatement ps = DBconfig.getInstance().getConnection().prepareStatement(query);
-			p.setId_partie(currentId);
-			currentId++;
-				ps.setInt(1, p.getId_partie());
-				ps.executeUpdate();
-				map.put(p.getId_partie(), p);
+		p.setId_partie(currentId);
+		currentId++;
+		ps.setInt(1, p.getId_partie());
+		ps.setString(2, p.getNom_partie());
+		ps.setDate(3, p.getDate());
+		ps.setInt(4, p.getCreateur().getId_user());
+		ps.setInt(5, p.getNb_joueurs());
+		ps.setInt(6, p.getNb_tours());
+		ps.setInt(7, p.getNb_ressources_tour());
+		ps.setString(8, p.getEtat_partie().toString());
+		ps.setInt(9, p.getCarte().getId_carte());
+		ps.executeUpdate();
+		CarteMapper.getInstance().insert(p.getCarte());
+		map.put(p.getId_partie(), p);
 	}
 	
 	public Partie findById(int id) throws SQLException, ClassNotFoundException{
@@ -57,7 +66,6 @@ public class PartieMapper {
 		if (rs.next()){
 			Partie p = new VirtualPartie();
 			p.setId_partie(id);
-			
 			map.put(id, p);
 			return p;
 		}
@@ -66,7 +74,7 @@ public class PartieMapper {
 
 	public ArrayList<Partie> findByIdJoueur(int id_joueur) throws ClassNotFoundException, SQLException {
 		
-		String query = "select id_partie from coo_jeu_partie where id_joueur = ?";
+		String query = "select id_partie from coo_joueur where id_joueur = ?";
 		PreparedStatement ps = DBconfig.getInstance().getConnection().prepareStatement(query);
 		ps.setInt(1, id_joueur);
 		ResultSet rs = ps.executeQuery();
@@ -79,7 +87,5 @@ public class PartieMapper {
 		
 		return parties;
 	}
-
-		
 		
 }

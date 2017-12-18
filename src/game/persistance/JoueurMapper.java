@@ -40,12 +40,16 @@ public class JoueurMapper {
 	}
 
 	public void insert(Joueur j) throws ClassNotFoundException, SQLException{
-		String query = "insert into coo_joueur values (?,?)";
+		String query = "insert into coo_joueur values (?,?,?,?,?,?)";
 		PreparedStatement ps = DBconfig.getInstance().getConnection().prepareStatement(query);
 		j.setId_joueur(currentId);
 		currentId++;
 		ps.setInt(1, j.getId_joueur());
 		ps.setString(2, j.getNom_joueur());
+		ps.setString(3, j.getJoueur_tribu().toString());
+		ps.setString(4, j.getCouleur().toString());
+		ps.setInt(5, j.getRessources());
+		ps.setInt(6, j.getPartie().getId_partie());
 		ps.executeUpdate();
 		map.put(j.getId_joueur(), j);
 	}
@@ -53,7 +57,7 @@ public class JoueurMapper {
 	public Joueur findById(int id) throws SQLException, ClassNotFoundException{
 		if (map.containsKey(id))
 			return map.get(id);
-		String query = "select pseudo from coo_joueur where id = ?";
+		String query = "select * from coo_joueur where id = ?";
 		PreparedStatement ps = DBconfig.getInstance().getConnection().prepareStatement(query);
 		ps.setInt(1, id);
 		ResultSet rs = ps.executeQuery();

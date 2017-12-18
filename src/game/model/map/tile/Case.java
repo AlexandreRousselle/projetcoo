@@ -12,30 +12,22 @@ public class Case {
 	private UUID id_case;
 	private Carte carte;
 	private Coordonnees coordonnees;
-	private CaseAccessibilite case_access;
+	private Boolean build_on;
 	private CaseType case_type;
 	private Unite unite;
 	private EffetType effet_type;
 	
-	public Case(Carte carte, Coordonnees coordonnees, CaseAccessibilite case_access, CaseType case_type) {
+	public Case(Carte carte, Coordonnees coordonnees, Boolean build_on, CaseType case_type) {
 		this.id_case = UUID.randomUUID();
 		this.carte = carte;
+		this.setBuild_on(build_on);
 		this.coordonnees = coordonnees;
-		this.case_access = case_access;
 		this.case_type = case_type;
 		this.effet_type = EffetType.DEFAULT;
 	}
 	
 	public void retirerEffet() {
 		this.setEffet_type(EffetType.DEFAULT);
-	}
-
-	public CaseAccessibilite getCase_access() {
-		return case_access;
-	}
-
-	public void setCase_access(CaseAccessibilite case_access) {
-		this.case_access = case_access;
 	}
 
 	public CaseType getCase_type() {
@@ -55,7 +47,7 @@ public class Case {
 	}
 	
 	public String getLibelle() {
-		return "Case " + this.case_access.toString() + " de type " + this.case_type.toString() 
+		return "Case " + this.build_on.toString() + " de type " + this.case_type.toString() 
 			+ " (" + this.coordonnees.getA() + ", " + this.coordonnees.getB() + ") ";
 	}
 
@@ -89,6 +81,14 @@ public class Case {
 
 	public void setId_case(UUID id_case) {
 		this.id_case = id_case;
+	}
+
+	public Boolean getBuild_on() {
+		return build_on;
+	}
+
+	public void setBuild_on(Boolean build_on) {
+		this.build_on = build_on;
 	}
 
 }

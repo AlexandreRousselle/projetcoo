@@ -8,7 +8,6 @@ import game.model.joueur.Joueur;
 import game.model.map.Carte;
 import game.model.map.Coordonnees;
 import game.model.map.tile.Case;
-import game.model.map.tile.CaseAccessibilite;
 import game.model.map.tile.CaseType;
 import game.model.map.tile.decorator.CaseAttaque;
 import game.model.map.tile.decorator.CaseDefense;
@@ -52,10 +51,10 @@ public class CarteFactory {
 			CaseType ct = randomCaseType();
 			switch(ct)
 			{
-				case PLAINE:c = new Case(carte, listCoordonnees.get(i), CaseAccessibilite.ACCESSIBLE, CaseType.PLAINE);break;
-				case FORET:c = new Case(carte, listCoordonnees.get(i), CaseAccessibilite.ACCESSIBLE, CaseType.FORET);break;
-				case CHAMP:c = new Case(carte, listCoordonnees.get(i), CaseAccessibilite.ACCESSIBLE, CaseType.CHAMP);break;
-				case MONTAGNE:c = new Case(carte, listCoordonnees.get(i), CaseAccessibilite.NONACCESSIBLE, CaseType.MONTAGNE);break;
+				case PLAINE:c = new Case(carte, listCoordonnees.get(i), true, CaseType.PLAINE);break;
+				case FORET:c = new Case(carte, listCoordonnees.get(i), true, CaseType.FORET);break;
+				case CHAMP:c = new Case(carte, listCoordonnees.get(i), true, CaseType.CHAMP);break;
+				case MONTAGNE:c = new Case(carte, listCoordonnees.get(i), false, CaseType.MONTAGNE);break;
 			}
 			EffetType et = randomEffetType();
 			switch(et)

@@ -3,7 +3,7 @@ package game.model.partie;
 import java.awt.Color;
 import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +13,7 @@ import game.model.User;
 import game.model.Visiteur;
 import game.model.joueur.Joueur;
 import game.model.map.Carte;
+import game.persistance.UnitOfWorks;
 
 public class Partie extends Observable {
 	
@@ -24,7 +25,7 @@ public class Partie extends Observable {
 	private int nb_tours;
 	private int nb_ressources_tour;
 	private int nb_joueurs;
-	private List<Joueur> listeJoueurs;
+	protected List<Joueur> listeJoueurs;
 	private EtatPartie etat_partie;
 	
 	public Partie() {
@@ -38,7 +39,7 @@ public class Partie extends Observable {
 		this.nb_ressources_tour = nb_ressources_tour;
 		this.carte = carte;
 		this.carte.setPartie(this);
-		this.date = Date.from(Instant.now());
+		this.date.toInstant();
 		this.etat_partie = EtatPartie.ATTENTE;
 		this.listeJoueurs = new ArrayList<Joueur>();
 	}

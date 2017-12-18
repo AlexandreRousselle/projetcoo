@@ -2,7 +2,6 @@ package game.model.joueur;
 
 import game.model.Observable;
 import game.model.Visiteur;
-import game.model.map.territoire.Territoire;
 import game.model.partie.Partie;
 import game.model.unite.Unite;
 
@@ -14,10 +13,10 @@ public class Joueur extends Observable {
 
 	protected int id_joueur;
 	protected String nom_joueur;
-	protected Territoire territoireConquis;
 	protected JoueurTribu joueur_tribu;
 	protected Color couleur;
 	protected int ressources;
+	protected Partie partie;
 	protected List<Unite> listUnites;
 	
 	public Joueur(String nom_joueur, JoueurTribu joueur_tribu, Color couleur) {
@@ -61,20 +60,36 @@ public class Joueur extends Observable {
 		this.nom_joueur = nom_joueur;
 	}
 	
-	public Territoire getTerritoireConquis() {
-		return territoireConquis;
-	}
-
-	public void setTerritoireConquis(Territoire territoireConquis) {
-		this.territoireConquis = territoireConquis;
-	}
-
 	public JoueurTribu getJoueur_tribu() {
 		return joueur_tribu;
 	}
 
 	public void setJoueur_tribu(JoueurTribu joueur_tribu) {
 		this.joueur_tribu = joueur_tribu;
+	}
+	
+	public int getRessources() {
+		return ressources;
+	}
+
+	public void setRessources(int ressources) {
+		this.ressources = ressources;
+	}
+
+	public Partie getPartie() {
+		return partie;
+	}
+
+	public void setPartie(Partie partie) {
+		this.partie = partie;
+	}
+
+	public List<Unite> getListUnites() {
+		return listUnites;
+	}
+
+	public void setListUnites(List<Unite> listUnites) {
+		this.listUnites = listUnites;
 	}
 
 	@Override
