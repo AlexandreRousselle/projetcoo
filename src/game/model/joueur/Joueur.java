@@ -26,7 +26,7 @@ public class Joueur extends Observable {
 		this.listeParties = new ArrayList<Partie>();
 		this.listeUnites = new ArrayList<Unite>();
 		this.addObserver(UnitOfWorks.getInstance());
-		notifyUpdate();
+		this.notifyUpdate();
 	}
 	
 	public Joueur(){

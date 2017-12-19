@@ -41,9 +41,7 @@ public class CreationPartieController implements ActionListener {
 		try {
 			Partie p = new Partie(this.nom_partie, Jeu.getInstance().getCurrent_joueur(), this.nb_joueurs, this.nb_tours, this.nb_ressources_initial,
 					this.nb_ressources_tour, new CarteFactory().creerCarte(this.type_carte, this.dimension_carte));
-			PartieMapper.getInstance().insert(p);
 			UnitOfWorks.getInstance().commit();
-			Jeu.getInstance().addPartieToJoueur(p);
 			Jeu.getInstance().setCurrent_partie(p);
 	    	Jeu.getInstance().setEtat_jeu(EtatJeu.ATTENTE_PARTIE);
     	}

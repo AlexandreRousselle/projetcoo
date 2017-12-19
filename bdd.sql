@@ -1,3 +1,11 @@
+drop table coo_joueur_partie;
+drop table coo_partie_carte;
+drop table coo_unite;
+drop table coo_partie;
+drop table coo_case;
+drop table coo_joueur;
+drop table coo_carte;
+
 create table coo_joueur (
   id_joueur number(5),
   pseudo varchar(50),
@@ -53,7 +61,7 @@ create table coo_case (
   id_carte number(5),
   posX number(10),
   posY number(10),
-  build_on number(1),
+  build_on char(1 byte),
   type_case varchar(50),
   effet_case varchar(50),
   CONSTRAINT check_build_on CHECK (build_on IN (0, 1))
@@ -74,5 +82,6 @@ ALTER TABLE coo_unite ADD CONSTRAINT FK1_coo_unite FOREIGN KEY (id_joueur) REFER
 ALTER TABLE coo_unite ADD CONSTRAINT FK2_coo_unite FOREIGN KEY (id_case) REFERENCES coo_case(id_case);
 
 insert into coo_joueur values (1,'rousselle', 'rousselle');
+insert into coo_joueur values (2,'cherifi', 'cherifi');
 
 commit;

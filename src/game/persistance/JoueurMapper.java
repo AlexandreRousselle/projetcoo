@@ -103,4 +103,21 @@ public class JoueurMapper {
 		return joueurs;
 	}
 
+	public List<String> findUserNamesByJoueurPartie(int id_partie) throws ClassNotFoundException, SQLException {
+		String query = "select cj.pseudo "
+				+ "from coo_joueur cj "
+				+ "inner join coo_joueur_partie cjp on cj.id_joueur = cjp.id_joueur"
+				+ " where cjp.id_partie = ?";
+		PreparedStatement ps = DBconfig.getInstance().getConnection().prepareStatement(query);
+		ps.setInt(1, id_partie);
+		ResultSet rs = ps.executeQuery();
+		ArrayList<String> pseudos = new ArrayList<String>(); 
+		while(rs.next()){
+			System.out.println(rs.getString(1));
+			String pseudo = rs.getString(1);
+			pseudos.add(pseudo);
+		}
+		return pseudos;
+	}
+
 }

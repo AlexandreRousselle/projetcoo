@@ -28,6 +28,7 @@ import game.model.joueur.Joueur;
 import game.model.partie.Partie;
 import game.persistance.JoueurMapper;
 import game.persistance.PartieMapper;
+import game.persistance.UnitOfWorks;
 
 public class ChoixPartieView extends JPanel {
 
@@ -101,6 +102,22 @@ public class ChoixPartieView extends JPanel {
 			}
 			this.listeParties.setListData(parties);
 			selection.setText("Rejoindre");
+			selection.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					try {
+						PartieMapper.getInstance().insertRelationPartieJoueur(Jeu.getInstance().getCurrent_joueur(), listeParties.getSelectedValue());
+						UnitOfWorks.getInstance().commit();
+					} catch (ClassNotFoundException | SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					Jeu.getInstance().setCurrent_partie(listeParties.getSelectedValue());
+					Jeu.getInstance().setEtat_jeu(EtatJeu.ATTENTE_PARTIE);
+				}
+			});
 		} else {
 			this.titledBorderName = "Voir mes parties";
 			Vector<Partie> parties = new Vector<Partie>();
@@ -123,16 +140,6 @@ public class ChoixPartieView extends JPanel {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					Jeu.getInstance().setCurrent_partie(listeParties.getSelectedValue());
-					Joueur j = new Joueur(Jeu.getInstance().getCurrent_joueur().getId_joueur()
-							,Jeu.getInstance().getCurrent_joueur().getPseudo()
-							,Jeu.getInstance().getCurrent_joueur().getMdp());
-					j.addPartie(listeParties.getSelectedValue());
-					try {
-						JoueurMapper.getInstance().insert(j);
-					} catch (ClassNotFoundException | SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
 					Jeu.getInstance().setEtat_jeu(EtatJeu.ATTENTE_PARTIE);
 				}
 			});

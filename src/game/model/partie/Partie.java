@@ -48,7 +48,7 @@ public class Partie extends Observable {
 	}
 	
 	public String toString() {
-		String res = "Partie nÂ°" + this.id_partie + ", Nom de partie : " + this.nom_partie;
+		String res = "Partie n°" + this.id_partie + ", Nom de partie : " + this.nom_partie + " (" + this.nb_joueurs + ")";
 		return res;
 	}
 	
