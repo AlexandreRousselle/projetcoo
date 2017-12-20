@@ -7,8 +7,12 @@ import java.util.Observer;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import com.sun.javafx.image.impl.General;
+
 import game.main.EtatJeu;
 import game.main.Jeu;
+import game.view.mapView.GeneralView;
+import game.view.mapView.MapView;
 
 public class JeuView extends JFrame implements Observer {
 	
@@ -61,9 +65,9 @@ public class JeuView extends JFrame implements Observer {
         case ATTENTE_PARTIE:
         	this.changePanel(new AttenteCreationPartieView());
         	break;
-       /* case PARTIE_EN_COURS:
-        	this.changePanel();
-        	break;*/
+        case PARTIE_EN_COURS:
+        	this.changePanel(new GeneralView());
+        	break;
 		}
 	}
 

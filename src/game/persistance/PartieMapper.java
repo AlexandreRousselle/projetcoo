@@ -75,7 +75,15 @@ public class PartieMapper {
 		ps3.executeUpdate();
 		map.put(p.getId_partie(), p);
 	}
-
+	
+	public void deleteRelationPartieJoueur(Joueur j, Partie p) throws ClassNotFoundException, SQLException {
+		String query3 = "delete from coo_joueur_partie where id_joueur = ? and id_partie = ?";
+		PreparedStatement ps3 = DBconfig.getInstance().getConnection().prepareStatement(query3);
+		ps3.setInt(1, j.getId_joueur());
+		ps3.setInt(2, p.getId_partie());
+		ps3.executeUpdate();
+		map.put(p.getId_partie(), p);
+	}
 	
 	public List<Partie> findByIdJoueur(int id_joueur) throws SQLException, ClassNotFoundException{
 		String query = "select cp.id_partie, cp.nom_partie, cp.date_creation, cp.createur, cp.nb_joueurs"

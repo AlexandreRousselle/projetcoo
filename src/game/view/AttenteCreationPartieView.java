@@ -21,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
 import game.controller.RetourMenuListener;
+import game.controller.SeDesinscrireController;
 import game.main.EtatJeu;
 import game.main.Jeu;
 import game.model.partie.Partie;
@@ -35,13 +36,16 @@ public class AttenteCreationPartieView extends JPanel {
 	
 	JButton demmarer = new JButton("Demarrer");
 	JButton retour = new JButton("Retour");
+	JButton se_desinscrire = new JButton("Se desinscrire");
 	
 	Font font = new Font("Arial",Font.BOLD,14);
 	
 	public AttenteCreationPartieView(){
-
+		
 		if(Jeu.getInstance().getCurrent_partie().getCreateur().getId_joueur() != Jeu.getInstance().getCurrent_joueur().getId_joueur()) {
 			demmarer.setEnabled(false);
+		} else {
+			se_desinscrire.setEnabled(false);
 		}
 		
 		this.setLayout(new GridBagLayout());
@@ -56,7 +60,7 @@ public class AttenteCreationPartieView extends JPanel {
 		this.setLayout(new GridBagLayout());
 
 		c.weightx = 2;
-		c.weighty = Jeu.getInstance().getCurrent_partie().getNb_joueurs()+1;
+		c.weighty = Jeu.getInstance().getCurrent_partie().getNb_joueurs()+2;
 		c.gridx = 0;
 		
 		c.gridy = 0;
@@ -111,6 +115,12 @@ public class AttenteCreationPartieView extends JPanel {
 			}
 		});
 		
+		c.gridwidth = 2;
+		c.gridx = 0;
+		c.gridy = Jeu.getInstance().getCurrent_partie().getNb_joueurs()+2;
+		this.add(se_desinscrire, c);
+		se_desinscrire.addActionListener(new SeDesinscrireController());
+
 		this.setBounds(0, 0, 500, 500);
 	}
 	
