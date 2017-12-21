@@ -22,7 +22,13 @@ public class Jeu extends Observable {
 	public Jeu() {
 		this.nom_jeu = "ALEXNASS_GAME";
 		this.files = new HashMap<String, File>();
-		this.files.put("fond", new File("ressources/fonds/general.jpg"));
+		this.loadFiles();
+	}
+	
+	public void loadFiles(){
+		this.files.put("fond_login", new File("ressources/auth_bg.png"));
+		this.files.put("fond", new File("ressources/bg.png"));
+		this.files.put("splash_screen", new File("ressources/splash_screen.png"));
 	}
 	
 	public void addListeJoueursToPartie(List<Joueur> l) {

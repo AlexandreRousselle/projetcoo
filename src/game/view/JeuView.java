@@ -24,14 +24,23 @@ public class JeuView extends JFrame implements Observer {
 		super();
 		this.jeu = Jeu.getInstance();
 		this.jeu.addObserver(this);
-		this.c = new LoginView();
+		this.c = new PreView();
+		this.setUndecorated(true);
 		this.setContentPane(c);
-		this.setSize(c.getWidth(), c.getHeight());
+		this.setSize(1280, 720);
 		this.setTitle(jeu.getNom_jeu());
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);	
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		try {
+		    Thread.sleep(2000);
+		} catch (InterruptedException e) {
+		    e.printStackTrace();
+		}
+		this.setVisible(false);
+		this.changePanel(new LoginView());
+		this.setVisible(true);
 	}
 	
 	
@@ -42,6 +51,7 @@ public class JeuView extends JFrame implements Observer {
 		this.setSize(jp.getWidth(), jp.getHeight());
 		revalidate();
 		repaint();
+		this.setLocationRelativeTo(null);
 	}
 	
 	public void refresh(EtatJeu ej) {

@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
@@ -34,10 +33,11 @@ public class AttenteCreationPartieView extends JPanel {
 	
 	JLabel nom_partie = new JLabel();
 	
-	JButton demmarer = new JButton("Demarrer");
-	JButton retour = new JButton("Retour");
-	JButton se_desinscrire = new JButton("Se desinscrire");
+	SoulsButton demmarer = new SoulsButton("Demarrer", 200, 50);
+	SoulsButton retour = new SoulsButton("Retour", 200, 50);
+	SoulsButton se_desinscrire = new SoulsButton("Se desinscrire", 200, 50);
 	
+	Font font_name = new Font("Arial",Font.BOLD,20);
 	Font font = new Font("Arial",Font.BOLD,14);
 	
 	public AttenteCreationPartieView(){
@@ -49,20 +49,16 @@ public class AttenteCreationPartieView extends JPanel {
 		}
 		
 		this.setLayout(new GridBagLayout());
-		TitledBorder tb = new TitledBorder("Salle d'attente");
-		tb.setTitleColor(Color.WHITE);
-		this.setBorder(tb);
 		
 		nom_partie.setForeground(Color.WHITE);
-		nom_partie.setFont(font);
+		nom_partie.setFont(font_name);
+
 		
 		GridBagConstraints c = new GridBagConstraints();
 		this.setLayout(new GridBagLayout());
 
-		c.weightx = 2;
-		c.weighty = Jeu.getInstance().getCurrent_partie().getNb_joueurs()+2;
 		c.gridx = 0;
-		
+		c.insets = new Insets(10, 10, 50, 10);
 		c.gridy = 0;
 		c.gridwidth = 2;
 		
@@ -101,7 +97,6 @@ public class AttenteCreationPartieView extends JPanel {
 		}
 		
 		c.insets = new Insets(10, 20, 10, 20);
-		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 0;
 		c.gridy = Jeu.getInstance().getCurrent_partie().getNb_joueurs()+1;
 		retour.addActionListener(new RetourMenuListener());
@@ -121,7 +116,7 @@ public class AttenteCreationPartieView extends JPanel {
 		this.add(se_desinscrire, c);
 		se_desinscrire.addActionListener(new SeDesinscrireController());
 
-		this.setBounds(0, 0, 500, 500);
+		this.setBounds(0, 0, 1280, 720);
 	}
 	
 	public void paintComponent(Graphics g) {

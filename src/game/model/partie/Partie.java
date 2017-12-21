@@ -2,12 +2,14 @@ package game.model.partie;
 
 import java.util.ArrayList;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.List;
 
 import game.model.Observable;
 import game.model.Visiteur;
 import game.model.joueur.Joueur;
 import game.model.map.Carte;
+import game.persistance.PartieMapper;
 import game.persistance.UnitOfWorks;
 
 public class Partie extends Observable {
@@ -48,7 +50,8 @@ public class Partie extends Observable {
 	}
 	
 	public String toString() {
-		String res = "Partie n°" + this.id_partie + ", Nom de partie : " + this.nom_partie + " (" + this.nb_joueurs + ")";
+		String res = "";
+		res = "Partie n° " + this.id_partie + ", Nom de partie : " + this.nom_partie;
 		return res;
 	}
 	

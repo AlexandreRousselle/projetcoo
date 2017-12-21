@@ -12,7 +12,6 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
@@ -24,18 +23,13 @@ public class MenuPrincipalView extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
 
-	JButton nouvelle = new JButton("Nouvelle partie");
-	JButton rejoindre = new JButton("Rejoindre partie");
-	JButton voir = new JButton("Voir mes parties");
-	JButton deco = new JButton("Deconnexion");
+	SoulsButton nouvelle = new SoulsButton("Nouvelle partie", 500, 70);
+	SoulsButton rejoindre = new SoulsButton("Rejoindre partie", 500, 70);
+	SoulsButton voir = new SoulsButton("Voir mes parties", 500, 70);
+	SoulsButton deco = new SoulsButton("Deconnexion", 500, 70);
 	Font font = new Font("Arial",Font.BOLD,16);
 
 	public MenuPrincipalView() {
-		
-		this.setName("Menu Principal");
-		TitledBorder tb = new TitledBorder("Choix");
-		tb.setTitleColor(Color.WHITE);
-		this.setBorder(tb);
 		
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -61,7 +55,7 @@ public class MenuPrincipalView extends JPanel {
 		this.add(deco, c);
 		deco.addActionListener(new DecoListener());
 		
-		this.setBounds(0, 0, 300, 500);
+		this.setBounds(0, 0, 1280, 720);
 	}
 	
     public void paintComponent(Graphics g) {

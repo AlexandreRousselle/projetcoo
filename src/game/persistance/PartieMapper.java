@@ -85,6 +85,27 @@ public class PartieMapper {
 		map.put(p.getId_partie(), p);
 	}
 	
+	public Partie findById(int id_partie) throws SQLException, ClassNotFoundException {
+		String query = "select * from coo_partie where id_partie = ?";
+		PreparedStatement ps = DBconfig.getInstance().getConnection().prepareStatement(query);
+		ps.setInt(1, id_partie);
+		ResultSet rs = ps.executeQuery();
+		Partie p = new VirtualPartie();
+		while(rs.next()){
+			p.setId_partie(rs.getInt(1));
+			p.setNom_partie(rs.getString(2));
+			Joueur j = new VirtualJoueur();
+			j.setId_joueur(rs.getInt(4));
+			p.setCreateur(j);
+			p.setNb_joueurs(rs.getInt(5));
+			p.setNb_tours(rs.getInt(6));
+			p.setNb_ressources_initial(rs.getInt(7));
+			p.setNb_ressources_tour(rs.getInt(8));
+			p.setEtat_partie(EtatPartie.valueOf(rs.getString(9)));
+		}
+		return p;
+	}
+	
 	public List<Partie> findByIdJoueur(int id_joueur) throws SQLException, ClassNotFoundException{
 		String query = "select cp.id_partie, cp.nom_partie, cp.date_creation, cp.createur, cp.nb_joueurs"
 				+ ", cp.nb_tours, cp.nb_ressources_initial, cp.nb_ressources_tour, cp.etat_partie"

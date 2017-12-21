@@ -1,6 +1,7 @@
 package game.view;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Vector;
 
 import javax.imageio.ImageIO;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -41,25 +43,22 @@ public class ChoixPartieView extends JPanel {
 	//
 	JLabel label_infos = new JLabel("Pas d'informations");
 	//
-	JButton selection = new JButton();
-	JButton retour = new JButton("Retour");
+	SoulsButton selection = new SoulsButton(200, 60);
+	SoulsButton retour = new SoulsButton("Retour", 200, 60);
 	
 	Font font = new Font("Arial",Font.BOLD,14);
 	
 	public ChoixPartieView(int mode){
 		this.mode_choix = mode;
 		this.setAttributes();
-		TitledBorder tb = new TitledBorder(this.titledBorderName);
-		tb.setTitleColor(Color.WHITE);
-		this.setBorder(tb);
 		
 		label_infos.setForeground(Color.WHITE);
 		label_infos.setFont(font);
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		
-		c.weightx = 2;
-		c.weighty = 3;
+		listeParties.setPreferredSize(new Dimension(400, 400));
+		listeParties.setBackground(new Color(180, 180, 180));
 		c.gridwidth = 2;
 		c.insets = new Insets(10, 20, 10, 20);
 		c.gridx = 0;
@@ -68,19 +67,17 @@ public class ChoixPartieView extends JPanel {
 		this.add(label_infos, c);
 		c.gridx = 0;
 		c.gridy = 0;
-		c.fill = GridBagConstraints.BOTH;
 		this.add(listeParties, c);
 		c.gridx = 0;
 		c.gridy = 2;
 		c.gridwidth = 1;
-		c.fill = GridBagConstraints.HORIZONTAL;
 		this.add(retour, c);
 		retour.addActionListener(new RetourMenuListener());
 		c.gridx = 1;
 		c.gridy = 2;
 		this.add(selection, c);
 
-		this.setBounds(0, 0, 500, 700);
+		this.setBounds(0, 0, 1280, 720);
 	}
 	
 	public void setAttributes(){
