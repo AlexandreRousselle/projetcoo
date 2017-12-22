@@ -25,7 +25,6 @@ public class JeuView extends JFrame implements Observer {
 		this.jeu = Jeu.getInstance();
 		this.jeu.addObserver(this);
 		this.c = new PreView();
-		this.setUndecorated(true);
 		this.setContentPane(c);
 		this.setSize(1280, 720);
 		this.setTitle(jeu.getNom_jeu());

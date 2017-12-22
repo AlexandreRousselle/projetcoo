@@ -2,6 +2,7 @@ package game.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 
 import game.main.EtatJeu;
 import game.main.Jeu;
@@ -41,7 +42,8 @@ public class CreationPartieController implements ActionListener {
 		try {
 			Partie p = new Partie(this.nom_partie, Jeu.getInstance().getCurrent_joueur(), this.nb_joueurs, this.nb_tours, this.nb_ressources_initial,
 					this.nb_ressources_tour, new CarteFactory().creerCarte(this.type_carte, this.dimension_carte));
-			UnitOfWorks.getInstance().commit();
+			p.setDate(new Date(System.currentTimeMillis()));
+			PartieMapper.getInstance().insert(p);
 			Jeu.getInstance().setCurrent_partie(p);
 	    	Jeu.getInstance().setEtat_jeu(EtatJeu.ATTENTE_PARTIE);
     	}

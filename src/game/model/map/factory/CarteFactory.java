@@ -24,9 +24,6 @@ public class CarteFactory {
             case FERMIERE:carte = new Carte(carte_type, dimension);
         		carte.setListeCases(creerCases(genererCoordonnees(dimension)));
             break;
-            case FORESTIERE:carte = new Carte(carte_type, dimension);
-        		carte.setListeCases(creerCases(genererCoordonnees(dimension)));
-            break;
             case MONTAGNEUSE:carte = new Carte(carte_type, dimension);
         		carte.setListeCases(creerCases(genererCoordonnees(dimension)));
             break;
@@ -52,7 +49,6 @@ public class CarteFactory {
 			switch(ct)
 			{
 				case PLAINE:c = new Case(carte, listCoordonnees.get(i), true, CaseType.PLAINE);break;
-				case FORET:c = new Case(carte, listCoordonnees.get(i), true, CaseType.FORET);break;
 				case CHAMP:c = new Case(carte, listCoordonnees.get(i), true, CaseType.CHAMP);break;
 				case MONTAGNE:c = new Case(carte, listCoordonnees.get(i), false, CaseType.MONTAGNE);break;
 			}
@@ -73,16 +69,14 @@ public class CarteFactory {
 	public CaseType randomCaseType() {
 		int valeur = (int) (Math.random()*100);
 		int nbChamps = this.carte.getCarte_type().getNbChamps();
-		int nbForets = this.carte.getCarte_type().getNbForets();
+		int nbPlaines = this.carte.getCarte_type().getNbPlaines();
 		int nbMontagnes = this.carte.getCarte_type().getNbMontagnes();
 		if (valeur < nbChamps) {
-			return CaseType.values()[1];
-		} else if (valeur < nbChamps + nbForets) {
-			return CaseType.values()[2];
-		} else if (valeur < nbChamps + nbForets + nbMontagnes) {
-			return CaseType.values()[3];
-		} else {
 			return CaseType.values()[0];
+		} else if (valeur < nbChamps + nbPlaines) {
+			return CaseType.values()[1];
+		} else {
+			return CaseType.values()[2];
 		}
 	}
 	

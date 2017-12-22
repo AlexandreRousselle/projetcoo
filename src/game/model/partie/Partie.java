@@ -16,7 +16,7 @@ public class Partie extends Observable {
 	
 	protected int id_partie;
 	private String nom_partie;
-	private Carte carte; 
+	protected Carte carte; 
 	private Date date;
 	private Joueur createur;
 	private int nb_tours;
@@ -41,8 +41,6 @@ public class Partie extends Observable {
 		this.carte.setPartie(this);
 		this.etat_partie = EtatPartie.ATTENTE;
 		this.listeJoueurs = new ArrayList<Joueur>();
-		this.addObserver(UnitOfWorks.getInstance());
-		this.notifyUpdate();
 	}
 
 	public void ajouterJoueur(Joueur joueur) {
@@ -51,7 +49,7 @@ public class Partie extends Observable {
 	
 	public String toString() {
 		String res = "";
-		res = "Partie n� " + this.id_partie + ", Nom de partie : " + this.nom_partie;
+		res = "Partie n° " + this.id_partie + ", Nom de partie : " + this.nom_partie + ", créée le : " + this.date.toString();
 		return res;
 	}
 	

@@ -1,5 +1,6 @@
 package game.persistance;
 
+import java.lang.ref.WeakReference;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,13 +10,14 @@ import java.util.List;
 
 import game.model.joueur.Joueur;
 import game.model.map.Carte;
+import game.model.map.factory.CarteType;
 import game.model.map.tile.Case;
 
 public class CarteMapper {
 
 	//Attributes
 		private static int currentId;
-		private static HashMap<Integer, Carte> map = new HashMap<Integer, Carte>();
+		private static HashMap<Integer, WeakReference<Carte>> map = new HashMap<Integer, WeakReference<Carte>>();
 
 		private static CarteMapper instance;
 
@@ -51,11 +53,24 @@ public class CarteMapper {
 			ps.setInt(3, c.getDimension());
 			ps.executeUpdate();
 			CaseMapper.getInstance().insert(c.getListeCases());
-			map.put(c.getId_carte(), c);
+			map.put(c.getId_carte(), new WeakReference<Carte>(c));
 		}
 
 		public Carte findById(int id) throws SQLException, ClassNotFoundException{
-			return null;
+			String query = "select * from coo_carte c inner join coo_partie_carte cpc on c.ID_CARTE = cpc.ID_CARTE "
+					+ "where cpc.id_partie = ?";
+			PreparedStatement ps = DBconfig.getInstance().getConnection().prepareStatement(query);
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			Carte c = null;
+			while (rs.next()){
+				c = new Carte();
+				c.setId_carte(rs.getInt(1));
+				c.setCarte_type(CarteType.valueOf(rs.getString(2)));
+				c.setId_carte(rs.getInt(1));
+				c.setListeCases(CaseMapper.getInstance().findListeCases(rs.getInt(1)));
+			}
+			return c;
 		}
 	
 }

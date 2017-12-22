@@ -33,7 +33,6 @@ public class DBconfig {
 		if (connect == null){
 			Class.forName(driver);
 			connect = DriverManager.getConnection(url, user, psw);
-			connect.setAutoCommit(false);
 		}
 		return connect;
 	}

@@ -25,6 +25,10 @@ public class Carte extends Observable {
 		this.listeCases = new ArrayList<Case>();
 	}
 	
+	public Carte() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String toString() {
 		String res = "Carte " + this.carte_type.toString() + " de dimension : " + this.dimension + "\n";
 		for (int i = 0; i < listeCases.size(); i++) {
@@ -34,7 +38,7 @@ public class Carte extends Observable {
 	}
 	
 	public String toStringModelise() {
-		String res = "Carte n�" + this.id_carte + ", " + this.carte_type.toString() + " de dimension : " + this.dimension + "\n";
+		String res = "Carte n°" + this.id_carte + ", " + this.carte_type.toString() + " de dimension : " + this.dimension + "\n";
 		for (int i = 1; i <= listeCases.size(); i++) {
 			/*if(listeCases.get(i-1).getUnite() == null){
 				res += "  |";

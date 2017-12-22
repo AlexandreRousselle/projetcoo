@@ -33,7 +33,7 @@ public class LoginView extends JPanel {
 	JTextField pseudojtf = new JTextField("rousselle");
 	JTextField mdpjtf = new JTextField("rousselle");
 	SoulsButton valider = new SoulsButton("Connexion", 140, 30);
-    Font font_auth = new Font("Arial", Font.BOLD, 20);
+    Font font_auth = new Font("Arial", Font.BOLD, 16);
 	Font font = new Font("Arial",Font.BOLD,14);
 	
 	public LoginView() {	

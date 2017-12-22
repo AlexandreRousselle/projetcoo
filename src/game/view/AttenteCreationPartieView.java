@@ -23,9 +23,11 @@ import game.controller.RetourMenuListener;
 import game.controller.SeDesinscrireController;
 import game.main.EtatJeu;
 import game.main.Jeu;
+import game.model.partie.EtatPartie;
 import game.model.partie.Partie;
 import game.persistance.JoueurMapper;
 import game.persistance.PartieMapper;
+import game.persistance.UnitOfWorks;
 
 public class AttenteCreationPartieView extends JPanel {
 
@@ -41,6 +43,10 @@ public class AttenteCreationPartieView extends JPanel {
 	Font font = new Font("Arial",Font.BOLD,14);
 	
 	public AttenteCreationPartieView(){
+		
+		System.out.println(Jeu.getInstance().getCurrent_joueur().getPseudo());
+		System.out.println(Jeu.getInstance().getCurrent_partie());
+		System.out.println(Jeu.getInstance().getCurrent_partie().getCreateur().getId_joueur());
 		
 		if(Jeu.getInstance().getCurrent_partie().getCreateur().getId_joueur() != Jeu.getInstance().getCurrent_joueur().getId_joueur()) {
 			demmarer.setEnabled(false);
@@ -106,6 +112,7 @@ public class AttenteCreationPartieView extends JPanel {
 		demmarer.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				Jeu.getInstance().setEtat_partie(EtatPartie.EN_COURS);
 				Jeu.getInstance().setEtat_jeu(EtatJeu.PARTIE_EN_COURS);
 			}
 		});

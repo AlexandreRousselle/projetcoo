@@ -23,6 +23,10 @@ public class Case {
 		this.effet_type = EffetType.DEFAULT;
 	}
 	
+	public Case() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public void retirerEffet() {
 		this.setEffet_type(EffetType.DEFAULT);
 	}

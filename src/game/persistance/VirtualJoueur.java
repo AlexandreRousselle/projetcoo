@@ -12,6 +12,7 @@ public class VirtualJoueur extends Joueur {
 	public VirtualJoueur(){
 		super();
 		this.listeParties = null;
+		this.listeUnites = null;
 	}
 	
 	@Override
@@ -29,7 +30,7 @@ public class VirtualJoueur extends Joueur {
 	}
 
 	/*@Override
-	public List<Unite> getListeUnites() {
+	/*public List<Unite> getListeUnites() {
 		if (this.listeUnites == null){
 			try {
 				this.listeUnites = PartieMapper.getInstance().findByIdUser(this.id_joueur);

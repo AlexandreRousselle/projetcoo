@@ -4,19 +4,20 @@ import java.util.UUID;
 
 import game.model.joueur.Joueur;
 import game.model.map.Coordonnees;
+import game.model.map.tile.Case;
 
 public class Unite {
 
 	protected UUID id_unite;
 	protected Joueur proprietaire;
 	protected UniteType unite_type;
-	protected Coordonnees coordonnees;
+	protected Case case_;
 
-	public Unite(UniteType unite_type, Joueur proprietaire, Coordonnees coordonnees) {
+	public Unite(UniteType unite_type, Joueur proprietaire, Case case_) {
 		this.id_unite = UUID.randomUUID();
 		this.unite_type = unite_type;
 		this.proprietaire = proprietaire;
-		this.coordonnees = coordonnees;
+		this.case_ = case_;
 	}
 
 	public UUID getId_unite() {
@@ -43,12 +44,12 @@ public class Unite {
 		this.unite_type = unite_type;
 	}
 
-	public Coordonnees getCoordonnees() {
-		return coordonnees;
+	public Case getCase_() {
+		return case_;
 	}
 
-	public void setCoordonnees(Coordonnees coordonnees) {
-		this.coordonnees = coordonnees;
+	public void setCase_(Case case_) {
+		this.case_ = case_;
 	}
-	
+
 }

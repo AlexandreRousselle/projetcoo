@@ -15,14 +15,14 @@ public class UnitOfWorks implements ActionListener,Observer{
 	//Attributes
 	private List<Observable> update = new ArrayList<Observable>();
 	
-	private VisiteurCreate creator = new VisiteurCreate();
+	private VisiteurUpdate creator = new VisiteurUpdate();
 	
 	private static UnitOfWorks instance;
 	
 	//Constrctor
 	private UnitOfWorks(){
 		 // this === c'est la classe qui implemente le ActionListener dans notre cas c'est this (notre classe)
-		 new Timer(100000,this).start();
+		 new Timer(2000,this).start();
 	}
 
 	//Methods
@@ -41,12 +41,6 @@ public class UnitOfWorks implements ActionListener,Observer{
 	public void commit(){
 		for(Observable o : this.update){
 			this.creator.visit(o);
-		}
-		try {
-			DBconfig.getInstance().getConnection().commit();
-		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		this.update.clear();
 	}

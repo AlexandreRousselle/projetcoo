@@ -53,23 +53,15 @@ public class NouvellePartieView extends JPanel {
 	JLabel type_carte = new JLabel("Type de carte");
 	JLabel dimension_carte = new JLabel("Dimension de la carte");
 	JSpinner type_carte_spin = new JSpinner(new SpinnerListModel(CarteType.values()));
-	JSpinner dimension_carte_spin = new JSpinner(new SpinnerNumberModel(10, 10, 20, 2));
+	JSpinner dimension_carte_spin = new JSpinner(new SpinnerNumberModel(30, 20, 30, 2));
 	//
-	JButton valider = new JButton("Valider");
-	JButton retour = new JButton("Retour");
+	SoulsButton valider = new SoulsButton("Valider", 200, 60);
+	SoulsButton retour = new SoulsButton("Retour", 200, 60);
 	Font font = new Font("Arial",Font.BOLD,14);
 
 	public NouvellePartieView() {
 		
 		this.setLayout(new GridBagLayout());
-		
-		TitledBorder tb = new TitledBorder("Configuration Partie");
-		tb.setTitleColor(Color.WHITE);
-		partie.setBorder(tb);
-		
-		TitledBorder tb2 = new TitledBorder("Configuration Carte");
-		tb2.setTitleColor(Color.WHITE);
-		carte.setBorder(tb2);
 		
 		GridBagConstraints c = new GridBagConstraints();
 		
@@ -100,11 +92,14 @@ public class NouvellePartieView extends JPanel {
 		type_carte_spin.setPreferredSize(new Dimension(150, 30));
 		dimension_carte_spin.setPreferredSize(new Dimension(150, 30));
 		
+		nb_tours_slider.setPreferredSize(new Dimension(150, 30));
+		nb_ressources_initial_slider.setPreferredSize(new Dimension(150, 30));
+		nb_ressources_tour_slider.setPreferredSize(new Dimension(150, 30));
+		
 		partie.setLayout(new GridBagLayout());
-		c.weightx = 2;
-		c.weighty = 5;
 		c.gridwidth = 1;
 		c.insets = new Insets(10, 20, 10, 20);
+		c.anchor = GridBagConstraints.CENTER;
 		c.gridx = 0;
 		c.gridy = 0;
 		partie.add(nom_partie, c);
@@ -120,8 +115,6 @@ public class NouvellePartieView extends JPanel {
 		c.gridx = 0;
 		c.gridy = 4;
 		partie.add(nb_ressources_tour, c);
-		c.anchor = GridBagConstraints.CENTER;
-		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 1;
 		c.gridy = 0;
 		partie.add(nom_partiejtf, c);
@@ -150,8 +143,6 @@ public class NouvellePartieView extends JPanel {
 		c.gridx = 0;
 		c.gridy = 1;
 		carte.add(dimension_carte, c);
-		c.anchor = GridBagConstraints.CENTER;
-		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 1;
 		c.gridy = 0;
 		carte.add(type_carte_spin, c);
@@ -160,11 +151,8 @@ public class NouvellePartieView extends JPanel {
 		carte.add(dimension_carte_spin, c);	
 		
 		boutons.setLayout(new GridBagLayout());
-		c.weightx = 2;
-		c.weighty = 1;
 		c.gridwidth = 1;
 		c.anchor = GridBagConstraints.CENTER;
-		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 0;
 		c.gridy = 0;
 		boutons.add(retour, c);
@@ -193,10 +181,7 @@ public class NouvellePartieView extends JPanel {
 		boutons.setBackground(new Color(0, 0, 0, 0));
 		
 		c.insets = new Insets(0, 0, 0, 0);
-		c.weightx = 1;
-		c.weighty = 3;
 		c.gridwidth = 1;
-		c.fill = GridBagConstraints.BOTH;
 		c.gridx = 0;
 		c.gridy = 0;
 		this.add(partie, c);
@@ -207,7 +192,7 @@ public class NouvellePartieView extends JPanel {
 		c.gridy = 2;
 		this.add(boutons, c);
 		
-		this.setBounds(0, 0, 500, 700);
+		this.setBounds(0, 0, 1280, 720);
 	}
 	
 	 public void paintComponent(Graphics g) {

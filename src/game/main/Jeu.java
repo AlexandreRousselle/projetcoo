@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Observable;
 
 import game.model.joueur.Joueur;
+import game.model.partie.EtatPartie;
 import game.model.partie.Partie;
 
 public class Jeu extends Observable {
@@ -29,6 +30,10 @@ public class Jeu extends Observable {
 		this.files.put("fond_login", new File("ressources/auth_bg.png"));
 		this.files.put("fond", new File("ressources/bg.png"));
 		this.files.put("splash_screen", new File("ressources/splash_screen.png"));
+	}
+	
+	public void setEtat_partie(EtatPartie ep){
+		this.current_partie.setEtat_partie(ep);
 	}
 	
 	public void addListeJoueursToPartie(List<Joueur> l) {

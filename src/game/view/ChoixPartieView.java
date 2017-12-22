@@ -50,6 +50,8 @@ public class ChoixPartieView extends JPanel {
 	
 	public ChoixPartieView(int mode){
 		this.mode_choix = mode;
+		System.out.println(Jeu.getInstance().getCurrent_joueur().getPseudo());
+		System.out.println(Jeu.getInstance().getCurrent_partie());
 		this.setAttributes();
 		
 		label_infos.setForeground(Color.WHITE);
@@ -57,13 +59,12 @@ public class ChoixPartieView extends JPanel {
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		
-		listeParties.setPreferredSize(new Dimension(400, 400));
+		listeParties.setPreferredSize(new Dimension(500, 400));
 		listeParties.setBackground(new Color(180, 180, 180));
 		c.gridwidth = 2;
 		c.insets = new Insets(10, 20, 10, 20);
 		c.gridx = 0;
 		c.gridy = 1;
-		c.anchor = GridBagConstraints.CENTER; 
 		this.add(label_infos, c);
 		c.gridx = 0;
 		c.gridy = 0;
@@ -106,7 +107,6 @@ public class ChoixPartieView extends JPanel {
 					// TODO Auto-generated method stub
 					try {
 						PartieMapper.getInstance().insertRelationPartieJoueur(Jeu.getInstance().getCurrent_joueur(), listeParties.getSelectedValue());
-						UnitOfWorks.getInstance().commit();
 					} catch (ClassNotFoundException | SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();

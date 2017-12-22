@@ -1,17 +1,16 @@
 package game.model.map.factory;
 
 public enum CarteType {
-	FERMIERE (70,15,15),
-	FORESTIERE (15,70,15),
-	MONTAGNEUSE (15,15,70);
+	FERMIERE (35,50,15),
+	MONTAGNEUSE (15,50,35);
 	
 	private int nbChamps;
-	private int nbForets;
+	private int nbPlaines;
 	private int nbMontagnes;
 	
-	private CarteType(int nbChamps, int nbForets, int nbMontagnes) {
+	private CarteType(int nbChamps, int nbPlaines, int nbMontagnes) {
 		this.nbChamps = nbChamps;
-		this.nbForets = nbForets;
+		this.nbPlaines = nbPlaines;
 		this.nbMontagnes = nbMontagnes;
 	}
 	
@@ -19,8 +18,8 @@ public enum CarteType {
 		return this.nbChamps;
 	}
 	
-	public int getNbForets() {
-		return this.nbForets;
+	public int getNbPlaines() {
+		return this.nbPlaines;
 	}
 	
 	public int getNbMontagnes() {
