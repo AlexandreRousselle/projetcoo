@@ -67,7 +67,7 @@ public class CarteMapper {
 				c = new Carte();
 				c.setId_carte(rs.getInt(1));
 				c.setCarte_type(CarteType.valueOf(rs.getString(2)));
-				c.setId_carte(rs.getInt(1));
+				c.setDimension(rs.getInt(3));
 				c.setListeCases(CaseMapper.getInstance().findListeCases(rs.getInt(1)));
 			}
 			return c;

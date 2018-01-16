@@ -1,5 +1,8 @@
 package game.model.map.tile;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import game.model.map.Carte;
 import game.model.map.Coordonnees;
 import game.model.map.tile.decorator.EffetType;
@@ -12,7 +15,7 @@ public class Case {
 	private Coordonnees coordonnees;
 	private Boolean build_on;
 	private CaseType case_type;
-	private Unite unite;
+	private List<Unite> unite;
 	private EffetType effet_type;
 	
 	public Case(Carte carte, Coordonnees coordonnees, Boolean build_on, CaseType case_type) {
@@ -21,6 +24,7 @@ public class Case {
 		this.coordonnees = coordonnees;
 		this.case_type = case_type;
 		this.effet_type = EffetType.DEFAULT;
+		this.unite = new ArrayList<Unite>();
 	}
 	
 	public Case() {
@@ -60,11 +64,11 @@ public class Case {
 		this.coordonnees = coordonnees;
 	}
 
-	public Unite getUnite() {
+	public List<Unite> getUnite() {
 		return unite;
 	}
 
-	public void setUnite(Unite unite) {
+	public void setUnite(List<Unite> unite) {
 		this.unite = unite;
 	}
 

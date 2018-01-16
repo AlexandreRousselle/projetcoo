@@ -1,9 +1,9 @@
 package game.model.map.tile;
 
 public enum CaseType {
+	PLAINE (0),
 	CHAMP (1),
-	PLAINE (2),
-	MONTAGNE (3);
+	MONTAGNE (2);
 	
 	private int value;
 	

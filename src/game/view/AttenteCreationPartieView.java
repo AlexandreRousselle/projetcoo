@@ -16,6 +16,7 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
@@ -25,9 +26,13 @@ import game.main.EtatJeu;
 import game.main.Jeu;
 import game.model.partie.EtatPartie;
 import game.model.partie.Partie;
+import game.model.unite.Unite;
+import game.model.unite.UniteType;
+import game.persistance.CaseMapper;
 import game.persistance.JoueurMapper;
 import game.persistance.PartieMapper;
 import game.persistance.UnitOfWorks;
+import game.persistance.UniteMapper;
 
 public class AttenteCreationPartieView extends JPanel {
 
@@ -112,8 +117,25 @@ public class AttenteCreationPartieView extends JPanel {
 		demmarer.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Jeu.getInstance().setEtat_partie(EtatPartie.EN_COURS);
-				Jeu.getInstance().setEtat_jeu(EtatJeu.PARTIE_EN_COURS);
+				if(Jeu.getInstance().getCurrent_partie().getListeJoueurs().size()
+						!= Jeu.getInstance().getCurrent_partie().getNb_joueurs()){
+					JOptionPane.showMessageDialog(null,"Pas assez de joueurs pour lancer la partie !", "Error", 1);
+				} else {
+					Jeu.getInstance().setEtat_partie(EtatPartie.EN_COURS);
+					Jeu.getInstance().setEtat_jeu(EtatJeu.PARTIE_EN_COURS);
+					for (int i = 0; i < Jeu.getInstance().getCurrent_partie().getNb_joueurs(); i++) {
+						Unite u = new Unite(UniteType.VILLE
+								, Jeu.getInstance().getCurrent_partie().getListeJoueurs().get(i)
+								, Jeu.getInstance().getCurrent_partie().getCarte().getListeCases().get((Jeu.getInstance().getCurrent_partie().getCarte().getListeCases().size()-1)/(i+1)));
+						try {
+							UniteMapper.getInstance().insert(u);
+						} catch (ClassNotFoundException | SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
+					UnitOfWorks.getInstance().commit();
+				}
 			}
 		});
 		

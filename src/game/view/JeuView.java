@@ -12,7 +12,6 @@ import com.sun.javafx.image.impl.General;
 import game.main.EtatJeu;
 import game.main.Jeu;
 import game.view.mapView.GeneralView;
-import game.view.mapView.MapView;
 
 public class JeuView extends JFrame implements Observer {
 	

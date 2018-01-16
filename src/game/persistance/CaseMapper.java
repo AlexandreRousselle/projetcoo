@@ -14,6 +14,7 @@ import game.model.map.factory.CarteType;
 import game.model.map.tile.Case;
 import game.model.map.tile.CaseType;
 import game.model.map.tile.decorator.EffetType;
+import game.model.unite.Unite;
 
 public class CaseMapper {
 	//Attributes
@@ -64,12 +65,25 @@ public class CaseMapper {
 	}
 
 	public Case findById(int id) throws SQLException, ClassNotFoundException{
-		return null;
+		String query = "select * from coo_case where id_case = ?";
+		PreparedStatement ps = DBconfig.getInstance().getConnection().prepareStatement(query);
+		ps.setInt(1, id);
+		ResultSet rs = ps.executeQuery();
+		Case c= null;
+		while (rs.next()){
+			c = new Case();
+			c.setId_case(rs.getInt(1));
+			c.setCoordonnees(new Coordonnees(rs.getInt(3),rs.getInt(4)));
+			c.setBuild_on(rs.getBoolean(5));
+			c.setCase_type(CaseType.valueOf(rs.getString(6)));
+			c.setEffet_type(EffetType.valueOf(rs.getString(7)));
+		}
+		return c;
 	}
 
 	public List<Case> findListeCases(int id_carte) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
-		String query = "select * from coo_case where id_carte = ?";
+		String query = "select * from coo_case where id_carte = ? order by posX, posY";
 		PreparedStatement ps = DBconfig.getInstance().getConnection().prepareStatement(query);
 		ps.setInt(1, id_carte);
 		ResultSet rs = ps.executeQuery();
@@ -85,4 +99,5 @@ public class CaseMapper {
 		}
 		return lca;
 	}
+
 }

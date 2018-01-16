@@ -1,30 +1,34 @@
 package game.model.unite;
 
-import java.util.UUID;
 
 import game.model.joueur.Joueur;
-import game.model.map.Coordonnees;
 import game.model.map.tile.Case;
 
 public class Unite {
 
-	protected UUID id_unite;
+	protected int id_unite;
 	protected Joueur proprietaire;
 	protected UniteType unite_type;
 	protected Case case_;
 
+	public Unite(int id_unite, UniteType unite_type, Joueur proprietaire, Case case_) {
+		this.id_unite = id_unite;
+		this.unite_type = unite_type;
+		this.proprietaire = proprietaire;
+		this.case_ = case_;
+	}
+	
 	public Unite(UniteType unite_type, Joueur proprietaire, Case case_) {
-		this.id_unite = UUID.randomUUID();
 		this.unite_type = unite_type;
 		this.proprietaire = proprietaire;
 		this.case_ = case_;
 	}
 
-	public UUID getId_unite() {
+	public int getId_unite() {
 		return id_unite;
 	}
 
-	public void setId_unite(UUID id_unite) {
+	public void setId_unite(int id_unite) {
 		this.id_unite = id_unite;
 	}
 
@@ -50,6 +54,12 @@ public class Unite {
 
 	public void setCase_(Case case_) {
 		this.case_ = case_;
+	}
+	
+	@Override
+	public String toString() {
+		return "Unite de : " + this.getProprietaire().getId_joueur() + " - " + this.getUnite_type().toString()
+				+ " - " + this.getUnite_type().getPv();
 	}
 
 }

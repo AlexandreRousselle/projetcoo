@@ -23,6 +23,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
+import game.controller.RejoindreController;
 import game.controller.RetourMenuListener;
 import game.main.EtatJeu;
 import game.main.Jeu;
@@ -105,14 +106,8 @@ public class ChoixPartieView extends JPanel {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
-					try {
-						PartieMapper.getInstance().insertRelationPartieJoueur(Jeu.getInstance().getCurrent_joueur(), listeParties.getSelectedValue());
-					} catch (ClassNotFoundException | SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					Jeu.getInstance().setCurrent_partie(listeParties.getSelectedValue());
-					Jeu.getInstance().setEtat_jeu(EtatJeu.ATTENTE_PARTIE);
+					RejoindreController rc = new RejoindreController(listeParties.getSelectedValue());
+					rc.actionPerformed(e);
 				}
 			});
 		} else {
@@ -133,7 +128,6 @@ public class ChoixPartieView extends JPanel {
 			this.listeParties.setListData(parties);
 			selection.setText("Continuer");
 			selection.addActionListener(new ActionListener() {
-				
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					Jeu.getInstance().setCurrent_partie(listeParties.getSelectedValue());

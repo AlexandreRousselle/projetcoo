@@ -15,7 +15,6 @@ public class Joueur extends Observable {
 	protected int id_joueur;
 	protected String pseudo;
 	protected String mdp;
-	protected int ressources;
 	protected List<Partie> listeParties;
 	protected List<Unite> listeUnites;
 	
@@ -63,15 +62,6 @@ public class Joueur extends Observable {
 
 	public void setId_joueur(int id_joueur) {
 		this.id_joueur = id_joueur;
-		notifyUpdate();
-	}
-	
-	public int getRessources() {
-		return ressources;
-	}
-
-	public void setRessources(int ressources) {
-		this.ressources = ressources;
 		notifyUpdate();
 	}
 

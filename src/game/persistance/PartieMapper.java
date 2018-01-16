@@ -90,7 +90,6 @@ public class PartieMapper {
 		WeakReference<Partie> wr = null;
 		wr = map.get(id_partie);
 		if(wr != null && wr.get() != null) {
-			System.out.println(id_partie);
 			return wr.get();
 		} else {
 			String query = "select * from coo_partie where id_partie = ?";
@@ -155,7 +154,20 @@ public class PartieMapper {
 		ps.setString(1, p.getEtat_partie().toString());
 		ps.setInt(2, p.getId_partie());
 		ps.executeUpdate();
-		
+	}
+
+	public List<Joueur> findJoueursById(int id_partie) throws ClassNotFoundException, SQLException {
+		String query = "select cj.id_joueur, cj.pseudo from coo_joueur cj" + 
+						" inner join coo_joueur_partie cjp on cj.ID_JOUEUR = cjp.ID_JOUEUR" +
+						" where cjp.ID_PARTIE = ?";
+		PreparedStatement ps = DBconfig.getInstance().getConnection().prepareStatement(query);
+		List<Joueur> joueurs = new ArrayList<Joueur>();
+		ps.setInt(1, id_partie);
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()){
+			joueurs.add(JoueurMapper.getInstance().findById(rs.getInt(1)));
+		}
+		return joueurs;
 	}
 		
 }

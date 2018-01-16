@@ -1,8 +1,6 @@
 package game.persistance;
 
-import game.main.Jeu;
 import game.model.joueur.Joueur;
-import game.model.partie.Partie;
 
 import java.lang.ref.WeakReference;
 import java.sql.PreparedStatement;
@@ -11,7 +9,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map.Entry;
 
 public class JoueurMapper {
 

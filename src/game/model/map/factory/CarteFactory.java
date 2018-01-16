@@ -33,8 +33,8 @@ public class CarteFactory {
 	
 	public List<Coordonnees> genererCoordonnees(int dimension) {
 		List<Coordonnees> listCoordonnees = new ArrayList<Coordonnees>();
-		for (int i = 1; i <= dimension; i++) {
-			for (int j = 1; j <= dimension; j++) {
+		for (int i = 0; i < dimension; i++) {
+			for (int j = 0; j < dimension; j++) {
 				listCoordonnees.add(new Coordonnees(i, j));
 			}
 		}
@@ -70,7 +70,6 @@ public class CarteFactory {
 		int valeur = (int) (Math.random()*100);
 		int nbChamps = this.carte.getCarte_type().getNbChamps();
 		int nbPlaines = this.carte.getCarte_type().getNbPlaines();
-		int nbMontagnes = this.carte.getCarte_type().getNbMontagnes();
 		if (valeur < nbChamps) {
 			return CaseType.values()[0];
 		} else if (valeur < nbChamps + nbPlaines) {
