@@ -17,7 +17,7 @@ public class Carte extends Observable {
 	private Partie partie;
 	private CarteType carte_type;
 	private int dimension;
-	private List<Case> listeCases;
+	protected List<Case> listeCases;
 	
 	public Carte(CarteType carte_type, int dimension) {
 		this.carte_type = carte_type;

@@ -42,13 +42,15 @@ public class CaseMapper {
 		if(rs.next()){
 			return rs.getInt(1)+1;
 		}
+		ps.close();
+		rs.close();
 		return 1;
 	}
 
-	public void insert(List<Case> lca) throws ClassNotFoundException, SQLException{
+	public void insert(List<Case> list) throws ClassNotFoundException, SQLException{
 		String query = "insert into coo_case values (?,?,?,?,?,?,?)";
 		PreparedStatement ps = DBconfig.getInstance().getConnection().prepareStatement(query);
-		for (Case ca : lca) {
+		for (Case ca : list) {
 			ca.setId_case(currentId);
 			currentId++;
 			ps.setInt(1, ca.getId_case());
@@ -62,6 +64,7 @@ public class CaseMapper {
 			map.put(ca.getId_case(), new WeakReference<Case>(ca));
 			System.out.println(ca.getCoordonnees().getA() + "," + ca.getCoordonnees().getB());
 		}
+		ps.close();
 	}
 
 	public Case findById(int id) throws SQLException, ClassNotFoundException{
@@ -71,13 +74,15 @@ public class CaseMapper {
 		ResultSet rs = ps.executeQuery();
 		Case c= null;
 		while (rs.next()){
-			c = new Case();
+			c = new VirtualCase();
 			c.setId_case(rs.getInt(1));
 			c.setCoordonnees(new Coordonnees(rs.getInt(3),rs.getInt(4)));
 			c.setBuild_on(rs.getBoolean(5));
 			c.setCase_type(CaseType.valueOf(rs.getString(6)));
 			c.setEffet_type(EffetType.valueOf(rs.getString(7)));
 		}
+		ps.close();
+		rs.close();
 		return c;
 	}
 
@@ -89,14 +94,10 @@ public class CaseMapper {
 		ResultSet rs = ps.executeQuery();
 		List<Case> lca = new ArrayList<Case>();
 		while (rs.next()){
-			Case c = new Case();
-			c.setId_case(rs.getInt(1));
-			c.setCoordonnees(new Coordonnees(rs.getInt(3),rs.getInt(4)));
-			c.setBuild_on(rs.getBoolean(5));
-			c.setCase_type(CaseType.valueOf(rs.getString(6)));
-			c.setEffet_type(EffetType.valueOf(rs.getString(7)));
-			lca.add(c);
+			lca.add(findById(rs.getInt(1)));
 		}
+		ps.close();
+		rs.close();
 		return lca;
 	}
 

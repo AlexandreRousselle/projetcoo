@@ -9,19 +9,19 @@ public class Unite {
 	protected int id_unite;
 	protected Joueur proprietaire;
 	protected UniteType unite_type;
-	protected Case case_;
+	protected int id_case;
 
-	public Unite(int id_unite, UniteType unite_type, Joueur proprietaire, Case case_) {
+	public Unite(int id_unite, UniteType unite_type, Joueur proprietaire, int id_case) {
 		this.id_unite = id_unite;
 		this.unite_type = unite_type;
 		this.proprietaire = proprietaire;
-		this.case_ = case_;
+		this.id_case = id_case;
 	}
 	
-	public Unite(UniteType unite_type, Joueur proprietaire, Case case_) {
+	public Unite(UniteType unite_type, Joueur proprietaire, int id_case) {
 		this.unite_type = unite_type;
 		this.proprietaire = proprietaire;
-		this.case_ = case_;
+		this.id_case = id_case;
 	}
 
 	public int getId_unite() {
@@ -48,14 +48,14 @@ public class Unite {
 		this.unite_type = unite_type;
 	}
 
-	public Case getCase_() {
-		return case_;
+	public int getId_case() {
+		return id_case;
 	}
 
-	public void setCase_(Case case_) {
-		this.case_ = case_;
+	public void setId_case(int id_case) {
+		this.id_case = id_case;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Unite de : " + this.getProprietaire().getId_joueur() + " - " + this.getUnite_type().toString()

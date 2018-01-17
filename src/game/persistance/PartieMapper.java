@@ -40,6 +40,8 @@ public class PartieMapper {
 		if(rs.next()){
 				return rs.getInt(1)+1;
 		}
+		ps.close();
+		rs.close();
 		return 1;
 	}
 	
@@ -59,12 +61,14 @@ public class PartieMapper {
 		ps.executeUpdate();
 		CarteMapper.getInstance().insert(p.getCarte());
 		PartieMapper.getInstance().insertRelationPartieJoueur(Jeu.getInstance().getCurrent_joueur(), p);
+		ps.close();
 		String query2 = "insert into coo_partie_carte values (?,?)";
 		PreparedStatement ps2 = DBconfig.getInstance().getConnection().prepareStatement(query2);
 		ps2.setInt(1, p.getId_partie());
 		ps2.setInt(2, p.getCarte().getId_carte());
 		ps2.executeUpdate();
 		map.put(p.getId_partie(), new WeakReference<Partie>(p));
+		ps2.close();
 	}
 	
 	public void insertRelationPartieJoueur(Joueur j, Partie p) throws ClassNotFoundException, SQLException {
@@ -104,7 +108,6 @@ public class PartieMapper {
 				p.setDate(rs.getDate(3));
 				j.setId_joueur(rs.getInt(4));
 				p.setCreateur(j);
-				p.setCarte(CarteMapper.getInstance().findById(id_partie));
 				p.setNb_joueurs(rs.getInt(5));
 				p.setNb_tours(rs.getInt(6));
 				p.setNb_ressources_initial(rs.getInt(7));
@@ -112,6 +115,8 @@ public class PartieMapper {
 				p.setEtat_partie(EtatPartie.valueOf(rs.getString(9)));
 				map.put(id_partie, new WeakReference<Partie>(p));
 			}
+			ps.close();
+			rs.close();
 			p.addObserver(UnitOfWorks.getInstance());
 			return p;
 		}
@@ -127,6 +132,8 @@ public class PartieMapper {
 		while (rs.next()){
 			lp.add(PartieMapper.getInstance().findById(rs.getInt(1)));
 		}
+		ps.close();
+		rs.close();
 		return lp;
 	}
 	
@@ -144,6 +151,8 @@ public class PartieMapper {
 			while (rs.next()){
 				parties.add(PartieMapper.getInstance().findById(rs.getInt(1)));
 			}
+		ps.close();
+		rs.close();
 		return parties;
 	}
 
@@ -167,6 +176,9 @@ public class PartieMapper {
 		while (rs.next()){
 			joueurs.add(JoueurMapper.getInstance().findById(rs.getInt(1)));
 		}
+		ps.close();
+		rs.close();
+		
 		return joueurs;
 	}
 		

@@ -9,6 +9,7 @@ import java.util.Observer;
 import javax.swing.JPanel;
 
 import game.model.map.tile.Case;
+import game.persistance.JoueurMapper;
 import game.persistance.UniteMapper;
 
 
@@ -41,6 +42,7 @@ public class GeneralView extends JPanel implements Observer {
 		c.gridheight = 1;
 		co = new ControlView();
 		co.setObserver(this);
+		co.ressources_joueur.setText("un chiffre");
 		this.add(co, c);
 		
 		this.setBounds(0, 0, 1280, 900);

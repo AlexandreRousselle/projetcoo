@@ -40,6 +40,8 @@ public class CarteMapper {
 			if(rs.next()){
 				return rs.getInt(1)+1;
 			}
+			ps.close();
+			rs.close();
 			return 1;
 		}
 
@@ -54,6 +56,7 @@ public class CarteMapper {
 			ps.executeUpdate();
 			CaseMapper.getInstance().insert(c.getListeCases());
 			map.put(c.getId_carte(), new WeakReference<Carte>(c));
+			ps.close();
 		}
 
 		public Carte findById(int id) throws SQLException, ClassNotFoundException{
@@ -64,12 +67,13 @@ public class CarteMapper {
 			ResultSet rs = ps.executeQuery();
 			Carte c = null;
 			while (rs.next()){
-				c = new Carte();
+				c = new VirtualCarte();
 				c.setId_carte(rs.getInt(1));
 				c.setCarte_type(CarteType.valueOf(rs.getString(2)));
 				c.setDimension(rs.getInt(3));
-				c.setListeCases(CaseMapper.getInstance().findListeCases(rs.getInt(1)));
 			}
+			ps.close();
+			rs.close();
 			return c;
 		}
 	

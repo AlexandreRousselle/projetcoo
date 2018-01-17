@@ -70,7 +70,7 @@ public class CarteFactory {
 		int valeur = (int) (Math.random()*100);
 		int nbChamps = this.carte.getCarte_type().getNbChamps();
 		int nbPlaines = this.carte.getCarte_type().getNbPlaines();
-		if (valeur < nbChamps) {
+		if (valeur < nbPlaines) {
 			return CaseType.values()[0];
 		} else if (valeur < nbChamps + nbPlaines) {
 			return CaseType.values()[1];

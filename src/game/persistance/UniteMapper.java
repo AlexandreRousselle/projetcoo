@@ -38,6 +38,8 @@ public class UniteMapper {
 		if(rs.next()){
 			return rs.getInt(1)+1;
 		}
+		ps.close();
+		rs.close();
 		return 1;
 	}
 
@@ -48,13 +50,14 @@ public class UniteMapper {
 		currentId++;
 		ps.setInt(1, u.getId_unite());
 		ps.setInt(2, u.getProprietaire().getId_joueur());
-		ps.setInt(3, u.getCase_().getId_case());
+		ps.setInt(3, u.getId_case());
 		ps.setString(4, u.getUnite_type().toString());
 		ps.executeUpdate();
 		map.put(u.getId_unite(), new WeakReference<Unite>(u));
+		ps.close();
 	}
 	
-	public Unite findByIdCase(int id_case) throws ClassNotFoundException, SQLException {
+	public List<Unite> findByIdCase(int id_case) throws ClassNotFoundException, SQLException {
 		String query = "select id_unite, id_joueur, type_unite from coo_unite where id_case = ?";
 		PreparedStatement ps = DBconfig.getInstance().getConnection().prepareStatement(query);
 		ps.setInt(1, id_case);
@@ -62,6 +65,7 @@ public class UniteMapper {
 		Unite u = null;
 		int id_unite, id_joueur;
 		String type_unite;
+		List<Unite> listUnites = new ArrayList<Unite>();
 		while (rs.next()){
 			id_unite = rs.getInt(1);
 			id_joueur = rs.getInt(2);
@@ -69,9 +73,12 @@ public class UniteMapper {
 			u = new Unite(id_unite
 					, UniteType.valueOf(type_unite)
 					, JoueurMapper.getInstance().findById(id_joueur)
-					, CaseMapper.getInstance().findById(id_case));
+					, id_case);
+			listUnites.add(u);
 		}
-		return u;
+		ps.close();
+		rs.close();
+		return listUnites;
 	}
 
 	public void update(Unite u) {

@@ -37,6 +37,8 @@ public class JoueurMapper {
 		if(rs.next()){
 			return rs.getInt(1)+1;
 		}
+		ps.close();
+		rs.close();
 		return 1;
 	}
 
@@ -50,6 +52,7 @@ public class JoueurMapper {
 		ps.setString(3, j.getMdp());
 		ps.executeUpdate();
 		map.put(j.getId_joueur(), new WeakReference<Joueur>(j));
+		ps.close();
 	}
 
 	public Joueur findById(int id) throws SQLException, ClassNotFoundException{
@@ -67,6 +70,8 @@ public class JoueurMapper {
 			map.put(id, new WeakReference<Joueur>(j));
 			return j;
 		}
+		ps.close();
+		rs.close();
 		return null;
 	}
 	
@@ -85,6 +90,8 @@ public class JoueurMapper {
 				map.put(id_joueur, new WeakReference<Joueur>(j));
 				return j;
 			}
+			ps.close();
+			rs.close();
 		return null;
 	}
 
@@ -102,6 +109,8 @@ public class JoueurMapper {
 			String pseudo = rs.getString(1);
 			pseudos.add(pseudo);
 		}
+		ps.close();
+		rs.close();
 		return pseudos;
 	}
 

@@ -15,7 +15,7 @@ public class Case {
 	private Coordonnees coordonnees;
 	private Boolean build_on;
 	private CaseType case_type;
-	private List<Unite> unite;
+	protected List<Unite> unite;
 	private EffetType effet_type;
 	
 	public Case(Carte carte, Coordonnees coordonnees, Boolean build_on, CaseType case_type) {

@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.swing.JLabel;
@@ -24,6 +25,7 @@ import game.controller.RetourMenuListener;
 import game.controller.SeDesinscrireController;
 import game.main.EtatJeu;
 import game.main.Jeu;
+import game.model.map.tile.CaseType;
 import game.model.partie.EtatPartie;
 import game.model.partie.Partie;
 import game.model.unite.Unite;
@@ -121,19 +123,28 @@ public class AttenteCreationPartieView extends JPanel {
 						!= Jeu.getInstance().getCurrent_partie().getNb_joueurs()){
 					JOptionPane.showMessageDialog(null,"Pas assez de joueurs pour lancer la partie !", "Error", 1);
 				} else {
-					Jeu.getInstance().setEtat_partie(EtatPartie.EN_COURS);
-					Jeu.getInstance().setEtat_jeu(EtatJeu.PARTIE_EN_COURS);
 					for (int i = 0; i < Jeu.getInstance().getCurrent_partie().getNb_joueurs(); i++) {
+						int mapSize = Jeu.getInstance().getCurrent_partie().getCarte().getListeCases().size();
+						Random rand = new Random();
+						int nbAlea = rand.nextInt(mapSize);
+						while(Jeu.getInstance().getCurrent_partie().getCarte().getListeCases().get(nbAlea).getCase_type()
+								.equals(CaseType.MONTAGNE) || Jeu.getInstance().getCurrent_partie().getCarte().getListeCases().get(nbAlea).getCase_type()
+								.equals(CaseType.CHAMP)){
+							nbAlea = rand.nextInt(mapSize);
+						}
 						Unite u = new Unite(UniteType.VILLE
 								, Jeu.getInstance().getCurrent_partie().getListeJoueurs().get(i)
-								, Jeu.getInstance().getCurrent_partie().getCarte().getListeCases().get((Jeu.getInstance().getCurrent_partie().getCarte().getListeCases().size()-1)/(i+1)));
+								, nbAlea);
 						try {
-							UniteMapper.getInstance().insert(u);
+							if(!Jeu.getInstance().getCurrent_partie().getEtat_partie().equals(EtatPartie.EN_COURS))
+								UniteMapper.getInstance().insert(u);
 						} catch (ClassNotFoundException | SQLException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}
+					Jeu.getInstance().setEtat_partie(EtatPartie.EN_COURS);
+					Jeu.getInstance().setEtat_jeu(EtatJeu.PARTIE_EN_COURS);
 					UnitOfWorks.getInstance().commit();
 				}
 			}

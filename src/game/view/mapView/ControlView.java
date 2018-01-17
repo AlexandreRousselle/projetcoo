@@ -6,6 +6,7 @@ import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import game.main.Jeu;
 import game.view.SoulsButton;
 
 public class ControlView extends JPanel {
@@ -16,9 +17,14 @@ public class ControlView extends JPanel {
 	
 	JPanel actions = new JPanel();
 	SoulsButton construire = new SoulsButton("Construire ville", 150, 40);
+	SoulsButton creer = new SoulsButton("Creer armee", 150, 40);
 	SoulsButton deplacer = new SoulsButton("Deplacer armee", 150, 40);
+	SoulsButton attaquer = new SoulsButton("Attaquer ville", 150, 40);
 	//
 	JPanel infos_joueurs = new JPanel();
+	JLabel pseudo = new JLabel(Jeu.getInstance().getCurrent_joueur().getPseudo());
+	JLabel ressources = new JLabel("Ressources disponibles");
+	JLabel ressources_joueur = new JLabel();
 	//
 	JPanel infos_case = new JPanel();
 	JLabel coordonnees = new JLabel("Coordonnees");
@@ -40,16 +46,32 @@ public class ControlView extends JPanel {
 		messages.setLayout(new GridBagLayout());
 		
 		GridBagConstraints c = new GridBagConstraints();
-
+		
 		c.weightx = 1;
-		c.weighty = 2;
+		c.weighty = 4;
 		c.gridwidth = 1;
 		c.gridx = 0;
 		c.gridy = 0;
 		actions.add(construire, c);
 		c.gridx = 0;
 		c.gridy = 1;
+		actions.add(creer, c);
+		c.gridx = 0;
+		c.gridy = 2;
 		actions.add(deplacer, c);
+		c.gridx = 0;
+		c.gridy = 3;
+		actions.add(attaquer, c);
+		
+		c.weightx = 1;
+		c.weighty = 2;
+		c.gridwidth = 1;
+		c.gridx = 0;
+		c.gridy = 0;
+		infos_joueurs.add(ressources, c);
+		c.gridx = 0;
+		c.gridy = 1;
+		infos_joueurs.add(ressources_joueur, c);
 		
 		c.weightx = 1;
 		c.weighty = 6;

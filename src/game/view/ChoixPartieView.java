@@ -29,6 +29,7 @@ import game.main.EtatJeu;
 import game.main.Jeu;
 import game.model.joueur.Joueur;
 import game.model.partie.Partie;
+import game.persistance.DBconfig;
 import game.persistance.JoueurMapper;
 import game.persistance.PartieMapper;
 import game.persistance.UnitOfWorks;
@@ -120,6 +121,7 @@ public class ChoixPartieView extends JPanel {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+			
 			if(p != null){
 				for (int i = 0; i < p.size(); i++) {
 					parties.add(p.get(i));
