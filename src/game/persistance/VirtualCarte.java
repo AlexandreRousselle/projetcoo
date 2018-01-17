@@ -3,7 +3,6 @@ package game.persistance;
 import java.sql.SQLException;
 import java.util.List;
 
-import game.model.joueur.Joueur;
 import game.model.map.Carte;
 import game.model.map.tile.Case;
 

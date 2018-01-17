@@ -2,11 +2,15 @@ package game.view.mapView;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import game.main.Jeu;
+import game.model.action.Action;
+import game.model.action.ConstruireVilleAction;
 import game.view.SoulsButton;
 
 public class ControlView extends JPanel {
@@ -35,7 +39,8 @@ public class ControlView extends JPanel {
 	JLabel unites_case = new JLabel();
 	//
 	JPanel messages = new JPanel();
-	//
+	JLabel message = new JLabel("Messages potentiels");
+	JLabel message_case = new JLabel();	//
 
 	public ControlView (){
 		
@@ -52,9 +57,22 @@ public class ControlView extends JPanel {
 		c.gridwidth = 1;
 		c.gridx = 0;
 		c.gridy = 0;
+		construire.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				notifyObserver("construire");
+			}
+		});
 		actions.add(construire, c);
 		c.gridx = 0;
 		c.gridy = 1;
+		creer.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				notifyObserver("creer");
+			}
+		});
 		actions.add(creer, c);
 		c.gridx = 0;
 		c.gridy = 2;
@@ -94,6 +112,16 @@ public class ControlView extends JPanel {
 		c.gridx = 0;
 		c.gridy = 5;
 		infos_case.add(unites_case, c);
+		
+		c.weightx = 1;
+		c.weighty = 2;
+		c.gridwidth = 1;
+		c.gridx = 0;
+		c.gridy = 0;
+		messages.add(message, c);
+		c.gridx = 0;
+		c.gridy = 1;
+		messages.add(message_case, c);
 		
 		c.weightx = 1;
 		c.weighty = 4;

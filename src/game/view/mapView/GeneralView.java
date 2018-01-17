@@ -8,9 +8,14 @@ import java.util.Observer;
 
 import javax.swing.JPanel;
 
+import game.model.action.Action;
+import game.model.action.ConstruireVilleAction;
+import game.model.action.CreerArmeeAction;
+import game.model.action.DeplacerArmeeAction;
 import game.model.map.tile.Case;
 import game.persistance.JoueurMapper;
 import game.persistance.UniteMapper;
+import game.persistance.VirtualCase;
 
 
 
@@ -20,6 +25,7 @@ public class GeneralView extends JPanel implements Observer {
 		
 	MapView m;
 	ControlView co;
+	VirtualCase caseSelected;
 	
 	public GeneralView(){
 		
@@ -55,17 +61,32 @@ public class GeneralView extends JPanel implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
-		Case c = (Case) arg;
-		co.coordonnees_case.setText(c.getCoordonnees().getA() + ", " + c.getCoordonnees().getB());
-		co.type_case.setText(c.getCase_type().toString());
-		try {
-			co.unites_case.setText(UniteMapper.getInstance().findByIdCase(c.getId_case()).toString());
-		} catch (NullPointerException | ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
-			co.unites_case.setText("Pas d'unites");
+		if(arg.equals("construire")) {
+			Action a = new ConstruireVilleAction();
+			String m = a.doAction(this.caseSelected);
+			co.message_case.setText(m);
+		} else if (arg.equals("creer")) {
+			Action a = new CreerArmeeAction();
+			String m = a.doAction(this.caseSelected);
+			co.message_case.setText(m);
+		} else if (arg.equals("deplacer")) {
+			Action a = new DeplacerArmeeAction();
+			String m = a.doAction(this.caseSelected);
+			co.message_case.setText(m);
+		} else {
+			co.message_case.setText("");
+			caseSelected = (VirtualCase) arg;
+			co.coordonnees_case.setText(caseSelected.getCoordonnees().getA() + ", " + caseSelected.getCoordonnees().getB());
+			co.type_case.setText(caseSelected.getCase_type().toString());
+			try {
+				co.unites_case.setText(UniteMapper.getInstance().findByIdCase(caseSelected.getId_case()).toString());
+			} catch (NullPointerException | ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			co.revalidate();
+			co.repaint();
 		}
-		co.revalidate();
-		co.repaint();
 	}
 	
 	

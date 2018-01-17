@@ -57,12 +57,11 @@ public class MapView extends JPanel implements MouseMotionListener, MouseListene
     	typeCell = new Case[tilecount][tilecount];
     	for (int x = 0; x < tilecount; x++) {
     		for (int y = 0; y < tilecount; y++) {
-    			this.typeCell[y][x] = this.p.getCarte().getListeCases().get(i);
-    			System.out.println(this.p.getCarte().getListeCases().get(i).getCoordonnees().toString());
+    			this.typeCell[y][x] = Jeu.getInstance().getCurrent_partie().getCarte().getListeCases().get(i);
     			i++;
 			}
 		}
-	}
+    }
 
 	private void createAssets() {
         GraphicsConfiguration gc = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
@@ -230,6 +229,8 @@ public class MapView extends JPanel implements MouseMotionListener, MouseListene
             	Selected.setLocation(hitx, hity);
 	            this.caseSelected = this.typeCell[hity][hitx];
 	            notifyObserver(this.caseSelected);
+	            this.typeCell[hity][hitx].setUnite(null);
+	            this.typeCell[hity][hitx].getUnite();
 	            repaint();
             }
         }
