@@ -9,8 +9,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import game.main.Jeu;
-import game.model.action.Action;
-import game.model.action.ConstruireVilleAction;
 import game.view.SoulsButton;
 
 public class ControlView extends JPanel {
@@ -43,6 +41,10 @@ public class ControlView extends JPanel {
 	JLabel message_case = new JLabel();	//
 
 	public ControlView (){
+		
+		Jeu.getInstance().getCurrent_partie().getMapJoueurs();
+		ressources_joueur = new JLabel("" + Jeu.getInstance().getCurrent_partie().getRessourcesByIdJoueur(
+				Jeu.getInstance().getCurrent_joueur().getId_joueur()));
 		
 		this.setLayout(new GridBagLayout());
 		actions.setLayout(new GridBagLayout());

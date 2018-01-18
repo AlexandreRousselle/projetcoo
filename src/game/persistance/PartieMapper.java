@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map.Entry;
+import java.util.Map;
 
 public class PartieMapper {
 	
@@ -163,10 +163,28 @@ public class PartieMapper {
 		ps.setString(1, p.getEtat_partie().toString());
 		ps.setInt(2, p.getId_partie());
 		ps.executeUpdate();
+		ps.close();
 	}
 
-	public List<Joueur> findJoueursById(int id_partie) throws ClassNotFoundException, SQLException {
-		String query = "select cj.id_joueur, cj.pseudo from coo_joueur cj" + 
+	public int findRessourcesByIdJoueur(int id_joueur) throws ClassNotFoundException, SQLException {
+		String query = "select cjp.nb_ressources_actuels from coo_partie cp" + 
+						" inner join coo_joueur_partie cjp on cp.ID_PARTIE = cjp.ID_PARTIE" +
+						" where cjp.ID_JOUEUR = ?";
+		PreparedStatement ps = DBconfig.getInstance().getConnection().prepareStatement(query);
+		int res = 0;
+		ps.setInt(1, id_joueur);
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()){
+			res = rs.getInt(1);
+		}
+		ps.close();
+		rs.close();
+		
+		return res;
+	}
+	
+	public List<Joueur> findJoueursByIdList(int id_partie) throws ClassNotFoundException, SQLException {
+		String query = "select cj.id_joueur, cjp.nb_ressources_actuels from coo_joueur cj" + 
 						" inner join coo_joueur_partie cjp on cj.ID_JOUEUR = cjp.ID_JOUEUR" +
 						" where cjp.ID_PARTIE = ?";
 		PreparedStatement ps = DBconfig.getInstance().getConnection().prepareStatement(query);
@@ -178,8 +196,35 @@ public class PartieMapper {
 		}
 		ps.close();
 		rs.close();
-		
 		return joueurs;
 	}
+
+	public Map<Joueur, Integer> findJoueursById(int id_partie) throws ClassNotFoundException, SQLException {
+		// TODO Auto-generated method stub
+		String query = "select cj.id_joueur, cjp.nb_ressources_actuels from coo_joueur cj" + 
+				" inner join coo_joueur_partie cjp on cj.ID_JOUEUR = cjp.ID_JOUEUR" +
+				" where cjp.ID_PARTIE = ?";
+		PreparedStatement ps = DBconfig.getInstance().getConnection().prepareStatement(query);
+		Map<Joueur, Integer> joueurs = new HashMap<Joueur, Integer>();
+		ps.setInt(1, id_partie);
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()){
+			joueurs.put(JoueurMapper.getInstance().findById(rs.getInt(1)), rs.getInt(2));
+		}
+		ps.close();
+		rs.close();
+		return joueurs;
+	}
+	
+	public void updateRessources(int id_partie, int id_joueur, int res) throws ClassNotFoundException, SQLException{
+		String query = "update coo_joueur_partie cjp set cjp.nb_ressources_actuels = ?"
+				+ " where cjp.id_partie = ? and cjp.id_joueur = ?";
+		PreparedStatement ps = DBconfig.getInstance().getConnection().prepareStatement(query);
+		ps.setInt(1, res);
+		ps.setInt(2, id_partie);
+		ps.setInt(3, id_joueur);
+		ps.executeUpdate();
+		ps.close();
+	}	
 		
 }

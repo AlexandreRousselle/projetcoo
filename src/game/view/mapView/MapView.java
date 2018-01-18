@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsEnvironment;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
@@ -12,15 +13,15 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
-import java.sql.SQLException;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import game.main.Jeu;
 import game.model.map.tile.Case;
 import game.model.partie.Partie;
 import game.model.unite.UniteType;
-import game.persistance.CaseMapper;
 
 public class MapView extends JPanel implements MouseMotionListener, MouseListener {
 
@@ -29,6 +30,7 @@ public class MapView extends JPanel implements MouseMotionListener, MouseListene
 	private GeneralView o;
 	private BufferedImage BackImage;
     BufferedImage GrassTilePlaine, GrassTileMontagne, GrassTileChamps, GrassTileVille, SelectedBorder;
+    Image pixel_tower;
     private Point MousePoint, PrevView, ViewLocation, Selected;
     private boolean Dragging;
     private int mapwidth, mapheight, tilecount;
@@ -40,6 +42,12 @@ public class MapView extends JPanel implements MouseMotionListener, MouseListene
     public MapView() {
         super();
         this.setOpaque(true);
+        try {
+			pixel_tower = ImageIO.read(Jeu.getInstance().getFileByKey("ville"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         this.p = Jeu.getInstance().getCurrent_partie();
         tilecount = this.p.getCarte().getDimension(); 
         setTypeCell();
@@ -73,9 +81,6 @@ public class MapView extends JPanel implements MouseMotionListener, MouseListene
         
         GrassTileChamps = gc.createCompatibleImage(128, 64, Transparency.TRANSLUCENT);
         Graphics g2 = GrassTileChamps.getGraphics();
-        
-        /*GrassTileVille = gc.createCompatibleImage(128, 64, Transparency.TRANSLUCENT);
-        Graphics g3 = GrassTileVille.getGraphics();*/
 
         Polygon poly = new Polygon();
         poly.addPoint(0, 32);
@@ -115,17 +120,7 @@ public class MapView extends JPanel implements MouseMotionListener, MouseListene
         g2.setColor(Color.red);
         g2.drawPolygon(poly);
         g2.dispose();
-        
-        /*g3.setColor(Color.ORANGE);
-        g3.fillPolygon(poly);
-        g3.setColor(Color.BLUE);
-        g3.drawPolygon(poly);
-        g3.dispose();
-        SelectedBorder = gc.createCompatibleImage(128, 64, Transparency.TRANSLUCENT);
-        g3 = SelectedBorder.getGraphics();
-        g3.setColor(Color.red);
-        g3.drawPolygon(poly);
-        g3.dispose();*/
+      
     }
 
     @Override
@@ -149,25 +144,26 @@ public class MapView extends JPanel implements MouseMotionListener, MouseListene
                 
         for (int x = 0; x < tilecount; x++) {
             for (int y = 0; y < tilecount; y++) {
+            	
                 dx = x * GrassTilePlaine.getWidth() / 2 - y * GrassTilePlaine.getWidth() / 2;
                 dy = x * GrassTilePlaine.getHeight() / 2 + y * GrassTilePlaine.getHeight() / 2;
 
                 dx -= ViewLocation.x;
                 dy -= ViewLocation.y;
 
-               
-					//if(typeCell[y][x].getUnite().isEmpty()){
+                
+					if(typeCell[y][x].getUnite().isEmpty()){
 					    if(typeCell[y][x].getCase_type().getValue() == 0)
 					    	g.drawImage(GrassTilePlaine, dx, dy, this);
 					    else if (typeCell[y][x].getCase_type().getValue() == 1)
 					    	g.drawImage(GrassTileChamps, dx, dy, this);
 					    else
 					    	g.drawImage(GrassTileMontagne, dx, dy, this);
-					/*} else {
+					} else {
 						if(typeCell[y][x].getUnite().get(0).getUnite_type().equals(UniteType.VILLE)){
-							g.drawImage(GrassTileVille, dx, dy, this);
+							g.drawImage(pixel_tower, dx, dx, 128, 64, this);
 						}
-					}*/
+					}
 
                 if ((x == Selected.x) && (y == Selected.y)) {
                     g.drawImage(SelectedBorder, dx, dy, this);

@@ -1,16 +1,15 @@
 package game.model.partie;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.sql.Date;
-import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import game.model.Observable;
 import game.model.Visiteur;
 import game.model.joueur.Joueur;
 import game.model.map.Carte;
-import game.persistance.PartieMapper;
-import game.persistance.UnitOfWorks;
 
 public class Partie extends Observable {
 	
@@ -24,10 +23,12 @@ public class Partie extends Observable {
 	private int nb_ressources_tour;
 	private int nb_joueurs;
 	protected List<Joueur> listeJoueurs;
+	protected Map<Joueur, Integer> mapJoueurs;
 	private EtatPartie etat_partie;
 	
 	public Partie() {
 		this.listeJoueurs = new ArrayList<Joueur>();
+		this.mapJoueurs = new HashMap<Joueur, Integer>();
 	}
 	
 	public Partie(String nom_partie, Joueur createur, int nb_joueurs, int nb_tours, int nb_ressources_initial, int nb_ressources_tour, Carte carte) {
@@ -41,15 +42,28 @@ public class Partie extends Observable {
 		this.carte.setPartie(this);
 		this.etat_partie = EtatPartie.ATTENTE;
 		this.listeJoueurs = new ArrayList<Joueur>();
+		this.mapJoueurs = new HashMap<Joueur, Integer>();
+	}
+	
+	public int getRessourcesByIdJoueur(int id_joueur){
+		for (Map.Entry<Joueur,Integer> e : mapJoueurs.entrySet()){
+			if(e.getKey().getId_joueur() == id_joueur)
+				return e.getValue();
+		}
+		return 0;
 	}
 
 	public void ajouterJoueur(Joueur joueur) {
 		listeJoueurs.add(joueur);
 	}
 	
+	public void ajouterMapJoueur(Joueur joueur, int ressources) {
+		mapJoueurs.put(joueur, ressources);
+	}
+	
 	public String toString() {
 		String res = "";
-		res = "Partie n° " + this.id_partie + ", Nom de partie : " + this.nom_partie + ", créée le : " + this.date.toString();
+		res = "Partie n� " + this.id_partie + ", Nom de partie : " + this.nom_partie + ", creee le : " + this.date.toString();
 		return res;
 	}
 	
@@ -145,6 +159,14 @@ public class Partie extends Observable {
 
 	public void setListeJoueurs(List<Joueur> listeJoueurs) {
 		this.listeJoueurs = listeJoueurs;
+	}
+
+	public Map<Joueur, Integer> getMapJoueurs() {
+		return mapJoueurs;
+	}
+
+	public void setMapJoueurs(Map<Joueur, Integer> mapJoueurs) {
+		this.mapJoueurs = mapJoueurs;
 	}
 
 	public int getNb_ressources_initial() {

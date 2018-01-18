@@ -30,6 +30,7 @@ public class Jeu extends Observable {
 		this.files.put("fond_login", new File("ressources/auth_bg.png"));
 		this.files.put("fond", new File("ressources/bg.png"));
 		this.files.put("splash_screen", new File("ressources/splash_screen.png"));
+		this.files.put("ville", new File("ressources/pixel_tower.png"));
 	}
 	
 	public void setEtat_partie(EtatPartie ep){

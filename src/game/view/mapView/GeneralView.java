@@ -6,14 +6,17 @@ import java.sql.SQLException;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import game.main.Jeu;
 import game.model.action.Action;
 import game.model.action.ConstruireVilleAction;
 import game.model.action.CreerArmeeAction;
 import game.model.action.DeplacerArmeeAction;
 import game.model.map.tile.Case;
 import game.persistance.JoueurMapper;
+import game.persistance.PartieMapper;
 import game.persistance.UniteMapper;
 import game.persistance.VirtualCase;
 
@@ -64,22 +67,40 @@ public class GeneralView extends JPanel implements Observer {
 		if(arg.equals("construire")) {
 			Action a = new ConstruireVilleAction();
 			String m = a.doAction(this.caseSelected);
-			co.message_case.setText(m);
+	    	JOptionPane.showMessageDialog(null, m, "Message", 1);
+	    	Jeu.getInstance().getCurrent_partie().setMapJoueurs(null);
+	    	Jeu.getInstance().getCurrent_partie().getMapJoueurs();
+	    	co.ressources_joueur.setText("" + Jeu.getInstance().getCurrent_partie()
+	    			.getRessourcesByIdJoueur(Jeu.getInstance().getCurrent_joueur().getId_joueur()));
 		} else if (arg.equals("creer")) {
 			Action a = new CreerArmeeAction();
 			String m = a.doAction(this.caseSelected);
-			co.message_case.setText(m);
+	    	JOptionPane.showMessageDialog(null, m, "Message", 1);
+	    	Jeu.getInstance().getCurrent_partie().setMapJoueurs(null);
+	    	Jeu.getInstance().getCurrent_partie().getMapJoueurs();
+	    	co.ressources_joueur.setText("" + Jeu.getInstance().getCurrent_partie()
+	    			.getRessourcesByIdJoueur(Jeu.getInstance().getCurrent_joueur().getId_joueur()));
+	    	
 		} else if (arg.equals("deplacer")) {
 			Action a = new DeplacerArmeeAction();
 			String m = a.doAction(this.caseSelected);
-			co.message_case.setText(m);
+	    	JOptionPane.showMessageDialog(null, m, "Message", 1);
+	    	Jeu.getInstance().getCurrent_partie().setMapJoueurs(null);
+	    	Jeu.getInstance().getCurrent_partie().getMapJoueurs();
+	    	co.ressources_joueur.setText("" + Jeu.getInstance().getCurrent_partie()
+	    			.getRessourcesByIdJoueur(Jeu.getInstance().getCurrent_joueur().getId_joueur()));
 		} else {
 			co.message_case.setText("");
 			caseSelected = (VirtualCase) arg;
 			co.coordonnees_case.setText(caseSelected.getCoordonnees().getA() + ", " + caseSelected.getCoordonnees().getB());
 			co.type_case.setText(caseSelected.getCase_type().toString());
 			try {
-				co.unites_case.setText(UniteMapper.getInstance().findByIdCase(caseSelected.getId_case()).toString());
+				String res = "<html>";
+				for (int i = 0; i < UniteMapper.getInstance().findByIdCase(caseSelected.getId_case()).size(); i++) {
+					res += UniteMapper.getInstance().findByIdCase(caseSelected.getId_case()).get(i).toString() + "<br>";
+				}
+				res += "</html>";
+				co.unites_case.setText(res);
 			} catch (NullPointerException | ClassNotFoundException | SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -2,7 +2,6 @@ package game.model.unite;
 
 
 import game.model.joueur.Joueur;
-import game.model.map.tile.Case;
 
 public class Unite {
 
@@ -58,8 +57,13 @@ public class Unite {
 
 	@Override
 	public String toString() {
-		return "Unite de : " + this.getProprietaire().getId_joueur() + " - " + this.getUnite_type().toString()
-				+ " - " + this.getUnite_type().getPv();
+		if (this.getUnite_type().equals(UniteType.VILLE)) {
+			return "Unite de " + this.getProprietaire().getPseudo() + ", " + this.getUnite_type().toString()
+					+ ", PV : " + this.getUnite_type().getPv() + ", PDef : " + this.getUnite_type().getPdefense();
+		}
+		return "Unite de " + this.getProprietaire().getPseudo() + ", " + this.getUnite_type().toString()
+				+ ", PV : " + this.getUnite_type().getPv() + ", PDef : " + this.getUnite_type().getPdefense()
+				+ ", PAtt : " + this.getUnite_type().getPattaque();
 	}
 
 }
