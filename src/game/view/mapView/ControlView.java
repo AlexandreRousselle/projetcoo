@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 
 import game.main.Jeu;
@@ -37,8 +38,8 @@ public class ControlView extends JPanel {
 	JLabel unites_case = new JLabel();
 	//
 	JPanel messages = new JPanel();
-	JLabel message = new JLabel("Messages potentiels");
-	JLabel message_case = new JLabel();	//
+	JLabel message = new JLabel("Cases Alentours");
+	JList message_case = new JList();	//
 
 	public ControlView (){
 		
@@ -78,6 +79,14 @@ public class ControlView extends JPanel {
 		actions.add(creer, c);
 		c.gridx = 0;
 		c.gridy = 2;
+		deplacer.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				notifyObserver("deplacer");
+			}
+		});
+		deplacer.setEnabled(false);
 		actions.add(deplacer, c);
 		c.gridx = 0;
 		c.gridy = 3;
@@ -123,6 +132,7 @@ public class ControlView extends JPanel {
 		messages.add(message, c);
 		c.gridx = 0;
 		c.gridy = 1;
+		message_case.setEnabled(false);
 		messages.add(message_case, c);
 		
 		c.weightx = 1;

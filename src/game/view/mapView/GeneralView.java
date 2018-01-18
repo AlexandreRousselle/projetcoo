@@ -14,9 +14,7 @@ import game.model.action.Action;
 import game.model.action.ConstruireVilleAction;
 import game.model.action.CreerArmeeAction;
 import game.model.action.DeplacerArmeeAction;
-import game.model.map.tile.Case;
-import game.persistance.JoueurMapper;
-import game.persistance.PartieMapper;
+import game.model.unite.UniteType;
 import game.persistance.UniteMapper;
 import game.persistance.VirtualCase;
 
@@ -51,7 +49,6 @@ public class GeneralView extends JPanel implements Observer {
 		c.gridheight = 1;
 		co = new ControlView();
 		co.setObserver(this);
-		co.ressources_joueur.setText("un chiffre");
 		this.add(co, c);
 		
 		this.setBounds(0, 0, 1280, 900);
@@ -82,16 +79,30 @@ public class GeneralView extends JPanel implements Observer {
 	    			.getRessourcesByIdJoueur(Jeu.getInstance().getCurrent_joueur().getId_joueur()));
 	    	
 		} else if (arg.equals("deplacer")) {
-			Action a = new DeplacerArmeeAction();
-			String m = a.doAction(this.caseSelected);
+			DeplacerArmeeAction a = new DeplacerArmeeAction();
+			String m = a.doAction(this.caseSelected, this.caseSelected);
 	    	JOptionPane.showMessageDialog(null, m, "Message", 1);
 	    	Jeu.getInstance().getCurrent_partie().setMapJoueurs(null);
 	    	Jeu.getInstance().getCurrent_partie().getMapJoueurs();
 	    	co.ressources_joueur.setText("" + Jeu.getInstance().getCurrent_partie()
 	    			.getRessourcesByIdJoueur(Jeu.getInstance().getCurrent_joueur().getId_joueur()));
 		} else {
-			co.message_case.setText("");
 			caseSelected = (VirtualCase) arg;
+			if(caseSelected.getUnite().isEmpty()){
+				co.deplacer.setEnabled(false);
+			} else {
+				for (int i = 0; i < caseSelected.getUnite().size(); i++) {
+					if (caseSelected.getUnite().get(i).getProprietaire().getId_joueur() 
+							!= Jeu.getInstance().getCurrent_joueur().getId_joueur()){
+						co.deplacer.setEnabled(false);
+					} else if (caseSelected.getUnite().get(i).getUnite_type().equals(UniteType.ARMEE)){
+						co.deplacer.setEnabled(true);
+						break;
+					} else {
+						co.deplacer.setEnabled(false);
+					}
+				}
+			}
 			co.coordonnees_case.setText(caseSelected.getCoordonnees().getA() + ", " + caseSelected.getCoordonnees().getB());
 			co.type_case.setText(caseSelected.getCase_type().toString());
 			try {

@@ -120,7 +120,7 @@ public class MapView extends JPanel implements MouseMotionListener, MouseListene
         g2.setColor(Color.red);
         g2.drawPolygon(poly);
         g2.dispose();
-      
+       
     }
 
     @Override
@@ -152,18 +152,12 @@ public class MapView extends JPanel implements MouseMotionListener, MouseListene
                 dy -= ViewLocation.y;
 
                 
-					if(typeCell[y][x].getUnite().isEmpty()){
 					    if(typeCell[y][x].getCase_type().getValue() == 0)
 					    	g.drawImage(GrassTilePlaine, dx, dy, this);
 					    else if (typeCell[y][x].getCase_type().getValue() == 1)
 					    	g.drawImage(GrassTileChamps, dx, dy, this);
 					    else
 					    	g.drawImage(GrassTileMontagne, dx, dy, this);
-					} else {
-						if(typeCell[y][x].getUnite().get(0).getUnite_type().equals(UniteType.VILLE)){
-							g.drawImage(pixel_tower, dx, dx, 128, 64, this);
-						}
-					}
 
                 if ((x == Selected.x) && (y == Selected.y)) {
                     g.drawImage(SelectedBorder, dx, dy, this);
@@ -207,6 +201,7 @@ public class MapView extends JPanel implements MouseMotionListener, MouseListene
 
     @Override
     public void mouseMoved(MouseEvent e) {
+    	
     }
 
     @Override
