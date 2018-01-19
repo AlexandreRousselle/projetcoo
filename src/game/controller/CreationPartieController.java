@@ -14,6 +14,12 @@ import game.persistance.JoueurMapper;
 import game.persistance.PartieMapper;
 import game.persistance.UnitOfWorks;
 
+/**
+ * Classe ActionListener quand on clique sur le bouton "Valider"
+ * dans la vue de NouvellePartie
+ * @author roussellea
+ *
+ */
 public class CreationPartieController implements ActionListener {
 	
 	private String nom_partie;
@@ -24,6 +30,16 @@ public class CreationPartieController implements ActionListener {
 	private CarteType type_carte;
 	private int dimension_carte;
 
+	/**
+	 * Constructeur CreationPartieController avec les attributs en conséquence
+	 * @param nom_partie
+	 * @param nb_joueurs
+	 * @param nb_tours
+	 * @param nb_ressources_initial
+	 * @param nb_ressources_tour
+	 * @param type_carte
+	 * @param dimension_carte
+	 */
 	public CreationPartieController(String nom_partie, int nb_joueurs, int nb_tours, int nb_ressources_initial,
 			int nb_ressources_tour, CarteType type_carte, int dimension_carte) {
 		// TODO Auto-generated constructor stub
@@ -36,6 +52,9 @@ public class CreationPartieController implements ActionListener {
 		this.dimension_carte = dimension_carte;
 	}
 
+	/**
+	 * Fonction actionPerformed() qui cree la partie avec les attributs de la vue
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub

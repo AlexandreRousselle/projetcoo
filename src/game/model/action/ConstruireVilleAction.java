@@ -9,8 +9,17 @@ import game.persistance.PartieMapper;
 import game.persistance.UniteMapper;
 import game.persistance.VirtualCase;
 
+/**
+ * Classe Action qui permet la construction d'une ville
+ * @author roussellea
+ *
+ */
 public class ConstruireVilleAction implements Action {
 	
+	/**
+	 * Creer une ville ou non en BDD sur la case en paramètre
+	 * et retourne un message
+	 */
 	@Override
 	public String doAction(VirtualCase c) {
 		// TODO Auto-generated method stub

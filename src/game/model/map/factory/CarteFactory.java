@@ -14,10 +14,22 @@ import game.model.map.tile.decorator.CaseDefense;
 import game.model.map.tile.decorator.CaseSante;
 import game.model.map.tile.decorator.EffetType;
 
+/**
+ * La classe CarteFactory qui permet la génération de la carte
+ * @author roussellea
+ *
+ */
 public class CarteFactory {
 	
 	protected Carte carte = null;
 	
+	/**
+	 * Fonction creer la carte et qui la stocke dans l'objet Carte
+	 * Revoie la carte en question
+	 * @param carte_type
+	 * @param dimension
+	 * @return
+	 */
 	public Carte creerCarte(CarteType carte_type, int dimension) {
 		switch(carte_type)
         {
@@ -31,6 +43,11 @@ public class CarteFactory {
 		return carte;
 	}
 	
+	/**
+	 * Generer les coordonnees par rapport à une dimension de carte
+	 * @param dimension
+	 * @return
+	 */
 	public List<Coordonnees> genererCoordonnees(int dimension) {
 		List<Coordonnees> listCoordonnees = new ArrayList<Coordonnees>();
 		for (int i = 0; i < dimension; i++) {
@@ -41,6 +58,12 @@ public class CarteFactory {
 		return listCoordonnees;
 	}
 	
+	/**
+	 * Creer les case de la map avec la liste des coordonnées générées
+	 * et la fonction random case type
+	 * @param listCoordonnees
+	 * @return
+	 */
 	public List<Case> creerCases(List<Coordonnees> listCoordonnees) {
 		List<Case> listCases = new ArrayList<Case>();
 		for (int i = 0; i < listCoordonnees.size(); i++) {
@@ -65,7 +88,10 @@ public class CarteFactory {
 		return listCases;
 	}
 	
-	//à restructurer intelligemment
+	/**
+	 * Renvoie un type de case aléatoire
+	 * @return
+	 */
 	public CaseType randomCaseType() {
 		int valeur = (int) (Math.random()*100);
 		int nbChamps = this.carte.getCarte_type().getNbChamps();
@@ -79,6 +105,10 @@ public class CarteFactory {
 		}
 	}
 	
+	/**
+	 * Renvoie un effet de case aléatoire
+	 * @return
+	 */
 	public EffetType randomEffetType() {
 		int valeur = (int) (Math.random()*100);
 	    if(valeur > 70) {

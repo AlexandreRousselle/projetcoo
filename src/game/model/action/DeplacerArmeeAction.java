@@ -8,8 +8,20 @@ import game.model.unite.UniteType;
 import game.persistance.UniteMapper;
 import game.persistance.VirtualCase;
 
+/**
+ * Classe Action qui permet le déplacement d'une armée
+ * PAS ENCORE DISPONIBLE
+ * @author roussellea
+ *
+ */
 public class DeplacerArmeeAction {
 
+	/**
+	 * Deplace une armee d'une case à une autre en fonction des conditions
+	 * @param fromCase
+	 * @param toCase
+	 * @return
+	 */
 	public String doAction(VirtualCase fromCase, VirtualCase toCase) {
 		// TODO Auto-generated method stub
 		String message = "";

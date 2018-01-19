@@ -9,8 +9,17 @@ import game.persistance.PartieMapper;
 import game.persistance.UniteMapper;
 import game.persistance.VirtualCase;
 
+/**
+ * Classe Action qui permet la creation d'une armée
+ * @author roussellea
+ *
+ */
 public class CreerArmeeAction implements Action {
 
+	/**
+	 * Creer une armée en BDD sur la case en question
+	 * et retourne un message en fonction des conditions
+	 */
 	@Override
 	public String doAction(VirtualCase c) {
 		// TODO Auto-generated method stub

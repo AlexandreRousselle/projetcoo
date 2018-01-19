@@ -1,5 +1,10 @@
 package game.main;
 
+/**
+ * Enumération de tous les etats de jeu possibles (Pour la classe Jeu.java)
+ * @author roussellea
+ *
+ */
 public enum EtatJeu {
 	PAGE_LOGIN,
 	MENU_PRINCIPAL,
