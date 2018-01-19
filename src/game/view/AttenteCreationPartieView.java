@@ -19,7 +19,6 @@ import javax.imageio.ImageIO;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.border.TitledBorder;
 
 import game.controller.RetourMenuListener;
 import game.controller.SeDesinscrireController;
@@ -27,12 +26,9 @@ import game.main.EtatJeu;
 import game.main.Jeu;
 import game.model.map.tile.CaseType;
 import game.model.partie.EtatPartie;
-import game.model.partie.Partie;
 import game.model.unite.Unite;
 import game.model.unite.UniteType;
-import game.persistance.CaseMapper;
 import game.persistance.JoueurMapper;
-import game.persistance.PartieMapper;
 import game.persistance.UnitOfWorks;
 import game.persistance.UniteMapper;
 

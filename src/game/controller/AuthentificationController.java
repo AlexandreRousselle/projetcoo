@@ -7,7 +7,6 @@ import javax.swing.JOptionPane;
 
 import game.main.EtatJeu;
 import game.main.Jeu;
-import game.model.joueur.Joueur;
 import game.persistance.JoueurMapper;
 
 /**

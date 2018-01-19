@@ -4,14 +4,10 @@ import java.lang.ref.WeakReference;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
-import game.model.joueur.Joueur;
 import game.model.map.Carte;
 import game.model.map.factory.CarteType;
-import game.model.map.tile.Case;
 
 public class CarteMapper {
 

@@ -21,7 +21,6 @@ import javax.swing.JPanel;
 import game.main.Jeu;
 import game.model.map.tile.Case;
 import game.model.partie.Partie;
-import game.model.unite.UniteType;
 
 public class MapView extends JPanel implements MouseMotionListener, MouseListener {
 

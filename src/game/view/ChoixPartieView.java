@@ -16,23 +16,16 @@ import java.util.List;
 import java.util.Vector;
 
 import javax.imageio.ImageIO;
-import javax.swing.DefaultListCellRenderer;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.border.TitledBorder;
 
 import game.controller.RejoindreController;
 import game.controller.RetourMenuListener;
 import game.main.EtatJeu;
 import game.main.Jeu;
-import game.model.joueur.Joueur;
 import game.model.partie.Partie;
-import game.persistance.DBconfig;
-import game.persistance.JoueurMapper;
 import game.persistance.PartieMapper;
-import game.persistance.UnitOfWorks;
 
 public class ChoixPartieView extends JPanel {
 

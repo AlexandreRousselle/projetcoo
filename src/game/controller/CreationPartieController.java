@@ -6,13 +6,10 @@ import java.sql.Date;
 
 import game.main.EtatJeu;
 import game.main.Jeu;
-import game.model.joueur.Joueur;
 import game.model.map.factory.CarteFactory;
 import game.model.map.factory.CarteType;
 import game.model.partie.Partie;
-import game.persistance.JoueurMapper;
 import game.persistance.PartieMapper;
-import game.persistance.UnitOfWorks;
 
 /**
  * Classe ActionListener quand on clique sur le bouton "Valider"

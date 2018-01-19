@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import game.model.joueur.Joueur;
 import game.model.unite.Unite;
 import game.model.unite.UniteType;
 

@@ -8,13 +8,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import game.model.map.Carte;
 import game.model.map.Coordonnees;
-import game.model.map.factory.CarteType;
 import game.model.map.tile.Case;
 import game.model.map.tile.CaseType;
 import game.model.map.tile.decorator.EffetType;
-import game.model.unite.Unite;
 
 public class CaseMapper {
 	//Attributes

@@ -1,6 +1,5 @@
 package game.model.action;
 
-import game.model.map.tile.Case;
 import game.persistance.VirtualCase;
 
 /**

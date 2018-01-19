@@ -13,23 +13,17 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSlider;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerListModel;
 import javax.swing.SpinnerNumberModel;
-import javax.swing.border.TitledBorder;
 
 import game.controller.CreationPartieController;
 import game.controller.RetourMenuListener;
-import game.main.EtatJeu;
 import game.main.Jeu;
 import game.model.map.factory.CarteType;
-import game.view.MenuPrincipalView.DecoListener;
 
 public class NouvellePartieView extends JPanel {
 

@@ -5,11 +5,9 @@ import game.model.Visiteur;
 import game.model.map.factory.CarteType;
 import game.model.map.tile.Case;
 import game.model.partie.Partie;
-import game.persistance.UnitOfWorks;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Classe Carte Observable qui stocke les éléments d'une carte

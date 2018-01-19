@@ -10,6 +10,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 
 import game.main.Jeu;
+import game.model.map.tile.Case;
 import game.view.SoulsButton;
 
 public class ControlView extends JPanel {
@@ -39,7 +40,7 @@ public class ControlView extends JPanel {
 	//
 	JPanel messages = new JPanel();
 	JLabel message = new JLabel("Cases Alentours");
-	JList message_case = new JList();	//
+	JList<Case> message_case = new JList<Case>();
 
 	public ControlView (){
 		

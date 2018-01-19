@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import game.model.joueur.Joueur;
 import game.model.map.Carte;
 import game.model.map.Coordonnees;
 import game.model.map.tile.Case;

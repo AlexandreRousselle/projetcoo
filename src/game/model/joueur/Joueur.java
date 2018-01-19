@@ -3,10 +3,7 @@ package game.model.joueur;
 import game.model.Observable;
 import game.model.Visiteur;
 import game.model.partie.Partie;
-import game.model.unite.Unite;
-import game.persistance.UnitOfWorks;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 

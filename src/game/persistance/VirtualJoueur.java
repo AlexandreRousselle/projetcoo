@@ -5,7 +5,6 @@ import java.util.List;
 
 import game.model.joueur.Joueur;
 import game.model.partie.Partie;
-import game.model.unite.Unite;
 
 public class VirtualJoueur extends Joueur {
 	
